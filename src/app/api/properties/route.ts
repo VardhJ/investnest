@@ -112,7 +112,13 @@ export async function POST(request: NextRequest) {
       .eq('id', user.id)
       .single();
 
-    if (profile?.role !== 'admin') {
+    // If profile doesn't exist, create it (default role: user)
+    if (!profile) {
+      await supabase.from('user_profiles').insert({ id: user.id, role: 'user' });
+      return NextResponse.json({ error: 'Admin access required. Your role is "user".' }, { status: 403 });
+    }
+
+    if (profile.role !== 'admin') {
       return NextResponse.json({ error: 'Admin access required' }, { status: 403 });
     }
 

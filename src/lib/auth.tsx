@@ -44,11 +44,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return;
     }
     try {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from('user_profiles')
         .select('role')
         .eq('id', userId)
         .single();
+      
+      if (error) {
+        // Profile might not exist yet (trigger hasn't fired)
+        // Try to create it
+        try {
+          await supabase.from('user_profiles').insert({ id: userId, role: 'user' });
+        } catch {
+          // Ignore insert errors (might already exist)
+        }
+        setIsAdmin(false);
+        return;
+      }
+      
       setIsAdmin(data?.role === 'admin');
     } catch {
       setIsAdmin(false);
@@ -56,8 +69,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    return { error: error?.message ?? null };
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+      // Provide more helpful error messages
+      if (error.message.includes('Invalid login credentials')) {
+        return { error: 'Invalid email or password. Make sure your account exists and email is confirmed.' };
+      }
+      if (error.message.includes('Email not confirmed')) {
+        return { error: 'Please confirm your email first. Check your inbox (and spam folder).' };
+      }
+      return { error: error.message };
+    }
+    return { error: null };
   };
 
   const signUp = async (email: string, password: string) => {
