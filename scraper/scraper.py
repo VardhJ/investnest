@@ -21,14 +21,9 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# Supabase client (optional - falls back to JSON file)
-try:
-    from supabase import create_client
-    SUPABASE_URL = os.getenv('SUPABASE_URL')
-    SUPABASE_KEY = os.getenv('SUPABASE_SERVICE_KEY')
-    supabase = create_client(SUPABASE_URL, SUPABASE_KEY) if SUPABASE_URL and SUPABASE_KEY else None
-except ImportError:
-    supabase = None
+# Supabase REST API (no client library needed)
+SUPABASE_URL = os.getenv('SUPABASE_URL')
+SUPABASE_KEY = os.getenv('SUPABASE_SERVICE_KEY')
 
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -218,7 +213,7 @@ class SBIParser:
 
 
 def save_properties(properties):
-    """Save properties to Supabase or JSON file."""
+    """Save properties to Supabase via REST API or JSON file."""
     if not properties:
         logger.info("No properties to save")
         return
@@ -233,10 +228,26 @@ def save_properties(properties):
 
     logger.info(f"Saving {len(unique)} unique properties")
 
-    if supabase:
+    if SUPABASE_URL and SUPABASE_KEY:
         try:
-            supabase.table('properties').upsert(unique, on_conflict='source_url').execute()
-            logger.info("Saved to Supabase")
+            import requests
+            headers = {
+                'apikey': SUPABASE_KEY,
+                'Authorization': f'Bearer {SUPABASE_KEY}',
+                'Content-Type': 'application/json',
+                'Prefer': 'return=representation,resolution=merge-duplicates',
+            }
+            resp = requests.post(
+                f'{SUPABASE_URL}/rest/v1/properties',
+                headers=headers,
+                json=unique,
+                timeout=30
+            )
+            if resp.status_code in (200, 201):
+                logger.info(f"Saved {len(resp.json())} properties to Supabase")
+            else:
+                logger.error(f"Supabase save error ({resp.status_code}): {resp.text[:200]}")
+                _save_json(unique)
         except Exception as e:
             logger.error(f"Supabase save error: {e}")
             _save_json(unique)
