@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import posthog from 'posthog-js';
 
 const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY || '';
@@ -12,7 +13,7 @@ export function initPostHog() {
   if (typeof window === 'undefined' || initialized || !POSTHOG_KEY) return;
   posthog.init(POSTHOG_KEY, {
     api_host: POSTHOG_HOST,
-    capture_pageview: true,
+    capture_pageview: false, // Manual tracking for Next.js App Router
     capture_pageleave: true,
     autocapture: true,
   });
@@ -30,9 +31,21 @@ export function identifyUser(userId: string, properties?: Record<string, any>) {
 }
 
 export function AnalyticsProvider({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+
   useEffect(() => {
     initPostHog();
   }, []);
+
+  // Track pageview on every route change
+  useEffect(() => {
+    if (typeof window !== 'undefined' && POSTHOG_KEY && initialized) {
+      posthog.capture('$pageview', {
+        $current_url: window.location.href,
+        path: pathname,
+      });
+    }
+  }, [pathname]);
 
   return <>{children}</>;
 }

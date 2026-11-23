@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import { AuthProvider } from '@/lib/auth';
 import { AnalyticsProvider } from '@/lib/analytics';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import GoogleAnalyticsTracker from '@/components/GoogleAnalyticsTracker';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -75,6 +76,7 @@ export default function RootLayout({
           </AnalyticsProvider>
         </AuthProvider>
         {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
+        {GA_ID && <GoogleAnalyticsTracker />}
       </body>
     </html>
   );
