@@ -17,6 +17,12 @@ const SITE_URL = 'https://investnest-seven.vercel.app';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  verification: {
+    google: 'google05f545bba76a658b',
+    other: {
+      'msvalidate.01': 'E42636624A4EB1D8A2DB9C78EE00EEED',
+    },
+  },
   title: {
     default: 'InvestNest — Discover Investments Beyond Stocks & MFs',
     template: '%s | InvestNest',
