@@ -1188,9 +1188,7 @@ Taxes can eat 20-30% of your investment returns. Understanding tax rules helps y
   },
 };
 
-export function generateStaticParams() {
-  return Object.keys(articles).map(slug => ({ slug }));
-}
+export const dynamic = 'force-dynamic';
 
 export default async function LearnArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
