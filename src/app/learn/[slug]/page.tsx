@@ -880,6 +880,181 @@ Use our [calculator](/calculator) to estimate your EMI:
 *Disclaimer: This article is for educational purposes only. Home loan rates and terms vary by bank. Please consult your bank or financial advisor. InvestNest is not a financial advisor.*
     `,
   },
+  'credit-score-guide': {
+    title: 'Credit Score in India — How It Affects Your Investments',
+    category: 'Basics',
+    readTime: '6 min',
+    content: `
+## What is a Credit Score?
+
+A credit score is a 3-digit number (300-900) that represents your creditworthiness. In India, CIBIL is the most popular credit bureau. A higher score means better loan terms.
+
+## Credit Score Ranges
+
+| Score Range | Rating | Loan Approval Chance |
+|------------|--------|---------------------|
+| 750-900 | Excellent | Very High |
+| 700-749 | Good | High |
+| 650-699 | Fair | Medium |
+| 600-649 | Poor | Low |
+| Below 600 | Very Poor | Very Low |
+
+## Why Credit Score Matters for Investors
+
+### 1. Home Loan Rates
+A 750+ score can get you 8.4% interest vs 9.5% for a 650 score. On a ₹50L loan for 20 years, that's a difference of **₹12+ lakhs** in total interest.
+
+### 2. Credit Card Rewards
+Higher scores get premium cards with better rewards, cashback, and travel benefits.
+
+### 3. Investment Leverage
+Better credit = easier access to margin trading, loan against securities, etc.
+
+## How to Improve Your Credit Score
+
+1. **Pay EMIs on time** — most important factor (35% weight)
+2. **Keep credit utilization below 30%** — don't max out your cards
+3. **Don't close old credit cards** — longer history = better score
+4. **Mix of credit types** — home loan + credit card is better than just cards
+5. **Check your CIBIL report** annually for errors (free once a year)
+6. **Don't apply for too many loans** — each inquiry reduces your score
+
+## How to Check Your Credit Score for Free
+
+| Platform | Cost | Frequency |
+|----------|------|-----------|
+| CIBIL (cibil.com) | Free once/year | Annual |
+| Paytm | Free | Monthly |
+| BankBazaar | Free | Monthly |
+| CRED | Free | Monthly |
+| OneScore | Free | Monthly |
+
+## Common Credit Score Mistakes
+
+1. **Missing an EMI** — even one late payment can drop your score by 50-100 points
+2. **Using >50% of credit limit** — signals high dependency on credit
+3. **Closing old cards** — reduces your credit history length
+4. **Applying for multiple loans** — each hard inquiry reduces score by 5-10 points
+5. **Not checking for errors** — CIBIL reports can have mistakes
+
+---
+
+*Disclaimer: This article is for educational purposes only. Credit scores are determined by credit bureaus. InvestNest is not a financial advisor.*
+    `,
+  },
+  'mutual-fund-sip': {
+    title: 'SIP in Mutual Funds — How to Start and Maximize Returns',
+    category: 'Traditional',
+    readTime: '7 min',
+    content: `
+## What is SIP?
+
+SIP (Systematic Investment Plan) is a method of investing a fixed amount regularly in a mutual fund. Think of it as a recurring deposit, but for mutual funds. You invest ₹500-₹50,000 per month, and the fund buys units at the current NAV.
+
+## Why SIP Works
+
+### Rupee Cost Averaging
+When markets are high, your fixed amount buys fewer units. When markets are low, it buys more units. Over time, this averages out your purchase cost.
+
+**Example:**
+| Month | NAV | Investment | Units Bought |
+|-------|-----|-----------|-------------|
+| Jan | ₹100 | ₹5,000 | 50.00 |
+| Feb | ₹80 | ₹5,000 | 62.50 |
+| Mar | ₹120 | ₹5,000 | 41.67 |
+| Apr | ₹90 | ₹5,000 | 55.56 |
+| **Total** | **Avg ₹95** | **₹20,000** | **209.72** |
+
+Average cost per unit: ₹95.24 (vs ₹97.50 if you invested ₹20,000 at once in Jan at ₹100)
+
+### Power of Compounding
+The longer you stay invested, the more your money grows. Starting early is the biggest advantage.
+
+**₹5,000/month SIP for 20 years at 12% = ₹49.96 lakhs**
+(You invested only ₹12 lakhs; the rest is compounding!)
+
+## How to Start a SIP
+
+### Step 1: Choose a Fund
+- For beginners: Index funds (Nifty 50, Nifty Next 50)
+- For growth: Flexi-cap or large-cap funds
+- For tax saving: ELSS funds
+
+### Step 2: Complete KYC
+- Aadhaar-based e-KYC takes 5 minutes online
+- Platforms: Groww, Zerodha, Paytm Money, ET Money
+
+### Step 3: Set Up SIP
+- Choose amount (min ₹500/month for most funds)
+- Choose date (1st, 5th, 10th, 15th, 20th, 25th of month)
+- Set up auto-debit via UPI or bank mandate
+
+### Step 4: Stay Invested
+- Don't stop SIPs during market downturns
+- Review annually, not monthly
+- Increase SIP amount with salary hikes (Step-up SIP)
+
+## SIP Strategies
+
+### 1. Step-Up SIP
+Increase your SIP amount by 10% every year. If you start with ₹5,000/month and increase by 10% annually:
+- Year 1: ₹5,000/month
+- Year 5: ₹7,320/month
+- Year 10: ₹11,790/month
+- 20-year corpus: ₹75+ lakhs (vs ₹50 lakhs without step-up)
+
+### 2. Multiple SIPs
+Don't put all money in one fund. Diversify:
+- 40% Large-cap index fund
+- 30% Flexi-cap fund
+- 20% Mid-cap fund
+- 10% International fund
+
+### 3. SIP in Debt Funds
+For short-term goals (1-3 years), use debt fund SIPs. Returns are lower (6-8%) but more stable.
+
+## Common SIP Mistakes
+
+1. **Stopping SIPs during market crashes** — this is when you buy the cheapest
+2. **Checking NAV daily** — causes panic and poor decisions
+3. **Not increasing SIP with salary** — inflation erodes your investment power
+4. **Too many funds** — 3-5 funds is enough
+5. **Ignoring expense ratio** — 0.5% difference compounds to lakhs over 20 years
+6. **Redeeming early** — breaks compounding
+
+## SIP vs Lump Sum
+
+| Factor | SIP | Lump Sum |
+|--------|-----|----------|
+| Market timing | Not needed | Critical |
+| Risk | Lower (averaged) | Higher (single entry point) |
+| Discipline | High (automated) | Low (requires manual action) |
+| Returns (bull market) | Lower | Higher |
+| Returns (bear market) | Higher | Lower |
+| Best for | Salaried investors | Those with large corpus |
+
+## Top SIP Funds (2026)
+
+| Fund | Category | 5Y Returns | Expense Ratio |
+|------|----------|-----------|---------------|
+| UTI Nifty 50 Index | Large Cap Index | 13.2% | 0.18% |
+| Parag Parikh Flexi Cap | Flexi Cap | 16.8% | 0.63% |
+| Nippon India Small Cap | Small Cap | 22.1% | 0.67% |
+| Mirae Asset Large Cap | Large Cap | 14.5% | 0.53% |
+| Axis Bluechip | Large Cap | 12.8% | 0.49% |
+
+## SIP Calculator
+
+Use our [calculator](/calculator) to estimate your SIP returns:
+- ₹5,000/month for 10 years at 12% = ₹11.6 lakhs
+- ₹10,000/month for 15 years at 12% = ₹47.6 lakhs
+- ₹15,000/month for 20 years at 12% = ₹1.5 crore
+
+---
+
+*Disclaimer: This article is for educational purposes only. Past performance doesn't guarantee future returns. Please consult a SEBI-registered financial advisor. InvestNest is not a financial advisor.*
+    `,
+  },
   'tax-on-investments': {
     title: 'Tax on Investments in India — Complete Guide (2026)',
     category: 'Basics',

@@ -9,8 +9,10 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@next/third-parties": "^16.4.6",
     "@supabase/supabase-js": "^2.119.2",
     "next": "16.4.6",
+    "posthog-js": "^1.454.2",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },

@@ -11,10 +11,12 @@ const articleSlugs = [
   'understanding-risk',
   'tax-on-investments',
   'home-loan-guide',
+  'credit-score-guide',
+  'mutual-fund-sip',
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://investnest.in';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://investnest-seven.vercel.app';
 
   const staticPages = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 1 },

@@ -57,6 +57,20 @@ const articles = [
     category: 'Basics',
     readTime: '9 min',
   },
+  {
+    title: 'Credit Score in India — Complete Guide',
+    slug: 'credit-score-guide',
+    description: 'How credit scores work, why they matter, and how to improve yours.',
+    category: 'Basics',
+    readTime: '6 min',
+  },
+  {
+    title: 'SIP in Mutual Funds — How to Start',
+    slug: 'mutual-fund-sip',
+    description: 'Everything about Systematic Investment Plans — returns, strategies, and mistakes to avoid.',
+    category: 'Traditional',
+    readTime: '7 min',
+  },
 ];
 
 export default function LearnPage() {
