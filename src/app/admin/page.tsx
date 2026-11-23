@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth';
 
+export const dynamic = 'force-dynamic';
+
 export default function AdminPage() {
   const router = useRouter();
   const { user, loading, isAdmin, signIn, signInWithGoogle, signOut } = useAuth();
