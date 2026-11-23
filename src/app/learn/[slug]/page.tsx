@@ -786,6 +786,100 @@ For direct stock investments, set a stop-loss to limit downside.
 *Disclaimer: This article is for educational purposes only. Risk tolerance varies by individual. Please consult a SEBI-registered financial advisor. InvestNest is not a financial advisor.*
     `,
   },
+  'home-loan-guide': {
+    title: 'Home Loan Guide India — Everything You Need to Know',
+    category: 'Real Estate',
+    readTime: '7 min',
+    content: `
+## What is a Home Loan?
+
+A home loan is money borrowed from a bank or housing finance company (HFC) to purchase, construct, or renovate a property. The property itself serves as collateral.
+
+## Types of Home Loans
+
+| Type | Purpose | Tenure |
+|------|---------|--------|
+| Purchase Loan | Buy ready/under-construction property | Up to 30 years |
+| Construction Loan | Build on your own plot | Up to 30 years |
+| Home Improvement | Renovate/repair existing property | Up to 15 years |
+| Home Extension | Add rooms/floors | Up to 15 years |
+| Plot Loan | Buy a plot for future construction | Up to 15 years |
+| Balance Transfer | Move loan to another bank for lower rate | Remaining tenure |
+
+## Current Home Loan Rates (2026)
+
+| Bank Type | Rate Range |
+|-----------|-----------|
+| PSU Banks (SBI, PNB, BoB) | 8.40% - 9.15% |
+| Private Banks (HDFC, ICICI, Axis) | 8.50% - 9.25% |
+| HFCs (LIC HFL, PNB HFL) | 8.60% - 9.40% |
+| Small Finance Banks | 9.00% - 10.00% |
+
+## How to Choose a Home Loan
+
+### 1. Compare Interest Rates
+- Check both fixed and floating rates
+- Floating rates are linked to RBI repo rate (currently more common)
+- Fixed rates are 1-2% higher but provide certainty
+
+### 2. Check Processing Fees
+- Usually 0.25-1% of loan amount
+- Some banks waive this during promotional periods
+
+### 3. Prepayment Charges
+- Floating rate loans: **No prepayment penalty** (RBI rule)
+- Fixed rate loans: May have 2-4% prepayment charge
+
+### 4. Loan-to-Value (LTV) Ratio
+| Property Value | Max LTV |
+|---------------|---------|
+| Up to ₹30L | 90% |
+| ₹30L - ₹75L | 80% |
+| Above ₹75L | 75% |
+
+## Documents Required
+
+### For Salaried
+- KYC: PAN, Aadhaar, passport photos
+- Income: Salary slips (3 months), Form 16, bank statements (6 months)
+- Property: Sale agreement, title deed, NOC from builder/society
+
+### For Self-Employed
+- KYC: PAN, Aadhaar, passport photos
+- Income: ITR (3 years), P&L statement, bank statements (12 months)
+- Business: Registration certificate, GST returns
+- Property: Same as above
+
+## Home Loan Tax Benefits
+
+| Section | Benefit | Max Amount |
+|---------|---------|------------|
+| 80C | Principal repayment | ₹1.5L |
+| 24(b) | Interest payment | ₹2L |
+| 80EEA | First-time buyer (affordable housing) | ₹1.5L |
+| 80EE | First-time buyer (standard) | ₹50,000 |
+
+## Tips for Getting the Best Home Loan
+
+1. **Check your credit score** — 750+ gets the best rates
+2. **Compare multiple banks** — don't just go to your salary account bank
+3. **Negotiate processing fees** — banks often waive them
+4. **Consider balance transfer** — if your current rate is >1% higher
+5. **Keep EMI < 40%** of your monthly income
+6. **Choose shorter tenure** if possible — saves lakhs in interest
+7. **Make prepayments** — even small ones reduce tenure significantly
+
+## Home Loan EMI Calculator
+
+Use our [calculator](/calculator) to estimate your EMI:
+- ₹50L loan at 8.5% for 20 years = ₹43,391/month EMI
+- Total interest paid: ₹54,13,840
+
+---
+
+*Disclaimer: This article is for educational purposes only. Home loan rates and terms vary by bank. Please consult your bank or financial advisor. InvestNest is not a financial advisor.*
+    `,
+  },
   'tax-on-investments': {
     title: 'Tax on Investments in India — Complete Guide (2026)',
     category: 'Basics',

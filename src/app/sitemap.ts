@@ -1,6 +1,18 @@
 import { MetadataRoute } from 'next';
 import { investmentProducts } from '@/data/products';
 
+const articleSlugs = [
+  'sarfaesi-auctions',
+  'invest-reits-india',
+  'p2p-lending-guide',
+  'invoice-discounting',
+  'fd-vs-mf',
+  'property-evaluation',
+  'understanding-risk',
+  'tax-on-investments',
+  'home-loan-guide',
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://investnest.in';
 
@@ -19,5 +31,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...productPages];
+  const articlePages = articleSlugs.map(slug => ({
+    url: `${baseUrl}/learn/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...productPages, ...articlePages];
 }
