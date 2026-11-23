@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
-import { Property } from '@/types';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -88,5 +87,27 @@ export async function GET(request: NextRequest) {
   } catch (e) {
     console.error('API error:', e);
     return NextResponse.json({ properties: [], total: 0 }, { status: 200 });
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+
+    const { data, error } = await supabase
+      .from('properties')
+      .insert(body)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Supabase insert error:', error);
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
+
+    return NextResponse.json({ property: data }, { status: 201 });
+  } catch (e) {
+    console.error('API error:', e);
+    return NextResponse.json({ error: 'Failed to create property' }, { status: 500 });
   }
 }
