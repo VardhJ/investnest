@@ -126,12 +126,15 @@ class IBAPIParser:
 
     def _parse_item(self, item):
         try:
-            title = item.get('Property', '') or ''
+            prop_type_raw = item.get('Property', '') or ''
             bank = item.get('Bank Name', '') or ''
             state = item.get('State', '') or ''
             district = item.get('District', '') or ''
             city = item.get('City', '') or ''
             location = f"{city}, {district}, {state}".strip(', ')
+            
+            # Create a descriptive title
+            title = f"{prop_type_raw.title()} Property in {city}, {district}" if city else f"{prop_type_raw.title()} Property"
 
             price_text = item.get('Reserve Price (Rs)', '') or ''
             reserve_price = self._parse_price(str(price_text))
@@ -145,8 +148,10 @@ class IBAPIParser:
             auction_start = item.get('Auction Start Date & Time', '') or ''
             auction_end = item.get('Auction End Date & Time', '') or ''
             emd_date = item.get('EMD Last Date & Time', '') or ''
-            prop_id = item.get('Property ID', '') or ''
-
+            # Property ID contains HTML: <a id="btn_view" ...>CORP0020190266</a>
+            prop_id_raw = item.get('Property ID', '') or ''
+            prop_id = re.sub(r'<[^>]+>', '', str(prop_id_raw)).strip()
+            
             city_clean = city if city else self._extract_city(location)
 
             return {
@@ -156,7 +161,7 @@ class IBAPIParser:
                 'location': location,
                 'city': city_clean or 'Unknown',
                 'state': state or 'Unknown',
-                'property_type': self._detect_type(title, location),
+                'property_type': self._map_property_type(prop_type_raw),
                 'reserve_price': reserve_price,
                 'market_value': None,
                 'discount': None,
@@ -207,6 +212,21 @@ class IBAPIParser:
         if any(w in text for w in ['plot', 'land', 'agricultural']):
             return 'land'
         if any(w in text for w in ['car', 'vehicle', 'truck', 'bike']):
+            return 'vehicle'
+        return 'residential'
+
+    def _map_property_type(self, prop_type):
+        """Map IBAPI property type to our enum."""
+        text = str(prop_type).lower()
+        if 'residential' in text or 'flat' in text or 'house' in text or 'apartment' in text:
+            return 'residential'
+        if 'commercial' in text or 'office' in text or 'shop' in text or 'showroom' in text:
+            return 'commercial'
+        if 'industrial' in text or 'factory' in text or 'plant' in text or 'warehouse' in text:
+            return 'industrial'
+        if 'agricultural' in text or 'plot' in text or 'land' in text:
+            return 'land'
+        if 'vehicle' in text or 'car' in text or 'truck' in text:
             return 'vehicle'
         return 'residential'
 
