@@ -20,7 +20,19 @@ CREATE TABLE properties (
   source_url TEXT NOT NULL,
   status TEXT DEFAULT 'active' CHECK (status IN ('active', 'sold', 'cancelled', 'expired')),
   created_at TIMESTAMPTZ DEFAULT NOW(),
-  updated_at TIMESTAMPTZ DEFAULT NOW()
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  -- Extended details
+  area_sqft INT,
+  bedrooms INT,
+  bathrooms INT,
+  floor TEXT,
+  total_floors INT,
+  parking TEXT,
+  amenities TEXT[] DEFAULT '{}',
+  possession_status TEXT,
+  construction_year INT,
+  facing TEXT,
+  furnishing TEXT
 );
 
 -- Full-text search index

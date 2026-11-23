@@ -34,6 +34,17 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       status: data.status,
       createdAt: data.created_at,
       updatedAt: data.updated_at,
+      areaSqft: data.area_sqft,
+      bedrooms: data.bedrooms,
+      bathrooms: data.bathrooms,
+      floor: data.floor,
+      totalFloors: data.total_floors,
+      parking: data.parking,
+      amenities: data.amenities || [],
+      possessionStatus: data.possession_status,
+      constructionYear: data.construction_year,
+      facing: data.facing,
+      furnishing: data.furnishing,
     };
 
     return NextResponse.json({ property });

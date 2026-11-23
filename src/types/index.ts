@@ -39,6 +39,18 @@ export interface Property {
   sourceUrl: string;
   createdAt: string;
   updatedAt: string;
+  // Extended details
+  areaSqft: number | null;
+  bedrooms: number | null;
+  bathrooms: number | null;
+  floor: string | null;
+  totalFloors: number | null;
+  parking: string | null;
+  amenities: string[];
+  possessionStatus: string | null;
+  constructionYear: number | null;
+  facing: string | null;
+  furnishing: string | null;
 }
 
 // User Types

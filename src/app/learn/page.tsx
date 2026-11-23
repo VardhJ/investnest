@@ -2,11 +2,11 @@ import Link from 'next/link';
 
 const articles = [
   {
-    title: 'What are SARFAESI Auctions?',
+    title: 'What are SARFAESI Auctions? Complete Guide',
     slug: 'sarfaesi-auctions',
-    description: 'Learn how banks sell seized properties at 15-30% below market value.',
+    description: 'Learn how banks sell seized properties at 15-30% below market value. Complete step-by-step guide.',
     category: 'Real Estate',
-    readTime: '5 min',
+    readTime: '8 min',
   },
   {
     title: 'How to Invest in REITs in India',

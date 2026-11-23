@@ -81,6 +81,17 @@ export async function GET(request: NextRequest) {
       status: p.status,
       createdAt: p.created_at,
       updatedAt: p.updated_at,
+      areaSqft: p.area_sqft,
+      bedrooms: p.bedrooms,
+      bathrooms: p.bathrooms,
+      floor: p.floor,
+      totalFloors: p.total_floors,
+      parking: p.parking,
+      amenities: p.amenities || [],
+      possessionStatus: p.possession_status,
+      constructionYear: p.construction_year,
+      facing: p.facing,
+      furnishing: p.furnishing,
     }));
 
     return NextResponse.json({ properties, total: count || 0 });

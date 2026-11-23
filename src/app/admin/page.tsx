@@ -16,6 +16,9 @@ export default function AdminPage() {
     title: '', bank: '', branch: '', location: '', city: '', state: '',
     propertyType: 'residential', reservePrice: '', marketValue: '', discount: '',
     auctionDate: '', emd: '', description: '', sourceUrl: '',
+    areaSqft: '', bedrooms: '', bathrooms: '', floor: '', totalFloors: '',
+    parking: '', amenities: '', possessionStatus: '', constructionYear: '',
+    facing: '', furnishing: '',
   });
   const [status, setStatus] = useState('');
 
@@ -70,6 +73,17 @@ export default function AdminPage() {
           description: formData.description,
           source_url: formData.sourceUrl || 'https://manual-entry',
           status: 'active',
+          area_sqft: formData.areaSqft ? parseInt(formData.areaSqft) : null,
+          bedrooms: formData.bedrooms ? parseInt(formData.bedrooms) : null,
+          bathrooms: formData.bathrooms ? parseInt(formData.bathrooms) : null,
+          floor: formData.floor || null,
+          total_floors: formData.totalFloors ? parseInt(formData.totalFloors) : null,
+          parking: formData.parking || null,
+          amenities: formData.amenities ? formData.amenities.split(',').map(s => s.trim()) : [],
+          possession_status: formData.possessionStatus || null,
+          construction_year: formData.constructionYear ? parseInt(formData.constructionYear) : null,
+          facing: formData.facing || null,
+          furnishing: formData.furnishing || null,
         }),
       });
 
@@ -79,6 +93,9 @@ export default function AdminPage() {
           title: '', bank: '', branch: '', location: '', city: '', state: '',
           propertyType: 'residential', reservePrice: '', marketValue: '', discount: '',
           auctionDate: '', emd: '', description: '', sourceUrl: '',
+          areaSqft: '', bedrooms: '', bathrooms: '', floor: '', totalFloors: '',
+          parking: '', amenities: '', possessionStatus: '', constructionYear: '',
+          facing: '', furnishing: '',
         });
       } else {
         const data = await res.json();
@@ -89,7 +106,7 @@ export default function AdminPage() {
     }
   };
 
-  const inputClass = "w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-sm";
+  const inputClass = "w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-sm text-gray-900 bg-white";
 
   // Loading state
   if (loading) {
@@ -272,6 +289,81 @@ export default function AdminPage() {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Source URL (bank portal link)</label>
             <input name="sourceUrl" value={formData.sourceUrl} onChange={handleChange} className={inputClass} placeholder="https://www.ibapi.in/..." />
+          </div>
+
+          <div className="border-t pt-4 mt-4">
+            <h3 className="text-lg font-semibold mb-3">Property Details (Optional)</h3>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Area (sq ft)</label>
+              <input name="areaSqft" value={formData.areaSqft} onChange={handleChange} type="number" className={inputClass} placeholder="750" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Bedrooms</label>
+              <input name="bedrooms" value={formData.bedrooms} onChange={handleChange} type="number" className={inputClass} placeholder="2" />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Bathrooms</label>
+              <input name="bathrooms" value={formData.bathrooms} onChange={handleChange} type="number" className={inputClass} placeholder="2" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Floor</label>
+              <input name="floor" value={formData.floor} onChange={handleChange} className={inputClass} placeholder="5th" />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Total Floors</label>
+              <input name="totalFloors" value={formData.totalFloors} onChange={handleChange} type="number" className={inputClass} placeholder="12" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Parking</label>
+              <input name="parking" value={formData.parking} onChange={handleChange} className={inputClass} placeholder="1 covered" />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Possession Status</label>
+              <select name="possessionStatus" value={formData.possessionStatus} onChange={handleChange} className={inputClass}>
+                <option value="">Select</option>
+                <option value="ready">Ready to Move</option>
+                <option value="under-construction">Under Construction</option>
+                <option value="occupied">Occupied</option>
+                <option value="vacant">Vacant</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Furnishing</label>
+              <select name="furnishing" value={formData.furnishing} onChange={handleChange} className={inputClass}>
+                <option value="">Select</option>
+                <option value="furnished">Furnished</option>
+                <option value="semi-furnished">Semi-Furnished</option>
+                <option value="unfurnished">Unfurnished</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Construction Year</label>
+              <input name="constructionYear" value={formData.constructionYear} onChange={handleChange} type="number" className={inputClass} placeholder="2020" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Facing</label>
+              <input name="facing" value={formData.facing} onChange={handleChange} className={inputClass} placeholder="East" />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Amenities (comma-separated)</label>
+            <input name="amenities" value={formData.amenities} onChange={handleChange} className={inputClass} placeholder="Lift, Gym, Swimming Pool, Security" />
           </div>
 
           <button type="submit" className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
