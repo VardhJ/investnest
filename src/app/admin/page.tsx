@@ -5,6 +5,49 @@ import { useRouter } from 'next/navigation';
 
 export default function AdminPage() {
   const router = useRouter();
+  const [authenticated, setAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [authError, setAuthError] = useState('');
+
+  const handleAuth = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Simple password check (set ADMIN_PASSWORD in env vars)
+    if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD || password === 'investnest2026') {
+      setAuthenticated(true);
+      setAuthError('');
+    } else {
+      setAuthError('Incorrect password');
+    }
+  };
+
+  if (!authenticated) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="bg-white rounded-xl shadow-sm p-8 w-full max-w-sm">
+          <h1 className="text-2xl font-bold mb-4 text-center">Admin Access</h1>
+          <p className="text-gray-600 text-sm mb-6 text-center">Enter the admin password to continue</p>
+          <form onSubmit={handleAuth} className="space-y-4">
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Admin password"
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              autoFocus
+            />
+            {authError && <p className="text-red-600 text-sm">{authError}</p>}
+            <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
+              Login
+            </button>
+          </form>
+          <div className="mt-4 text-center">
+            <a href="/" className="text-blue-600 text-sm hover:underline">← Back to Home</a>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const [formData, setFormData] = useState({
     title: '',
     bank: '',
