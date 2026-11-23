@@ -1017,8 +1017,9 @@ export function generateStaticParams() {
   return Object.keys(articles).map(slug => ({ slug }));
 }
 
-export default function LearnArticlePage({ params }: { params: { slug: string } }) {
-  const article = articles[params.slug];
+export default async function LearnArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const article = articles[slug];
 
   if (!article) {
     notFound();
