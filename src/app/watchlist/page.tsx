@@ -55,20 +55,30 @@ export default function WatchlistPage() {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <div className="inline-block w-8 h-8 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Sign In Required</h1>
-          <p className="text-gray-600 mb-4">Please sign in to view your watchlist.</p>
-          <Link href="/login" className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition inline-block">
-            Sign In
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center py-16 px-4">
+        <div className="bg-white rounded-2xl border border-slate-200 p-8 text-center max-w-sm shadow-sm">
+          <div className="w-12 h-12 rounded-xl bg-slate-100 text-slate-500 flex items-center justify-center mx-auto mb-4">
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <h1 className="text-xl font-bold text-slate-900 mb-2">Authentication Required</h1>
+          <p className="text-xs text-slate-500 mb-6">
+            Sign in to your InvestNest account to track saved bank auction properties.
+          </p>
+          <Link
+            href="/login"
+            className="w-full inline-block py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs rounded-xl transition"
+          >
+            Sign In to Continue
           </Link>
         </div>
       </div>
@@ -76,59 +86,93 @@ export default function WatchlistPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold mb-2">My Watchlist</h1>
-          <p className="text-gray-600">{watchlist.length} saved properties</p>
+    <div className="min-h-screen bg-slate-50">
+      <div className="bg-white border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Saved Auction Watchlist
+          </h1>
+          <p className="mt-1 text-sm text-slate-500">
+            {watchlist.length} properties saved for tracking and bidding preparation
+          </p>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {loading ? (
-          <div className="text-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="py-20 text-center">
+            <div className="inline-block w-8 h-8 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin mb-3" />
+            <p className="text-xs text-slate-500">Loading your saved properties...</p>
           </div>
         ) : watchlist.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-gray-600 text-lg">No properties saved yet.</p>
-            <p className="text-gray-500 mt-2">Browse properties and click "Add to Watchlist" to save them here.</p>
-            <Link href="/properties" className="text-blue-600 font-semibold hover:underline mt-4 inline-block">
-              Browse Properties →
+          <div className="py-20 text-center max-w-sm mx-auto">
+            <div className="w-12 h-12 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3">
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+              </svg>
+            </div>
+            <h3 className="text-base font-bold text-slate-900">No properties bookmarked yet</h3>
+            <p className="mt-1 text-xs text-slate-500">
+              Browse current bank auction listings and click "Save to Watchlist" on any detail page to keep track here.
+            </p>
+            <Link
+              href="/properties"
+              className="mt-4 inline-block px-4 py-2 bg-emerald-600 text-white rounded-lg text-xs font-semibold hover:bg-emerald-700 transition"
+            >
+              Browse Auction Properties
             </Link>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {watchlist.map((item) => {
               const prop = item.properties;
               if (!prop) return null;
               return (
-                <div key={item.id} className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">
-                  <div className="h-48 bg-gray-200 flex items-center justify-center">
-                    <span className="text-4xl">🏠</span>
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-semibold text-gray-900 line-clamp-1">{prop.title}</h3>
-                    <p className="text-gray-600 text-sm mb-2">📍 {prop.location}</p>
-                    <div className="flex justify-between items-center">
-                      <div className="text-lg font-bold text-blue-600">{formatPrice(prop.reserve_price)}</div>
+                <div
+                  key={item.id}
+                  className="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition-all flex flex-col justify-between"
+                >
+                  <div className="p-5">
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <h3 className="font-bold text-slate-900 text-base line-clamp-1">{prop.title}</h3>
                       {prop.discount && (
-                        <span className="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded">
+                        <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-amber-500 text-white shrink-0">
                           {prop.discount}% off
                         </span>
                       )}
                     </div>
-                    <div className="mt-3 flex justify-between">
-                      <Link href={`/properties/${prop.id}`} className="text-blue-600 text-sm hover:underline">
-                        View Details →
-                      </Link>
-                      <button
-                        onClick={() => removeFromWatchlist(prop.id)}
-                        className="text-red-600 text-sm hover:underline"
-                      >
-                        Remove
-                      </button>
+
+                    <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium mb-4">
+                      <svg className="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      <span className="truncate">{prop.location}</span>
                     </div>
+
+                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between">
+                      <div>
+                        <div className="text-[10px] uppercase font-bold text-slate-400">Reserve Price</div>
+                        <div className="text-base font-extrabold text-emerald-700">
+                          {formatPrice(prop.reserve_price)}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="px-5 py-3 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between text-xs">
+                    <Link
+                      href={`/properties/${prop.id}`}
+                      className="font-semibold text-emerald-700 hover:underline"
+                    >
+                      View Dossier →
+                    </Link>
+                    <button
+                      onClick={() => removeFromWatchlist(prop.id)}
+                      className="text-slate-400 hover:text-rose-600 font-medium transition"
+                    >
+                      Remove
+                    </button>
                   </div>
                 </div>
               );

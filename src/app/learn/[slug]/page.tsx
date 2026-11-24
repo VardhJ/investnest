@@ -2200,52 +2200,91 @@ export default async function LearnArticlePage({ params }: { params: Promise<{ s
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <Link href="/learn" className="text-blue-600 hover:underline mb-4 inline-block">← Back to Learn</Link>
+    <div className="min-h-screen bg-slate-50 py-8 lg:py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Breadcrumb */}
+        <div className="mb-6 flex items-center gap-2 text-xs font-medium text-slate-500">
+          <Link href="/learn" className="hover:text-emerald-700 flex items-center gap-1">
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            <span>Research & Learn</span>
+          </Link>
+          <span>/</span>
+          <span className="text-slate-800 font-semibold truncate max-w-sm">{article.title}</span>
+        </div>
 
-        <article className="bg-white rounded-xl shadow-sm p-8">
+        <article className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-10">
           <div className="flex items-center gap-2 mb-4">
-            <span className="bg-blue-100 text-blue-700 text-xs font-medium px-2 py-1 rounded">{article.category}</span>
-            <span className="text-gray-500 text-xs">{article.readTime} read</span>
+            <span className="bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded">
+              {article.category}
+            </span>
+            <span className="text-slate-400 text-xs font-medium">{article.readTime} reading time</span>
           </div>
 
-          <h1 className="text-3xl font-bold mb-6">{article.title}</h1>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-8 pb-4 border-b border-slate-100">
+            {article.title}
+          </h1>
 
-          <div className="prose prose-blue max-w-none">
+          <div className="prose max-w-none text-slate-700">
             {article.content.split('\n').map((line, i) => {
               if (line.startsWith('## ')) {
-                return <h2 key={i} className="text-2xl font-bold mt-8 mb-4 text-gray-900">{renderInlineBold(line.replace('## ', ''))}</h2>;
+                return (
+                  <h2 key={i} className="text-xl sm:text-2xl font-bold mt-8 mb-4 text-slate-900 border-b border-slate-100 pb-2">
+                    {renderInlineBold(line.replace('## ', ''))}
+                  </h2>
+                );
               }
               if (line.startsWith('### ')) {
-                return <h3 key={i} className="text-xl font-bold mt-6 mb-3 text-gray-900">{renderInlineBold(line.replace('### ', ''))}</h3>;
+                return (
+                  <h3 key={i} className="text-lg font-bold mt-6 mb-3 text-slate-900">
+                    {renderInlineBold(line.replace('### ', ''))}
+                  </h3>
+                );
               }
               if (line.startsWith('|')) {
-                return null; // Tables handled separately
+                return null;
               }
               if (line.startsWith('- ')) {
-                return <li key={i} className="text-gray-700 ml-4">{renderInlineBold(line.replace('- ', ''))}</li>;
+                return (
+                  <li key={i} className="text-slate-700 ml-4 mb-1 text-sm leading-relaxed">
+                    {renderInlineBold(line.replace('- ', ''))}
+                  </li>
+                );
               }
               if (line.startsWith('**') && line.endsWith('**')) {
-                return <p key={i} className="font-bold text-gray-900 mt-4">{renderInlineBold(line.replace(/\*\*/g, ''))}</p>;
+                return (
+                  <p key={i} className="font-bold text-slate-900 mt-4 text-sm">
+                    {renderInlineBold(line.replace(/\*\*/g, ''))}
+                  </p>
+                );
               }
               if (line.trim() === '') {
                 return <br key={i} />;
               }
-              return <p key={i} className="text-gray-700 mb-3 leading-relaxed">{renderInlineBold(line)}</p>;
+              return (
+                <p key={i} className="text-slate-700 mb-3 text-sm leading-relaxed">
+                  {renderInlineBold(line)}
+                </p>
+              );
             })}
           </div>
 
-          <div className="mt-8 pt-6 border-t border-gray-200">
-            <p className="text-sm text-gray-500">
-              <strong>Disclaimer:</strong> This article is for educational purposes only. 
-              InvestNest is not a financial advisor. Please consult a SEBI-registered advisor before making investment decisions.
-            </p>
+          <div className="mt-10 pt-6 border-t border-slate-100 text-xs text-slate-500 leading-relaxed bg-slate-50 p-4 rounded-xl">
+            <strong className="text-slate-700">Regulatory Disclaimer:</strong> This dossier is curated for educational and informational purposes only and does not constitute financial, legal, or investment advice. Always consult a SEBI-registered advisor and independent legal counsel before participating in auctions or deploying capital.
           </div>
         </article>
 
-        <div className="mt-6 text-center">
-          <Link href="/learn" className="text-blue-600 hover:underline">← Back to Learn</Link>
+        <div className="mt-8 text-center">
+          <Link
+            href="/learn"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 hover:text-emerald-800"
+          >
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            <span>Return to All Research Articles</span>
+          </Link>
         </div>
       </div>
     </div>

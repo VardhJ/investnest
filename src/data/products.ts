@@ -19,7 +19,7 @@ export const investmentProducts: InvestmentProduct[] = [
     pros: ['High return potential', 'High liquidity', 'Ownership in businesses', 'Dividend income'],
     cons: ['High volatility', 'Requires research', 'No guaranteed returns', 'Emotional stress'],
     platforms: ['Zerodha', 'Groww', 'Angel One', 'Upstox'],
-    icon: '📈',
+    icon: '',
   },
   {
     id: 'mutual-funds',
@@ -38,7 +38,7 @@ export const investmentProducts: InvestmentProduct[] = [
     pros: ['Professional management', 'Diversification', 'SIP option', 'Low minimum'],
     cons: ['Expense ratio fees', 'No control over stock selection', 'Market risk remains'],
     platforms: ['Groww', 'Zerodha Coin', 'Paytm Money', 'ET Money'],
-    icon: '🏦',
+    icon: '',
   },
   {
     id: 'etfs',
@@ -57,7 +57,7 @@ export const investmentProducts: InvestmentProduct[] = [
     pros: ['Low cost', 'Transparent', 'Intraday trading', 'Diversified'],
     cons: ['Tracking error', 'Lower liquidity than stocks', 'No active management'],
     platforms: ['Zerodha', 'Groww', 'ICICI Direct'],
-    icon: '📊',
+    icon: '',
   },
   {
     id: 'fixed-deposits',
@@ -76,7 +76,7 @@ export const investmentProducts: InvestmentProduct[] = [
     pros: ['Guaranteed returns', 'Safe (DICGC insured up to ₹5L)', 'Simple', 'Predictable'],
     cons: ['Low returns (below inflation sometimes)', 'Tax inefficient', 'Premature withdrawal penalty'],
     platforms: ['Any bank', 'Small Finance Banks (higher rates)'],
-    icon: '🏦',
+    icon: '',
   },
   {
     id: 'ppf',
@@ -95,7 +95,7 @@ export const investmentProducts: InvestmentProduct[] = [
     pros: ['Tax-free returns', 'Government guaranteed', 'Disciplined saving', 'Loan facility'],
     cons: ['15-year lock-in', 'Low liquidity', 'Max ₹1.5L/year', 'Interest rate can change'],
     platforms: ['Post Office', 'Banks', 'Online via net banking'],
-    icon: '🏛️',
+    icon: '',
   },
   {
     id: 'gold',
@@ -114,7 +114,7 @@ export const investmentProducts: InvestmentProduct[] = [
     pros: ['Inflation hedge', 'Cultural value', 'SGB gives interest', 'Liquid (ETFs)'],
     cons: ['No passive income (except SGB)', 'Storage cost (physical)', 'Making charges (jewelry)'],
     platforms: ['Zerodha (Gold ETF)', 'Groww', 'MMTC-PAMP (digital gold)', 'RBI (SGB)'],
-    icon: '🥇',
+    icon: '',
   },
   // === REAL ESTATE ===
   {
@@ -134,7 +134,7 @@ export const investmentProducts: InvestmentProduct[] = [
     pros: ['Low minimum', 'High liquidity', 'Professional management', 'Diversified properties', 'Tax-efficient dividends'],
     cons: ['Market volatility', 'Limited to commercial (not residential)', 'Only 3 REITs in India', 'Low trading volume'],
     platforms: ['Zerodha', 'Groww', 'ICICI Direct', 'HDFC Securities'],
-    icon: '🏢',
+    icon: '',
   },
   {
     id: 'sarfaesi-properties',
@@ -153,7 +153,7 @@ export const investmentProducts: InvestmentProduct[] = [
     pros: ['Below market price', 'Bank-backed (safer title)', 'Diverse property types', 'Potential high returns'],
     cons: ['Legal complexity', 'Title risks', 'As-is condition', 'Competition from investors', 'Illiquid', 'EMD at risk if bid fails'],
     platforms: ['IBAPI.in', 'SBI e-Auction', 'MSTC', 'e-Procurement'],
-    icon: '🏠',
+    icon: '',
   },
   {
     id: 'fractional-real-estate',
@@ -172,7 +172,7 @@ export const investmentProducts: InvestmentProduct[] = [
     pros: ['Low entry for commercial RE', 'Professional management', 'Regular income', 'Diversification'],
     cons: ['Illiquid (no secondary market)', 'Platform risk', 'High minimum (₹10L+)', 'Regulatory uncertainty'],
     platforms: ['Strata', 'hBits', 'PropertyShare', 'Assetmonk'],
-    icon: '🏗️',
+    icon: '',
   },
   // === ALTERNATIVE ===
   {
@@ -192,7 +192,7 @@ export const investmentProducts: InvestmentProduct[] = [
     pros: ['High returns', 'Low minimum', 'Monthly income', 'Diversification across borrowers'],
     cons: ['Credit risk (default)', 'No DICGC insurance', 'Illiquid', 'Platform risk', 'Tax inefficient'],
     platforms: ['Faircent', 'LenDenClub', 'RupeeCircle', 'LiquiLoans'],
-    icon: '🤝',
+    icon: '',
   },
   {
     id: 'invoice-discounting',
@@ -211,7 +211,7 @@ export const investmentProducts: InvestmentProduct[] = [
     pros: ['Short tenure', 'Higher than FD returns', 'Relatively lower risk (corporate buyers)', 'Predictable cash flows'],
     cons: ['Buyer default risk', 'Platform risk', 'Minimum ₹1L', 'Not widely available'],
     platforms: ['KredX', 'InvoiceX', 'TradeCred'],
-    icon: '📄',
+    icon: '',
   },
   {
     id: 'invits',
@@ -230,7 +230,7 @@ export const investmentProducts: InvestmentProduct[] = [
     pros: ['Infrastructure exposure', 'Regular income', 'Listed (liquid)', 'Government-backed projects'],
     cons: ['Lower liquidity than stocks', 'Regulatory complexity', 'Concentration risk', 'Tax inefficient vs REITs'],
     platforms: ['Zerodha', 'Groww', 'ICICI Direct'],
-    icon: '🛣️',
+    icon: '',
   },
   {
     id: 'art-collectibles',
@@ -249,7 +249,7 @@ export const investmentProducts: InvestmentProduct[] = [
     pros: ['Tangible asset', 'Cultural value', 'Potential high appreciation', 'Portfolio diversification'],
     cons: ['No income', 'Extremely illiquid', 'Authentication risk', 'Storage/insurance cost', 'Subjective valuation'],
     platforms: ['AstaGuru', 'Saffronart', 'Pundole\'s'],
-    icon: '🎨',
+    icon: '',
   },
   {
     id: 'sovereign-gold-bonds',
@@ -268,6 +268,6 @@ export const investmentProducts: InvestmentProduct[] = [
     pros: ['Tax-free at maturity', '2.5% interest', 'No storage cost', 'Government backed', 'Tradable on exchange'],
     cons: ['8-year lock-in for tax benefit', 'Limited issuance windows', 'Low secondary market liquidity'],
     platforms: ['RBI', 'Banks', 'Post Office', 'Zerodha (secondary market)'],
-    icon: '🏅',
+    icon: '',
   },
 ];
