@@ -1055,6 +1055,293 @@ Use our [calculator](/calculator) to estimate your SIP returns:
 *Disclaimer: This article is for educational purposes only. Past performance doesn't guarantee future returns. Please consult a SEBI-registered financial advisor. InvestNest is not a financial advisor.*
     `,
   },
+  'e-auction-guide': {
+    title: 'How to Participate in E-Auctions in India — Step-by-Step Guide',
+    category: 'Real Estate',
+    readTime: '8 min',
+    content: `
+## What is an E-Auction?
+
+An e-auction is an online auction where properties, assets, or goods are sold to the highest bidder. In India, banks use e-auctions to sell seized properties under the SARFAESI Act.
+
+## Types of E-Auctions in India
+
+| Platform | Used By | Property Types |
+|----------|---------|---------------|
+| IBAPI | All banks (IBA) | Residential, commercial, industrial, land |
+| MSTC | Government, NBFCs | Various |
+| e-Procurement | Government departments | Various |
+| Bank-specific | Individual banks | Bank's seized properties |
+
+## Step-by-Step: How to Participate
+
+### Step 1: Register on the E-Auction Platform
+1. Go to the bank's auction portal or IBAPI.in
+2. Click "Bidder Registration"
+3. Fill in personal details (name, PAN, Aadhaar, address)
+4. Upload KYC documents
+5. Verify email and mobile number
+6. Registration is usually free and one-time
+
+### Step 2: Find Properties
+- Browse available properties on IBAPI or bank portals
+- Filter by city, state, property type, price range
+- Check auction dates and reserve prices
+- Note the EMD (Earnest Money Deposit) amount
+
+### Step 3: Pay EMD
+- EMD is typically 5-10% of the reserve price
+- Pay via NEFT/RTGS to the bank's specified account
+- Get a payment receipt/transaction ID
+- EMD is refundable if you don't win
+
+### Step 4: Bid in the Auction
+- Log in to the e-auction platform on auction day
+- Enter your bid amount (must be ≥ reserve price)
+- Bids are usually in increments (e.g., ₹10,000 or ₹25,000)
+- Auction typically lasts 1-3 hours
+- Highest bid wins
+
+### Step 5: Complete the Purchase
+- Pay the balance amount within 15-30 days
+- Bank issues a Sale Certificate
+- Register the property in your name at the sub-registrar
+- Pay stamp duty and registration fees
+
+## Tips for First-Time Bidders
+
+1. **Register early** — don't wait until auction day
+2. **Pay EMD 2-3 days before** — NEFT can take time
+3. **Set a maximum bid** — don't get caught in bidding wars
+4. **Have financing ready** — banks require payment within 15-30 days
+5. **Visit the property** — before bidding, if possible
+6. **Check title** — get a lawyer to verify
+7. **Read the auction notice** — carefully, for all terms and conditions
+
+## Common Mistakes to Avoid
+
+- ❌ Not reading the auction notice fully
+- ❌ Bidding without visiting the property
+- ❌ Not having funds ready for payment
+- ❌ Ignoring outstanding dues (maintenance, taxes)
+- ❌ Not checking if the property is occupied
+- ❌ Bidding above your budget in excitement
+
+## E-Auction vs Regular Auction
+
+| Factor | E-Auction | Regular Auction |
+|--------|-----------|-----------------|
+| Location | Online (anywhere) | Physical (specific venue) |
+| Transparency | High (all bids visible) | Medium |
+| Competition | Higher (more bidders) | Lower |
+| Convenience | High | Low |
+| Speed | Fast (1-3 hours) | Slow (whole day) |
+
+---
+
+*Disclaimer: This article is for educational purposes only. E-auction rules vary by bank and platform. Please consult a legal expert before participating. InvestNest is not a financial advisor.*
+    `,
+  },
+  'best-cities-real-estate': {
+    title: 'Best Cities for Real Estate Investment in India (2026)',
+    category: 'Real Estate',
+    readTime: '7 min',
+    content: `
+## Top Cities for Real Estate Investment in 2026
+
+Choosing the right city is the most important decision in real estate investment. Here's our analysis based on rental yields, price appreciation, infrastructure, and job growth.
+
+## Tier 1 Cities
+
+### 1. Bangalore
+- **Rental Yield:** 3.0-3.5%
+- **Price Appreciation:** 8-12% annually
+- **Key Drivers:** IT sector, startup ecosystem, metro expansion
+- **Best Areas:** Whitefield, Electronic City, Hebbal, Sarjapur Road
+- **Avg. Property Price:** ₹60L-₹1.5Cr (2BHK)
+
+### 2. Hyderabad
+- **Rental Yield:** 3.5-4.0%
+- **Price Appreciation:** 10-15% annually
+- **Key Drivers:** IT/ITES growth, Pharma, affordable prices
+- **Best Areas:** Gachibowli, HITEC City, Kondapur, Kukatpally
+- **Avg. Property Price:** ₹50L-₹1.2Cr (2BHK)
+
+### 3. Pune
+- **Rental Yield:** 3.0-3.5%
+- **Price Appreciation:** 7-10% annually
+- **Key Drivers:** IT, manufacturing, education hub
+- **Best Areas:** Hinjewadi, Wakad, Baner, Kharadi
+- **Avg. Property Price:** ₹55L-₹1.3Cr (2BHK)
+
+## Tier 2 Cities (High Growth Potential)
+
+### 4. Ahmedabad
+- **Rental Yield:** 3.0-3.5%
+- **Price Appreciation:** 8-12% annually
+- **Key Drivers:** GIFT City, manufacturing, infrastructure
+- **Best Areas:** SG Highway, Satellite, Bopal, Prahlad Nagar
+- **Avg. Property Price:** ₹40L-₹90L (2BHK)
+
+### 5. Lucknow
+- **Rental Yield:** 2.5-3.0%
+- **Price Appreciation:** 7-10% annually
+- **Key Drivers:** Government capital, infrastructure projects
+- **Best Areas:** Gomti Nagar, Hazratganj, Indira Nagar
+- **Avg. Property Price:** ₹35L-₹80L (2BHK)
+
+### 6. Kochi
+- **Rental Yield:** 2.5-3.0%
+- **Price Appreciation:** 6-9% annually
+- **Key Drivers:** IT park, port, tourism
+- **Best Areas:** Kakkanad, Edappally, Vyttila
+- **Avg. Property Price:** ₹40L-₹90L (2BHK)
+
+### 7. Coimbatore
+- **Rental Yield:** 3.0-3.5%
+- **Price Appreciation:** 7-10% annually
+- **Key Drivers:** Manufacturing, IT, education
+- **Best Areas:** RS Puram, Peelamedu, Saravanampatti
+- **Avg. Property Price:** ₹35L-₹75L (2BHK)
+
+## Tier 3 Cities (Emerging Opportunities)
+
+### 8. Indore
+- **Rental Yield:** 3.0-4.0%
+- **Price Appreciation:** 8-12% annually
+- **Key Drivers:** Cleanest city, IT growth, affordable
+- **Best Areas:** Vijay Nagar, AB Road, Super Corridor
+- **Avg. Property Price:** ₹30L-₹70L (2BHK)
+
+### 9. Nagpur
+- **Rental Yield:** 3.0-3.5%
+- **Price Appreciation:** 7-10% annually
+- **Key Drivers:** Logistics hub, MIHAN project, affordability
+- **Best Areas:** Wardha Road, Manish Nagar, Besa
+- **Avg. Property Price:** ₹30L-₹65L (2BHK)
+
+### 10. Jaipur
+- **Rental Yield:** 2.5-3.0%
+- **Price Appreciation:** 6-9% annually
+- **Key Drivers:** Tourism, IT growth, infrastructure
+- **Best Areas:** Mansarovar, Vaishali Nagar, Jagatpura
+- **Avg. Property Price:** ₹35L-₹80L (2BHK)
+
+## Investment Strategy by Budget
+
+| Budget | Recommended Cities | Property Type |
+|--------|-------------------|---------------|
+| ₹30-50L | Indore, Nagpur, Jaipur, Coimbatore | 2BHK apartment |
+| ₹50-80L | Ahmedabad, Lucknow, Kochi, Pune | 2BHK/3BHK apartment |
+| ₹80L-1.5Cr | Bangalore, Hyderabad, Pune | 3BHK apartment or villa |
+| ₹1.5Cr+ | Mumbai, Delhi NCR, Bangalore | Premium property or commercial |
+
+## SARFAESI Opportunities by City
+
+Bank-seized properties are available in all major cities. Use InvestNest to find:
+- **Mumbai:** 200+ properties, avg. 25% discount
+- **Delhi NCR:** 150+ properties, avg. 28% discount
+- **Bangalore:** 180+ properties, avg. 26% discount
+- **Hyderabad:** 120+ properties, avg. 27% discount
+- **Pune:** 100+ properties, avg. 25% discount
+
+---
+
+*Disclaimer: This article is for educational purposes only. Real estate prices and yields vary. Always conduct due diligence. InvestNest is not a financial advisor.*
+    `,
+  },
+  'gold-vs-real-estate': {
+    title: 'Gold vs Real Estate — Which is the Better Investment?',
+    category: 'Investment Comparison',
+    readTime: '7 min',
+    content: `
+## The Two Most Loved Assets in India
+
+Gold and real estate are the two most popular investment choices in India. Every family has an opinion on which is better. Let's settle this with data.
+
+## Returns Comparison (Last 10 Years)
+
+| Asset | 10-Year CAGR | Volatility | Liquidity |
+|-------|-------------|-----------|-----------|
+| Gold (SGB) | 10-12% | Medium | Medium |
+| Real Estate (residential) | 5-8% | Low | Very Low |
+| Real Estate (commercial) | 7-10% | Low | Low |
+| Equity (Nifty 50) | 12-14% | High | High |
+
+## Gold: Pros and Cons
+
+### Pros
+- ✅ Highly liquid (sell anytime)
+- ✅ No maintenance cost (SGBs)
+- ✅ Inflation hedge
+- ✅ Cultural value
+- ✅ SGBs give 2.5% interest + tax-free at maturity
+- ✅ No tenant/occupancy risk
+
+### Cons
+- ❌ No passive income (except SGBs)
+- ❌ Storage cost (physical gold)
+- ❌ Making charges (jewelry: 10-25%)
+- ❌ No leverage (can't take loan against gold easily)
+- ❌ Emotional attachment (hard to sell jewelry)
+
+## Real Estate: Pros and Cons
+
+### Pros
+- ✅ Rental income (passive income)
+- ✅ Leverage (home loan at 8.5%)
+- ✅ Tangible asset
+- ✅ Tax benefits (80C, 24b)
+- ✅ Inflation hedge
+- ✅ Can be used (live in it)
+
+### Cons
+- ❌ Very illiquid (takes months to sell)
+- ❌ High transaction costs (6-10%)
+- ❌ Maintenance and repair costs
+- ❌ Tenant risk (vacancy, default)
+- ❌ Requires large capital
+- ❌ Location risk
+
+## When to Choose Gold
+
+- **Short-term parking** (1-3 years) — gold is more liquid
+- **Hedge against inflation** — gold preserves purchasing power
+- **Small amounts** — can invest ₹500 in digital gold
+- **No management hassle** — SGBs are completely passive
+- **Emergency fund** — gold can be sold quickly
+
+## When to Choose Real Estate
+
+- **Long-term wealth building** (5-10+ years)
+- **Rental income needed** — real estate generates cash flow
+- **Leverage available** — home loans at 8.5% make it accessible
+- **Tax benefits** — 80C and 24(b) deductions
+- **Physical use** — you can live in or use the property
+
+## The Verdict
+
+| Investor Profile | Better Choice | Why |
+|-----------------|--------------|-----|
+| Young professional, low capital | Gold (SGBs) | Low entry, liquid, passive |
+| Salaried, stable income | Real Estate | Leverage, tax benefits, rental income |
+| Retiree | Gold + Debt funds | No management hassle, liquid |
+| HNI, large capital | Both | Diversification |
+| Short-term (<3 years) | Gold | More liquid |
+| Long-term (>5 years) | Real Estate | Better total returns with leverage |
+
+## The Optimal Allocation
+
+Most financial planners recommend:
+- **10-15% in gold** (via SGBs for tax efficiency)
+- **20-30% in real estate** (via REITs for liquidity, or direct for control)
+- **60-70% in equity** (stocks, mutual funds)
+
+---
+
+*Disclaimer: This article is for educational purposes only. Returns are historical and not guaranteed. Please consult a financial advisor. InvestNest is not a financial advisor.*
+    `,
+  },
   'tax-on-investments': {
     title: 'Tax on Investments in India — Complete Guide (2026)',
     category: 'Basics',

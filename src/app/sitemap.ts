@@ -13,6 +13,9 @@ const articleSlugs = [
   'home-loan-guide',
   'credit-score-guide',
   'mutual-fund-sip',
+  'e-auction-guide',
+  'best-cities-real-estate',
+  'gold-vs-real-estate',
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

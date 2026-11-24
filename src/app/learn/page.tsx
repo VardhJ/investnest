@@ -71,6 +71,27 @@ const articles = [
     category: 'Traditional',
     readTime: '7 min',
   },
+  {
+    title: 'How to Participate in E-Auctions in India',
+    slug: 'e-auction-guide',
+    description: 'Step-by-step guide to participating in bank e-auctions for seized properties.',
+    category: 'Real Estate',
+    readTime: '8 min',
+  },
+  {
+    title: 'Best Cities for Real Estate Investment (2026)',
+    slug: 'best-cities-real-estate',
+    description: 'Top 10 cities for real estate investment in India based on yields and appreciation.',
+    category: 'Real Estate',
+    readTime: '7 min',
+  },
+  {
+    title: 'Gold vs Real Estate — Which is Better?',
+    slug: 'gold-vs-real-estate',
+    description: 'Comprehensive comparison of gold and real estate as investments.',
+    category: 'Investment Comparison',
+    readTime: '7 min',
+  },
 ];
 
 export default function LearnPage() {

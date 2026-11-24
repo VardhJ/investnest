@@ -3,8 +3,10 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import { useAuth } from '@/lib/auth';
 
 export default function PropertyDetailPage() {
+  const { user } = useAuth();
   const params = useParams();
   const [property, setProperty] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -13,7 +15,21 @@ export default function PropertyDetailPage() {
     if (params?.id) {
       fetch(`/api/properties/${params.id}`)
         .then(res => res.json())
-        .then(data => setProperty(data.property))
+        .then(data => {
+          setProperty(data.property);
+          if (data.property) {
+            import('@/lib/analytics').then(({ trackEvent }) => {
+              trackEvent('property_viewed', {
+                property_id: data.property.id,
+                city: data.property.city,
+                bank: data.property.bank,
+                price: data.property.reservePrice,
+                property_type: data.property.propertyType,
+                discount: data.property.discount,
+              });
+            });
+          }
+        })
         .catch(console.error)
         .finally(() => setLoading(false));
     }
@@ -230,6 +246,38 @@ export default function PropertyDetailPage() {
               >
                 View on Bank Portal →
               </a>
+              {user && (
+                <button
+                  onClick={async () => {
+                    try {
+                      const { data: { session } } = await (await import('@/lib/supabase')).supabase.auth.getSession();
+                      const token = session?.access_token;
+                      const res = await fetch('/api/watchlist', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+                        body: JSON.stringify({ property_id: property.id }),
+                      });
+                      if (res.ok) {
+                        alert('Added to watchlist!');
+                        import('@/lib/analytics').then(({ trackEvent }) => {
+                          trackEvent('property_watchlisted', { property_id: property.id, city: property.city });
+                        });
+                      } else {
+                        const data = await res.json();
+                        alert(data.error || 'Failed to add');
+                      }
+                    } catch (e) {
+                      alert('Failed to add to watchlist');
+                    }
+                  }}
+                  className="border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition"
+                >
+                  Add to Watchlist
+                </button>
+              )}
+              <Link href="/watchlist" className="border-2 border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition text-center">
+                My Watchlist
+              </Link>
             </div>
           </div>
         </div>

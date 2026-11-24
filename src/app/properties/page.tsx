@@ -24,6 +24,23 @@ export default function PropertiesPage() {
     fetchProperties();
   }, [city, propertyType, bank, minPrice, maxPrice, sortBy, page]);
 
+  // Track search/filter events
+  useEffect(() => {
+    if (city || propertyType || bank || minPrice || maxPrice || search) {
+      import('@/lib/analytics').then(({ trackEvent }) => {
+        trackEvent('property_searched', {
+          city: city || 'all',
+          property_type: propertyType || 'all',
+          bank: bank || 'all',
+          min_price: minPrice || null,
+          max_price: maxPrice || null,
+          sort_by: sortBy,
+          page: page,
+        });
+      });
+    }
+  }, [city, propertyType, bank, minPrice, maxPrice, sortBy, page]);
+
   const fetchProperties = async () => {
     setLoading(true);
     try {

@@ -26,6 +26,11 @@ export default function Navbar() {
             <Link href="/calculator" className="text-gray-700 hover:text-blue-600 font-medium transition">
               Calculator
             </Link>
+            {user && (
+              <Link href="/watchlist" className="text-gray-700 hover:text-blue-600 font-medium transition">
+                Watchlist
+              </Link>
+            )}
             {isAdmin && (
               <Link href="/admin" className="text-orange-600 hover:text-orange-700 font-medium transition">
                 Admin
