@@ -2,6 +2,13 @@ import Link from 'next/link';
 
 const articles = [
   {
+    title: 'How Our AI Deal Score Works — Methodology Explained',
+    slug: 'deal-score-logic',
+    description: 'Understand how InvestNest calculates deal scores, ROI estimates, and risk factors for properties.',
+    category: 'InvestNest',
+    readTime: '6 min',
+  },
+  {
     title: 'MSTC E-Auction — Complete Buyer Registration & Bidding Guide',
     slug: 'mstc-e-auction-guide',
     description: 'Step-by-step institutional guide to registering and bidding on the official MSTC e-auction portal for bank-seized properties.',

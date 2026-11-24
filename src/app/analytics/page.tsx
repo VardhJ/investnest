@@ -294,8 +294,12 @@ export default function AnalyticsPage() {
         {/* Disclaimer */}
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
           <strong>Disclaimer:</strong> This data is derived from IBAPI (Indian Banks' Association Property Auction portal).
-          Property counts and prices are updated daily via automated scraping. Market values and discounts are estimates.
+          Property counts and prices are updated daily via automated scraping. Market values, deal scores, and discounts are estimates.
           Always verify property details independently before bidding.
+        </div>
+
+        <div className="text-[11px] text-slate-400 leading-relaxed pt-2">
+          <span className="font-medium text-slate-500">Note:</span> Deal scores, ROI estimates, and market value projections are indicative and based on city-level averages. They do not constitute financial advice or a recommendation to bid. Actual property values may differ significantly. InvestNest is not a financial advisor.
         </div>
       </div>
     </div>

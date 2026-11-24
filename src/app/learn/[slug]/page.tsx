@@ -226,6 +226,150 @@ MSTC (Metal Scrap Trade Corporation) is a Government of India enterprise that op
 *Disclaimer: This article is for educational purposes only. E-auction rules vary by bank and platform. Please consult a legal expert before participating. InvestNest is not a financial advisor.*
     `,
   },
+  'deal-score-logic': {
+    title: 'How Our AI Deal Score Works — Methodology Explained',
+    category: 'InvestNest',
+    readTime: '6 min',
+    content: `
+## What is the Deal Score?
+
+Every property on InvestNest has an **AI Deal Score** from 0 to 100. This score helps you quickly identify whether a property is a good investment opportunity or not.
+
+The score is based on **6 components**, each measuring a different aspect of the property:
+
+## The 6 Components
+
+### 1. Discount Score (0-30 points)
+The most important factor. We estimate the market value of the property based on:
+- City-wise average price per square foot
+- Estimated property area (from bedrooms or listed area)
+
+Then we calculate: **Discount % = (Market Value - Reserve Price) / Market Value × 100**
+
+| Discount % | Points |
+|-----------|--------|
+| 30%+ | 30 |
+| 20-30% | 24 |
+| 10-20% | 15 |
+| 0-10% | 8 |
+| Negative (overpriced) | 0 |
+
+### 2. Location Score (0-25 points)
+Based on the city's tier classification:
+
+| Tier | Cities | Points |
+|------|--------|--------|
+| Tier 1 | Mumbai, Delhi, Bangalore, Hyderabad, Chennai, Kolkata, Pune | 25 |
+| Tier 2 | Ahmedabad, Jaipur, Lucknow, Chandigarh, Kochi, Indore, Surat | 18 |
+| Tier 3 | All other cities | 10 |
+
+### 3. Property Type Score (0-15 points)
+| Type | Points | Rationale |
+|------|--------|-----------|
+| Residential | 15 | Highest demand, easiest to resell |
+| Commercial | 12 | Good rental yield, moderate liquidity |
+| Land | 10 | Appreciation potential, but requires approvals |
+| Industrial | 8 | Specialized buyers, lower liquidity |
+| Vehicle | 5 | Depreciating asset |
+
+### 4. Size Score (0-10 points)
+| Area | Points |
+|------|--------|
+| 1500+ sq ft | 10 |
+| 1000-1500 sq ft | 8 |
+| 600-1000 sq ft | 6 |
+| < 600 sq ft | 3 |
+| Unknown | 5 (neutral) |
+
+### 5. EMD Score (0-10 points)
+Lower EMD percentage is better (less capital locked):
+
+| EMD % | Points |
+|-------|--------|
+| ≤ 5% | 10 |
+| 6-8% | 8 |
+| 9-10% | 6 |
+| > 10% | 3 |
+
+### 6. Bank Score (0-10 points)
+Based on bank reliability (title clarity, process efficiency):
+
+| Bank | Score |
+|------|-------|
+| SBI | 95 → 10 pts |
+| HDFC | 90 → 9 pts |
+| ICICI | 90 → 9 pts |
+| Axis | 85 → 8 pts |
+| Bank of Baroda | 80 → 8 pts |
+| PNB | 75 → 7 pts |
+| Union Bank | 75 → 7 pts |
+| Others | 55-70 → 5-7 pts |
+
+## Grade System
+
+| Score | Grade | Label |
+|-------|-------|-------|
+| 80-100 | A | Excellent Deal |
+| 65-79 | B | Good Deal |
+| 50-64 | C | Average Deal |
+| 35-49 | D | Below Average |
+| 0-34 | F | Poor Deal |
+
+## ROI Estimates
+
+We also calculate estimated returns:
+
+- **Estimated Market Value:** City price/sqft × property area
+- **Total Cost:** Reserve price + 7% (stamp duty, registration, legal fees)
+- **Potential Profit:** Market value - Total cost
+- **Profit Margin:** Profit as % of total cost
+- **Rental Yield:** Estimated annual rent (3% of market value) / reserve price
+- **Break-even:** Years to recover investment
+
+## Risk Factors (Auto-Detected)
+
+The system automatically flags risks:
+- Reserve price above estimated market value
+- Tier 3 city (lower liquidity)
+- Industrial property (specialized buyers)
+- Land (requires approvals)
+- High EMD percentage (>10%)
+- Low-reliability bank
+- Old property (>15 years, may need renovation)
+- Occupied property (eviction needed)
+- Unknown possession status
+
+## Recommendations (Auto-Generated)
+
+Based on the analysis:
+- Excellent discount → "Strong investment opportunity"
+- Consider bidding 10-15% above reserve price
+- Budget 5-10% for furnishing/renovation
+- Verify title independently
+- Factor in eviction costs
+
+## Important Limitations
+
+1. **Market value is estimated** — based on city averages, not actual property valuation
+2. **No photos** — IBAPI doesn't provide property photos
+3. **No auction dates** — IBAPI doesn't provide real auction dates
+4. **No historical data** — we're building this over time
+5. **City-level averages** — actual prices vary by neighborhood
+
+## Why This Matters
+
+No other platform in India provides this level of property analysis for SARFAESI auctions. While Bankeauctions.com lists 85,000+ properties, they don't provide any analysis or scoring. InvestNest's Deal Score helps you:
+
+- Quickly identify the best deals
+- Understand the risks before bidding
+- Estimate potential returns
+- Compare properties objectively
+
+---
+
+*Disclaimer: This article is for educational purposes only. Deal scores and ROI estimates are indicative and based on city-level averages. They do not constitute financial advice. Always conduct independent due diligence. InvestNest is not a financial advisor.*
+    `,
+  },
   'sarfaesi-auctions': {
     title: 'What are SARFAESI Auctions? Complete Guide',
     category: 'Real Estate',

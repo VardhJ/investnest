@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { investmentProducts } from '@/data/products';
 
 const articleSlugs = [
+  'deal-score-logic',
   'mstc-e-auction-guide',
   'sarfaesi-auctions',
   'invest-reits-india',
