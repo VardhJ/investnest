@@ -9,27 +9,31 @@ export default function PropertyDetailPage() {
   const { user } = useAuth();
   const params = useParams();
   const [property, setProperty] = useState<any>(null);
+  const [dealScore, setDealScore] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (params?.id) {
-      fetch(`/api/properties/${params.id}`)
-        .then(res => res.json())
-        .then(data => {
-          setProperty(data.property);
-          if (data.property) {
-            import('@/lib/analytics').then(({ trackEvent }) => {
-              trackEvent('property_viewed', {
-                property_id: data.property.id,
-                city: data.property.city,
-                bank: data.property.bank,
-                price: data.property.reservePrice,
-                property_type: data.property.propertyType,
-                discount: data.property.discount,
-              });
+      Promise.all([
+        fetch(`/api/properties/${params.id}`).then(res => res.json()),
+        fetch(`/api/deal-score/${params.id}`).then(res => res.json()),
+      ]).then(([propData, scoreData]) => {
+        setProperty(propData.property);
+        setDealScore(scoreData.dealScore || null);
+        if (propData.property) {
+          import('@/lib/analytics').then(({ trackEvent }) => {
+            trackEvent('property_viewed', {
+              property_id: propData.property.id,
+              city: propData.property.city,
+              bank: propData.property.bank,
+              price: propData.property.reservePrice,
+              property_type: propData.property.propertyType,
+              discount: propData.property.discount,
+              deal_score: scoreData.dealScore?.overall,
             });
-          }
-        })
+          });
+        }
+      })
         .catch(console.error)
         .finally(() => setLoading(false));
     }
@@ -119,8 +123,122 @@ export default function PropertyDetailPage() {
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap gap-2 shrink-0">
+            {/* Deal Score Section */}
+            {dealScore && (
+              <div className="mb-6 bg-gradient-to-br from-slate-50 to-emerald-50 rounded-xl p-6 border border-slate-200/80">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-xl font-bold text-slate-900">AI Deal Analysis</h2>
+                  <div className="flex items-center gap-3">
+                    <div className={`px-4 py-2 rounded-xl text-2xl font-extrabold ${
+                      dealScore.grade === 'A' ? 'bg-emerald-500 text-white' :
+                      dealScore.grade === 'B' ? 'bg-blue-500 text-white' :
+                      dealScore.grade === 'C' ? 'bg-amber-500 text-white' :
+                      dealScore.grade === 'D' ? 'bg-orange-500 text-white' :
+                      'bg-red-500 text-white'
+                    }`}>
+                      {dealScore.overall}/100
+                    </div>
+                    <div className="text-right">
+                      <div className="text-sm font-bold text-slate-900">Grade {dealScore.grade}</div>
+                      <div className="text-xs text-slate-500">{dealScore.label}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+                  {[
+                    { label: 'Discount', score: dealScore.components.discount, max: 30, color: 'bg-emerald-500' },
+                    { label: 'Location', score: dealScore.components.location, max: 25, color: 'bg-blue-500' },
+                    { label: 'Property Type', score: dealScore.components.propertyType, max: 15, color: 'bg-purple-500' },
+                    { label: 'Size', score: dealScore.components.size, max: 10, color: 'bg-amber-500' },
+                    { label: 'EMD', score: dealScore.components.emd, max: 10, color: 'bg-rose-500' },
+                    { label: 'Bank', score: dealScore.components.bank, max: 10, color: 'bg-slate-500' },
+                  ].map((comp) => (
+                    <div key={comp.label} className="bg-white/60 rounded-lg p-3">
+                      <div className="flex justify-between text-xs mb-1">
+                        <span className="text-slate-600">{comp.label}</span>
+                        <span className="font-bold text-slate-900">{comp.score}/{comp.max}</span>
+                      </div>
+                      <div className="bg-slate-200 rounded-full h-2 overflow-hidden">
+                        <div
+                          className={`h-full rounded-full ${comp.color}`}
+                          style={{ width: `${(comp.score / comp.max) * 100}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="bg-white/60 rounded-lg p-4 mb-4">
+                  <h3 className="text-sm font-bold text-slate-900 mb-3">ROI Estimates</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                    <div>
+                      <div className="text-xs text-slate-500">Est. Market Value</div>
+                      <div className="font-bold text-slate-900">{formatPrice(dealScore.roi.estimatedMarketValue)}</div>
+                    </div>
+                    <div>
+                      <div className="text-xs text-slate-500">Total Cost (incl. fees)</div>
+                      <div className="font-bold text-slate-900">{formatPrice(dealScore.roi.totalCost)}</div>
+                    </div>
+                    <div>
+                      <div className="text-xs text-slate-500">Potential Profit</div>
+                      <div className={`font-bold ${dealScore.roi.potentialProfit > 0 ? 'text-emerald-600' : 'text-red-600'}`}>
+                        {formatPrice(dealScore.roi.potentialProfit)}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-xs text-slate-500">Profit Margin</div>
+                      <div className={`font-bold ${dealScore.roi.profitMargin > 0 ? 'text-emerald-600' : 'text-red-600'}`}>
+                        {dealScore.roi.profitMargin}%
+                      </div>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 text-sm mt-3">
+                    <div>
+                      <div className="text-xs text-slate-500">Est. Rental Yield</div>
+                      <div className="font-bold text-slate-900">{dealScore.roi.rentalYield}%</div>
+                    </div>
+                    <div>
+                      <div className="text-xs text-slate-500">Break-even</div>
+                      <div className="font-bold text-slate-900">{dealScore.roi.breakEvenYears} years</div>
+                    </div>
+                  </div>
+                </div>
+
+                {dealScore.risks.length > 0 && (
+                  <div className="mb-4">
+                    <h3 className="text-sm font-bold text-red-700 mb-2">Risk Factors</h3>
+                    <ul className="space-y-1">
+                      {dealScore.risks.map((risk: string, i: number) => (
+                        <li key={i} className="text-sm text-red-600 flex items-start gap-2">
+                          <span className="mt-0.5">•</span> {risk}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {dealScore.recommendations.length > 0 && (
+                  <div>
+                    <h3 className="text-sm font-bold text-emerald-700 mb-2">Recommendations</h3>
+                    <ul className="space-y-1">
+                      {dealScore.recommendations.map((rec: string, i: number) => (
+                        <li key={i} className="text-sm text-emerald-600 flex items-start gap-2">
+                          <span className="mt-0.5">•</span> {rec}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                <div className="mt-4 pt-3 border-t border-slate-200/80 text-xs text-slate-500">
+                  <strong>Disclaimer:</strong> AI-generated estimate based on city averages. Actual market values may vary. Always verify independently.
+                </div>
+              </div>
+            )}
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap gap-2 shrink-0">
                 {user && (
                   <button
                     onClick={async () => {
