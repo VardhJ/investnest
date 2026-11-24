@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import posthog from 'posthog-js';
+import { initErrorTracking } from './errorTracking';
 
 const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY || '';
 const POSTHOG_HOST = 'https://us.i.posthog.com';
@@ -18,6 +19,8 @@ export function initPostHog() {
     autocapture: true,
   });
   initialized = true;
+  // Initialize error tracking after PostHog is ready
+  initErrorTracking();
 }
 
 export function trackEvent(event: string, properties?: Record<string, any>) {

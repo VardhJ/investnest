@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { captureError } from '@/lib/errorTracking';
 
 export default function Error({
   error,
@@ -11,6 +12,7 @@ export default function Error({
 }) {
   useEffect(() => {
     console.error('Application error:', error);
+    captureError(error, { source: 'error_boundary', digest: error.digest });
   }, [error]);
 
   return (
