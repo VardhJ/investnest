@@ -294,26 +294,26 @@ export default function PropertiesPage() {
 
                       {/* New Badge */}
                       {property.createdAt && (Date.now() - new Date(property.createdAt).getTime()) < 7 * 24 * 60 * 60 * 1000 && (
-                        <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-extrabold bg-emerald-500 text-white shadow-sm">
+                        <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-extrabold bg-emerald-500 text-white shadow-sm z-10">
                           NEW
                         </div>
                       )}
 
                       {/* Discount Badge */}
                       {property.discount && property.discount > 0 && (
-                        <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-extrabold bg-amber-500 text-white shadow-sm">
+                        <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-extrabold bg-amber-500 text-white shadow-sm z-10">
                           {property.discount}% Below Market
                         </div>
                       )}
 
-                      {/* Bank Badge */}
-                      <div className="absolute bottom-3 left-3 px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-slate-900/80 text-white backdrop-blur-xs">
-                        {property.bank}
+                      {/* Property Type Badge */}
+                      <div className="absolute top-12 left-3 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-white/90 text-slate-800 backdrop-blur-xs z-10">
+                        {property.propertyType}
                       </div>
 
-                      {/* Property Type Badge */}
-                      <div className="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-white/90 text-slate-800 backdrop-blur-xs">
-                        {property.propertyType}
+                      {/* Bank Badge */}
+                      <div className="absolute bottom-3 left-3 px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-slate-900/80 text-white backdrop-blur-xs z-10">
+                        {property.bank}
                       </div>
                     </div>
 
