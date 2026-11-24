@@ -1,16 +1,32 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { investmentProducts } from '@/data/products';
 
 const categories = [
   { id: 'all', name: 'All Products' },
-  { id: 'traditional', name: 'Traditional' },
   { id: 'real-estate', name: 'Real Estate' },
+  { id: 'traditional', name: 'Stocks & MFs' },
   { id: 'alternative', name: 'Alternative' },
   { id: 'fixed-income', name: 'Fixed Income' },
   { id: 'commodity', name: 'Commodities' },
 ];
 
 export default function ProductsPage() {
+  const searchParams = useSearchParams();
+  const [selectedCategory, setSelectedCategory] = useState(searchParams?.get('category') || 'all');
+
+  useEffect(() => {
+    const cat = searchParams?.get('category');
+    if (cat) setSelectedCategory(cat);
+  }, [searchParams]);
+
+  const filteredProducts = selectedCategory === 'all'
+    ? investmentProducts
+    : investmentProducts.filter(p => p.category === selectedCategory);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="bg-white border-b">
@@ -24,19 +40,27 @@ export default function ProductsPage() {
         {/* Category Tabs */}
         <div className="flex flex-wrap gap-2 mb-8">
           {categories.map(cat => (
-            <Link
+            <button
               key={cat.id}
-              href={cat.id === 'all' ? '/products' : `/products?category=${cat.id}`}
-              className="px-4 py-2 rounded-full text-sm font-medium bg-white border hover:bg-blue-50 hover:border-blue-300 transition"
+              onClick={() => setSelectedCategory(cat.id)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+                selectedCategory === cat.id
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-white border hover:bg-blue-50 hover:border-blue-300'
+              }`}
             >
               {cat.name}
-            </Link>
+            </button>
           ))}
+        </div>
+
+        <div className="text-sm text-gray-500 mb-4">
+          Showing {filteredProducts.length} of {investmentProducts.length} products
         </div>
 
         {/* Product Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {investmentProducts.map(product => (
+          {filteredProducts.map(product => (
             <Link key={product.id} href={`/products/${product.id}`} className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition border border-gray-100">
               <div className="flex items-start gap-4">
                 <div className="text-4xl">{product.icon}</div>
@@ -53,6 +77,12 @@ export default function ProductsPage() {
             </Link>
           ))}
         </div>
+
+        {filteredProducts.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-gray-600 text-lg">No products in this category.</p>
+          </div>
+        )}
       </div>
     </div>
   );
