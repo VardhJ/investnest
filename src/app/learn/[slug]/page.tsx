@@ -2,6 +2,230 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 const articles: Record<string, { title: string; category: string; readTime: string; content: string }> = {
+  'mstc-e-auction-guide': {
+    title: 'MSTC E-Auction — Complete Buyer Registration & Bidding Guide',
+    category: 'Real Estate',
+    readTime: '12 min',
+    content: `
+## What is MSTC?
+
+MSTC (Metal Scrap Trade Corporation) is a Government of India enterprise that operates one of India's largest e-auction platforms. Banks, government departments, and PSUs use MSTC to auction seized properties, scrap, and other assets.
+
+**IBAPI** (Indian Banks' Association portal) links to MSTC for actual bidding. When you find a property on IBAPI, the actual auction happens on MSTC's platform.
+
+## Why MSTC Matters for Property Buyers
+
+- **All major banks** use MSTC for property auctions (SBI, PNB, BoB, Canara, Union, etc.)
+- **Transparent bidding** — all bids are visible in real-time
+- **Government-backed** — safer than private auctions
+- **Pan-India** — properties across all states
+- **No middlemen** — you bid directly with the bank
+
+## Step 1: Register as a Bidder on MSTC
+
+### Prerequisites
+- PAN card (mandatory)
+- Aadhaar card
+- Bank account details
+- Email ID and mobile number
+- Passport-size photo
+
+### Registration Process
+
+1. **Go to MSTC e-Auction portal:** [mstcecommerce.com](https://www.mstcecommerce.com)
+2. Click **"Bidder Registration"** or **"Register"**
+3. Select **"Bidder"** as your role
+4. Fill in the registration form:
+   - Name, PAN, Aadhaar
+   - Address, email, mobile
+   - Bank account details (for EMD refund)
+5. Upload documents (PAN, Aadhaar, photo)
+6. Submit and wait for approval (usually 1-2 business days)
+7. You'll receive a login ID and password via email
+
+### Important Notes
+- Registration is **free** and **one-time**
+- One registration works for ALL bank auctions on MSTC
+- Keep your login credentials safe
+- Update your profile if your details change
+
+## Step 2: Find Properties to Bid On
+
+### On IBAPI (ibapi.in)
+1. Go to [ibapi.in](https://www.ibapi.in)
+2. Search for properties by state, city, bank, or property type
+3. Note down the **Property ID** (e.g., CORP0020190266)
+4. Check the **reserve price**, **EMD**, and **auction dates**
+
+### On MSTC Directly
+1. Go to [mstcecommerce.com](https://www.mstcecommerce.com)
+2. Navigate to "Auction Home" → "IBAPI" or "Property Auctions"
+3. Browse available properties
+4. Click on a property to see full details
+
+### What to Check Before Bidding
+- [ ] Property location and accessibility
+- [ ] Reserve price vs market value
+- [ ] EMD amount (usually 5-10% of reserve price)
+- [ ] Auction start and end date/time
+- [ ] EMD payment deadline
+- [ ] Property description and photos
+- [ ] Outstanding dues (maintenance, taxes)
+- [ ] Possession status (vacant/occupied)
+
+## Step 3: Pay EMD (Earnest Money Deposit)
+
+### How Much EMD?
+- Typically **5-10% of the reserve price**
+- For a ₹50L property, EMD = ₹2.5-5L
+- EMD is **refundable** if you don't win
+
+### How to Pay EMD
+
+1. **Log in to MSTC** with your bidder credentials
+2. Go to the property you want to bid on
+3. Click **"Pay EMD"** or **"Generate Challan"**
+4. MSTC generates a **challan** (payment slip) with bank details
+5. Pay via **NEFT/RTGS** to the specified bank account
+6. Use the **challan number** as the payment reference
+7. Upload the payment receipt on MSTC
+8. EMD is credited to your **"Global EMD Wallet"** on MSTC
+
+### Important EMD Rules
+- Pay EMD **2-3 days before** the auction (NEFT can take 1-2 days)
+- EMD is valid for **that specific auction only**
+- If you win, EMD is adjusted against the purchase price
+- If you lose, EMD is refunded within 7-15 working days
+- If you win but don't pay the balance, EMD is **forfeited**
+
+## Step 4: The Bidding Process
+
+### Before the Auction
+1. Log in to MSTC **1 hour before** the auction starts
+2. Go to "My Auctions" → find your property
+3. Verify your EMD has been credited
+4. Read the auction terms and conditions
+5. Set your **maximum bid** (don't exceed this)
+
+### During the Auction
+1. The auction window is typically **1-3 hours**
+2. Bidding is done online on the MSTC platform
+3. You can see all bids in real-time
+4. Each bid must be higher than the current highest bid
+5. Bid increments are usually ₹10,000 or ₹25,000
+6. You can bid multiple times
+7. The auction may extend if a bid is placed in the last few minutes (auto-extension)
+
+### Bidding Strategy
+- **Start with the reserve price** — don't overbid initially
+- **Watch other bidders** — see how aggressive they are
+- **Bid in the last 15 minutes** — many bidders wait until the end
+- **Don't get emotional** — stick to your maximum bid
+- **Set a hard limit** — never exceed your budget
+
+### What Happens After Bidding
+- **If you win:** You're the highest bidder. The bank will contact you.
+- **If you lose:** Your EMD is refunded. Try again next time.
+- **If no bids:** The auction may be re-scheduled or the property may be sold at reserve price.
+
+## Step 5: Post-Auction Process (If You Win)
+
+### Payment Timeline
+| Step | Timeline | Action |
+|------|----------|--------|
+| Win notification | Immediate | Bank contacts you via email/phone |
+| Balance payment | 15-30 days | Pay the remaining amount (reserve price - EMD) |
+| Sale certificate | After payment | Bank issues sale certificate |
+| Registration | 30-60 days | Register property at sub-registrar |
+| Possession | After registration | Take physical possession |
+
+### Documents You'll Receive
+1. **Sale Certificate** — proof of purchase from the bank
+2. **Possession Letter** — if property was occupied
+3. **NOC** — from bank confirming loan is closed
+4. **Original property documents** — title deed, etc.
+
+### Documents You Need to Submit
+1. **Payment proof** — bank transfer receipt for balance amount
+2. **KYC documents** — PAN, Aadhaar, address proof
+3. **Registration documents** — for sub-registrar
+4. **Stamp duty payment** — varies by state (5-8%)
+
+### Total Cost Breakdown (Example: ₹50L Property)
+
+| Item | Amount |
+|------|--------|
+| Reserve price (winning bid) | ₹50,00,000 |
+| EMD (already paid) | ₹5,00,000 |
+| Balance payment | ₹45,00,000 |
+| Stamp duty (6%) | ₹3,00,000 |
+| Registration (1%) | ₹50,000 |
+| Legal fees | ₹25,000 |
+| **Total** | **₹53,75,000** |
+
+## Common Issues and How to Resolve
+
+### Issue 1: EMD Not Credited
+- **Cause:** Payment not yet processed by bank
+- **Fix:** Wait 24-48 hours. Contact bank with transaction ID. Don't bid until EMD is credited.
+
+### Issue 2: Can't Place Bid
+- **Cause:** EMD not credited, or auction hasn't started
+- **Fix:** Check EMD status. Verify auction timing (IST). Refresh the page.
+
+### Issue 3: Auction Extended
+- **Cause:** Someone bid in the last few minutes
+- **Fix:** This is normal. The auction extends by 5-10 minutes. Keep watching.
+
+### Issue 4: Lost the Auction
+- **Cause:** Someone bid higher than your maximum
+- **Fix:** Your EMD will be refunded in 7-15 days. Try again next time. Set a higher budget or look for other properties.
+
+### Issue 5: Won but Can't Pay Balance
+- **Cause:** Financing not arranged
+- **Fix:** Arrange financing BEFORE bidding. Banks are reluctant to give loans for auction properties. Consider NBFCs or private lenders.
+
+### Issue 6: Property Occupied
+- **Cause:** Previous owner or tenant still living there
+- **Fix:** Bank is responsible for eviction. This can take 3-12 months. Factor this into your decision.
+
+## MSTC vs IBAPI — What's the Difference?
+
+| Platform | Purpose | Who Uses It |
+|----------|---------|-------------|
+| **IBAPI** | Property listing and search | All banks (IBA members) |
+| **MSTC** | Actual bidding platform | Banks, government, PSUs |
+| **e-Procurement** | Government property auctions | Government departments |
+
+**Flow:** Find property on IBAPI → Register on MSTC → Pay EMD on MSTC → Bid on MSTC → Complete purchase with bank
+
+## Tips for First-Time Bidders
+
+1. **Register early** — don't wait until auction day
+2. **Start with a small property** — learn the process with lower stakes
+3. **Visit the property** — photos can be misleading
+4. **Get a lawyer** — for title verification
+5. **Have funds ready** — don't bid if you can't pay
+6. **Read the auction notice** — every word matters
+7. **Check for outstanding dues** — maintenance, taxes, etc.
+8. **Factor in all costs** — not just the reserve price
+9. **Don't bid emotionally** — stick to your budget
+10. **Be patient** — the right property will come
+
+## Key Takeaways
+
+- MSTC is the **official bidding platform** for bank property auctions
+- Registration is **free and one-time**
+- EMD is **5-10% of reserve price** and **refundable** if you lose
+- Auctions are **transparent** — you can see all bids
+- Payment is due within **15-30 days** of winning
+- Always do **thorough due diligence** before bidding
+
+---
+
+*Disclaimer: This article is for educational purposes only. E-auction rules vary by bank and platform. Please consult a legal expert before participating. InvestNest is not a financial advisor.*
+    `,
+  },
   'sarfaesi-auctions': {
     title: 'What are SARFAESI Auctions? Complete Guide',
     category: 'Real Estate',

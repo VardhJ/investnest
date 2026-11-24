@@ -2,6 +2,13 @@ import Link from 'next/link';
 
 const articles = [
   {
+    title: 'MSTC E-Auction — Complete Buyer Registration & Bidding Guide',
+    slug: 'mstc-e-auction-guide',
+    description: 'Step-by-step guide to registering and bidding on MSTC e-auction platform for bank-seized properties.',
+    category: 'Real Estate',
+    readTime: '12 min',
+  },
+  {
     title: 'What are SARFAESI Auctions? Complete Guide',
     slug: 'sarfaesi-auctions',
     description: 'Learn how banks sell seized properties at 15-30% below market value. Complete step-by-step guide.',
