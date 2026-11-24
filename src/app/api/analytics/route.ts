@@ -41,7 +41,10 @@ export async function GET(request: NextRequest) {
     // City distribution (top 20)
     const cityCounts: Record<string, number> = {};
     allProperties.forEach(p => {
-      cityCounts[p.city] = (cityCounts[p.city] || 0) + 1;
+      // Normalize city name to title case
+      const city = (p.city || 'Unknown').trim();
+      const normalized = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
+      cityCounts[normalized] = (cityCounts[normalized] || 0) + 1;
     });
     const cityDistribution = Object.entries(cityCounts)
       .map(([city, count]) => ({ city, count }))
@@ -93,8 +96,9 @@ export async function GET(request: NextRequest) {
       };
     });
 
-    // Best deals (lowest 6 prices)
+    // Best deals (lowest 6 prices, excluding ₹1 placeholder prices)
     const bestDeals = [...allProperties]
+      .filter(p => p.reserve_price > 1000) // Exclude placeholder prices (₹1, etc.)
       .sort((a, b) => a.reserve_price - b.reserve_price)
       .slice(0, 6)
       .map(p => ({

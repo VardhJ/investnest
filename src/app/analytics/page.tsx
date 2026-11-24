@@ -215,13 +215,14 @@ export default function AnalyticsPage() {
                              intensity > 0.2 ? 'bg-emerald-200 text-emerald-900' :
                              'bg-slate-100 text-slate-700';
               return (
-                <div
+                <Link
                   key={city.city}
-                  className={`rounded-xl p-3 text-center ${bgClass} transition-all hover:scale-105`}
+                  href={`/properties?city=${encodeURIComponent(city.city)}`}
+                  className={`rounded-xl p-3 text-center ${bgClass} transition-all hover:scale-105 cursor-pointer block`}
                 >
                   <div className="text-lg font-bold">{city.count}</div>
                   <div className="text-xs font-medium truncate">{city.city}</div>
-                </div>
+                </Link>
               );
             })}
           </div>

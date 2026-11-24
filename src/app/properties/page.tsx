@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Property } from '@/types';
 
@@ -9,10 +10,11 @@ const PROPERTY_TYPES = ['residential', 'commercial', 'industrial', 'land', 'vehi
 const BANKS = ['SBI', 'PNB', 'HDFC', 'ICICI', 'Axis', 'Bank of Baroda', 'Canara Bank', 'Union Bank'];
 
 export default function PropertiesPage() {
+  const searchParams = useSearchParams();
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState(searchParams?.get('city') || '');
   const [propertyType, setPropertyType] = useState('');
   const [bank, setBank] = useState('');
   const [minPrice, setMinPrice] = useState('');
@@ -20,6 +22,13 @@ export default function PropertiesPage() {
   const [sortBy, setSortBy] = useState('auction_date');
   const [page, setPage] = useState(1);
   const [showNewOnly, setShowNewOnly] = useState(false);
+
+  useEffect(() => {
+    const cityParam = searchParams?.get('city');
+    if (cityParam && cityParam !== city) {
+      setCity(cityParam);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     fetchProperties();
