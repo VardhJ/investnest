@@ -1,6 +1,7 @@
 """
-SARFAESI Property Scraper
+SARFAESI Property Scraper — Enhanced
 Aggregates bank-seized properties from IBAPI (ASP.NET AJAX) portal.
+Tracks new/removed/changed properties for alerts.
 Runs via GitHub Actions cron (free) or manually.
 """
 
@@ -16,14 +17,13 @@ import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 
-# Load .env.local from parent directory
 load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env.local'))
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 SUPABASE_URL = os.getenv('SUPABASE_URL') or os.getenv('NEXT_PUBLIC_SUPABASE_URL')
-SUPABASE_KEY = os.getenv('SUPABASE_SERVICE_KEY') or os.getenv('SUPABASE_SERVICE_KEY')
+SUPABASE_KEY = os.getenv('SUPABASE_SERVICE_KEY')
 
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -33,12 +33,7 @@ HEADERS = {
 
 
 class IBAPIParser:
-    """Parse properties from IBAPI (Indian Banks' Association portal).
-    
-    IBAPI uses ASP.NET AJAX: POST to Sale_Info_Home.aspx/Button_search_Click
-    with JSON body { key_val: [...] }. Response is JSON with data.d as a
-    JSON string containing property records.
-    """
+    """Parse properties from IBAPI (Indian Banks' Association portal)."""
 
     BASE_URL = 'https://www.ibapi.in'
 
@@ -50,44 +45,29 @@ class IBAPIParser:
         properties = []
 
         try:
-            # Step 1: GET the search page (establishes session)
             resp = self.session.get(f'{self.BASE_URL}/sale_info_home.aspx', timeout=15)
             if resp.status_code != 200:
                 logger.warning(f"IBAPI page returned {resp.status_code}")
                 return properties
 
-            # Step 2: Call the AJAX search endpoint
             ajax_url = f'{self.BASE_URL}/Sale_Info_Home.aspx/Button_search_Click'
-
-            # Search with no filters (all properties)
-            key_val = []
-
-            ajax_headers = {
-                'Content-Type': 'application/json; charset=utf-8',
-                'Accept': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest',
-            }
 
             search_resp = self.session.post(
                 ajax_url,
-                json={'key_val': key_val},
-                headers=ajax_headers,
-                timeout=60
+                json={'key_val': []},
+                headers={
+                    'Content-Type': 'application/json; charset=utf-8',
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+                timeout=120
             )
 
             if search_resp.status_code != 200:
                 logger.warning(f"IBAPI AJAX returned {search_resp.status_code}")
-                logger.debug(f"Response: {search_resp.text[:300]}")
                 return properties
 
-            # Parse JSON response
-            try:
-                data = search_resp.json()
-            except Exception as e:
-                logger.error(f"IBAPI response not JSON: {e}")
-                logger.debug(f"Response: {search_resp.text[:500]}")
-                return properties
-
+            data = search_resp.json()
             result_str = data.get('d', '')
             if not result_str:
                 logger.info("IBAPI returned empty result")
@@ -98,10 +78,7 @@ class IBAPIParser:
                 return properties
 
             try:
-                if isinstance(result_str, str):
-                    result_data = json.loads(result_str)
-                else:
-                    result_data = result_str
+                result_data = json.loads(result_str) if isinstance(result_str, str) else result_str
             except json.JSONDecodeError:
                 logger.error(f"Could not parse IBAPI result: {str(result_str)[:200]}")
                 return properties
@@ -132,8 +109,7 @@ class IBAPIParser:
             district = item.get('District', '') or ''
             city = item.get('City', '') or ''
             location = f"{city}, {district}, {state}".strip(', ')
-            
-            # Create a descriptive title
+
             title = f"{prop_type_raw.title()} Property in {city}, {district}" if city else f"{prop_type_raw.title()} Property"
 
             price_text = item.get('Reserve Price (Rs)', '') or ''
@@ -146,12 +122,9 @@ class IBAPIParser:
             emd = self._parse_price(str(emd_text))
 
             auction_start = item.get('Auction Start Date & Time', '') or ''
-            auction_end = item.get('Auction End Date & Time', '') or ''
-            emd_date = item.get('EMD Last Date & Time', '') or ''
-            # Property ID contains HTML: <a id="btn_view" ...>CORP0020190266</a>
             prop_id_raw = item.get('Property ID', '') or ''
             prop_id = re.sub(r'<[^>]+>', '', str(prop_id_raw)).strip()
-            
+
             city_clean = city if city else self._extract_city(location)
 
             return {
@@ -201,22 +174,7 @@ class IBAPIParser:
                 return c
         return 'Unknown'
 
-    def _detect_type(self, title, location):
-        text = (title + ' ' + location).lower()
-        if any(w in text for w in ['flat', 'apartment', 'house', 'villa', 'residential', 'bhk']):
-            return 'residential'
-        if any(w in text for w in ['office', 'shop', 'commercial', 'showroom', 'warehouse']):
-            return 'commercial'
-        if any(w in text for w in ['factory', 'industrial', 'plant', 'mill']):
-            return 'industrial'
-        if any(w in text for w in ['plot', 'land', 'agricultural']):
-            return 'land'
-        if any(w in text for w in ['car', 'vehicle', 'truck', 'bike']):
-            return 'vehicle'
-        return 'residential'
-
     def _map_property_type(self, prop_type):
-        """Map IBAPI property type to our enum."""
         text = str(prop_type).lower()
         if 'residential' in text or 'flat' in text or 'house' in text or 'apartment' in text:
             return 'residential'
@@ -242,63 +200,125 @@ class IBAPIParser:
         return None
 
 
+def get_existing_properties():
+    """Fetch all existing properties from Supabase."""
+    properties = []
+    offset = 0
+    limit = 1000
+    while True:
+        resp = requests.get(
+            f'{SUPABASE_URL}/rest/v1/properties?select=*&order=created_at.asc',
+            headers={
+                'apikey': SUPABASE_KEY,
+                'Authorization': f'Bearer {SUPABASE_KEY}',
+                'Range': f'{offset}-{offset + limit - 1}',
+            },
+            timeout=30
+        )
+        if resp.status_code != 200:
+            logger.error(f"Failed to fetch existing properties: {resp.status_code}")
+            break
+        data = resp.json()
+        if not data:
+            break
+        properties.extend(data)
+        if len(data) < limit:
+            break
+        offset += limit
+    return properties
+
+
 def save_properties(properties):
-    """Save properties to Supabase via REST API or JSON file."""
+    """Save properties to Supabase via REST API."""
     if not properties:
         logger.info("No properties to save")
         return
 
-    seen = set()
-    unique = []
-    for p in properties:
-        # Deduplicate by bank + title + city (not source_url, since all share the same URL)
-        key = f"{p.get('bank', '')}|{p.get('title', '')}|{p.get('city', '')}|{p.get('reserve_price', '')}"
-        if key not in seen:
-            seen.add(key)
-            unique.append(p)
+    headers = {
+        'apikey': SUPABASE_KEY,
+        'Authorization': f'Bearer {SUPABASE_KEY}',
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation,resolution=merge-duplicates',
+    }
 
-    logger.info(f"Saving {len(unique)} unique properties")
-
-    if SUPABASE_URL and SUPABASE_KEY:
+    # Save in batches of 500
+    batch_size = 500
+    total_saved = 0
+    for i in range(0, len(properties), batch_size):
+        batch = properties[i:i + batch_size]
         try:
-            import requests
-            headers = {
-                'apikey': SUPABASE_KEY,
-                'Authorization': f'Bearer {SUPABASE_KEY}',
-                'Content-Type': 'application/json',
-                'Prefer': 'return=representation,resolution=merge-duplicates',
-            }
             resp = requests.post(
                 f'{SUPABASE_URL}/rest/v1/properties',
                 headers=headers,
-                json=unique,
+                json=batch,
                 timeout=60
             )
             if resp.status_code in (200, 201):
-                logger.info(f"Saved {len(resp.json())} properties to Supabase")
+                total_saved += len(resp.json())
             else:
                 logger.error(f"Supabase save error ({resp.status_code}): {resp.text[:200]}")
-                _save_json(unique)
         except Exception as e:
             logger.error(f"Supabase save error: {e}")
-            _save_json(unique)
-    else:
-        _save_json(unique)
+    
+    logger.info(f"Saved {total_saved} properties to Supabase")
 
 
-def _save_json(properties):
-    output_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'properties.json')
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        json.dump(properties, f, indent=2, default=str)
-    logger.info(f"Saved {len(properties)} properties to {output_path}")
+def update_property_status(property_id, status):
+    """Update a property's status."""
+    try:
+        headers = {
+            'apikey': SUPABASE_KEY,
+            'Authorization': f'Bearer {SUPABASE_KEY}',
+            'Content-Type': 'application/json',
+        }
+        resp = requests.patch(
+            f'{SUPABASE_URL}/rest/v1/properties?id=eq.{property_id}',
+            headers=headers,
+            json={'status': status, 'updated_at': datetime.now().isoformat()},
+            timeout=10
+        )
+        return resp.status_code in (200, 204)
+    except Exception as e:
+        logger.error(f"Failed to update property {property_id}: {e}")
+        return False
+
+
+def log_scrape(stats):
+    """Log scrape results to scrape_logs table."""
+    try:
+        headers = {
+            'apikey': SUPABASE_KEY,
+            'Authorization': f'Bearer {SUPABASE_KEY}',
+            'Content-Type': 'application/json',
+        }
+        resp = requests.post(
+            f'{SUPABASE_URL}/rest/v1/scrape_logs',
+            headers=headers,
+            json={
+                'scraped_at': datetime.now().isoformat(),
+                'total_fetched': stats['total_fetched'],
+                'new_properties': stats['new'],
+                'updated_properties': stats['updated'],
+                'removed_properties': stats['removed'],
+                'price_changes': stats['price_changes'],
+                'duration_seconds': stats['duration'],
+            },
+            timeout=10
+        )
+        if resp.status_code in (200, 201):
+            logger.info("Scrape log saved")
+        else:
+            logger.warning(f"Failed to save scrape log: {resp.status_code}")
+    except Exception as e:
+        logger.warning(f"Failed to save scrape log: {e}")
 
 
 def main():
-    logger.info("Starting SARFAESI property scraper...")
+    start_time = datetime.now()
+    logger.info("Starting SARFAESI property scraper (enhanced)...")
     all_properties = []
 
-    # IBAPI (ASP.NET AJAX)
+    # Step 1: Fetch from IBAPI
     try:
         ibapi = IBAPIParser()
         props = ibapi.fetch_properties()
@@ -307,8 +327,88 @@ def main():
     except Exception as e:
         logger.error(f"IBAPI failed: {e}")
 
-    save_properties(all_properties)
-    logger.info(f"Total: {len(all_properties)} properties scraped")
+    if not all_properties:
+        logger.warning("No properties fetched. Exiting.")
+        return
+
+    # Step 2: Get existing properties from DB
+    logger.info("Fetching existing properties from DB...")
+    existing = get_existing_properties()
+    logger.info(f"Found {len(existing)} existing properties in DB")
+
+    # Step 3: Build lookup by source_url
+    existing_map = {p['source_url']: p for p in existing}
+    now = datetime.now().isoformat()
+
+    new_props = []
+    updated_props = []
+    price_changes = 0
+
+    for prop in all_properties:
+        key = prop['source_url']
+        if key in existing_map:
+            old = existing_map[key]
+            # Check for price change
+            if old.get('reserve_price') != prop['reserve_price']:
+                price_changes += 1
+                # Append to price history
+                history = old.get('price_history') or []
+                history.append({
+                    'date': now,
+                    'price': prop['reserve_price']
+                })
+                prop['price_history'] = history
+            
+            # Update tracking fields
+            prop['first_seen_at'] = old.get('first_seen_at', now)
+            prop['last_seen_at'] = now
+            prop['scrape_count'] = (old.get('scrape_count') or 0) + 1
+            prop['id'] = old['id']  # Keep existing ID
+            
+            # Remove fields that shouldn't be updated
+            for field in ['created_at']:
+                prop.pop(field, None)
+            
+            updated_props.append(prop)
+        else:
+            # New property
+            prop['first_seen_at'] = now
+            prop['last_seen_at'] = now
+            prop['scrape_count'] = 1
+            prop['price_history'] = [{'date': now, 'price': prop['reserve_price']}]
+            new_props.append(prop)
+
+    # Step 4: Find removed properties (likely sold)
+    ibapi_urls = set(p['source_url'] for p in all_properties)
+    removed = [p for p in existing if p['source_url'] not in ibapi_urls]
+    logger.info(f"Found {len(removed)} removed properties (likely sold)")
+
+    # Mark removed properties as "likely_sold"
+    for prop in removed:
+        update_property_status(prop['id'], 'likely_sold')
+
+    # Step 5: Save new + updated properties
+    to_save = new_props + updated_props
+    logger.info(f"Saving {len(to_save)} properties ({len(new_props)} new, {len(updated_props)} updated)")
+    save_properties(to_save)
+
+    # Step 6: Log scrape results
+    duration = (datetime.now() - start_time).total_seconds()
+    stats = {
+        'total_fetched': len(all_properties),
+        'new': len(new_props),
+        'updated': len(updated_props),
+        'removed': len(removed),
+        'price_changes': price_changes,
+        'duration': int(duration),
+    }
+    log_scrape(stats)
+
+    logger.info(f"Scrape complete in {int(duration)}s:")
+    logger.info(f"  New: {len(new_props)}")
+    logger.info(f"  Updated: {len(updated_props)}")
+    logger.info(f"  Removed (likely sold): {len(removed)}")
+    logger.info(f"  Price changes: {price_changes}")
 
 
 if __name__ == '__main__':

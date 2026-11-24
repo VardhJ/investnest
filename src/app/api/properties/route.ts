@@ -11,14 +11,20 @@ export async function GET(request: NextRequest) {
   const minPrice = searchParams.get('minPrice');
   const maxPrice = searchParams.get('maxPrice');
   const sortBy = searchParams.get('sortBy') || 'auction_date';
-  const page = parseInt(searchParams.get('page') || '1');
+  const page = Math.max(1, Math.min(1000, parseInt(searchParams.get('page') || '1')));
   const pageSize = 20;
+  const newOnly = searchParams.get('newOnly') === 'true';
 
   try {
     let query = supabase
       .from('properties')
       .select('*', { count: 'exact' })
       .eq('status', 'active');
+
+    if (newOnly) {
+      const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+      query = query.gte('created_at', sevenDaysAgo);
+    }
 
     // Sanitize search input to prevent filter injection
     if (search) {

@@ -19,6 +19,7 @@ export default function PropertiesPage() {
   const [maxPrice, setMaxPrice] = useState('');
   const [sortBy, setSortBy] = useState('auction_date');
   const [page, setPage] = useState(1);
+  const [showNewOnly, setShowNewOnly] = useState(false);
 
   useEffect(() => {
     fetchProperties();
@@ -51,6 +52,7 @@ export default function PropertiesPage() {
       if (bank) params.set('bank', bank);
       if (minPrice) params.set('minPrice', minPrice);
       if (maxPrice) params.set('maxPrice', maxPrice);
+      if (showNewOnly) params.set('newOnly', 'true');
       params.set('sortBy', sortBy);
       params.set('page', page.toString());
 
@@ -77,7 +79,7 @@ export default function PropertiesPage() {
     return `₹${price.toLocaleString('en-IN')}`;
   };
 
-  const hasActiveFilters = Boolean(city || propertyType || bank || minPrice || maxPrice || search);
+  const hasActiveFilters = Boolean(city || propertyType || bank || minPrice || maxPrice || search || showNewOnly);
 
   const clearAllFilters = () => {
     setSearch('');
@@ -173,6 +175,17 @@ export default function PropertiesPage() {
                 className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-semibold transition-colors shadow-xs"
               >
                 Apply Filters
+              </button>
+              <button
+                type="button"
+                onClick={() => { setShowNewOnly(!showNewOnly); setPage(1); }}
+                className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors shadow-xs border ${
+                  showNewOnly
+                    ? 'bg-emerald-100 text-emerald-700 border-emerald-300'
+                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                }`}
+              >
+                {showNewOnly ? '✓ New (7 days)' : 'New (7 days)'}
               </button>
             </div>
 
@@ -276,6 +289,13 @@ export default function PropertiesPage() {
                           <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
                             Verified SARFAESI Record
                           </span>
+                        </div>
+                      )}
+
+                      {/* New Badge */}
+                      {property.createdAt && (Date.now() - new Date(property.createdAt).getTime()) < 7 * 24 * 60 * 60 * 1000 && (
+                        <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-extrabold bg-emerald-500 text-white shadow-sm">
+                          NEW
                         </div>
                       )}
 
