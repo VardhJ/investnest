@@ -50,19 +50,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         .eq('id', userId)
         .single();
       
-      if (error) {
-        // Profile might not exist yet (trigger hasn't fired)
-        // Try to create it
-        try {
-          await supabase.from('user_profiles').insert({ id: userId, role: 'user' });
-        } catch {
-          // Ignore insert errors (might already exist)
-        }
+      if (error || !data) {
+        // Profile doesn't exist yet (trigger hasn't fired or RLS blocks)
         setIsAdmin(false);
         return;
       }
       
-      setIsAdmin(data?.role === 'admin');
+      setIsAdmin(data.role === 'admin');
     } catch {
       setIsAdmin(false);
     }
@@ -92,7 +86,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/admin`,
+        redirectTo: `${window.location.origin}/`,
       },
     });
   };

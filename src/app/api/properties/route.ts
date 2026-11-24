@@ -20,23 +20,36 @@ export async function GET(request: NextRequest) {
       .select('*', { count: 'exact' })
       .eq('status', 'active');
 
+    // Sanitize search input to prevent filter injection
     if (search) {
-      query = query.or(`title.ilike.%${search}%,location.ilike.%${search}%,city.ilike.%${search}%,bank.ilike.%${search}%`);
+      const sanitized = search.replace(/[%_\\,()'"<>]/g, '').slice(0, 100);
+      if (sanitized) {
+        query = query.or(`title.ilike.%${sanitized}%,location.ilike.%${sanitized}%,city.ilike.%${sanitized}%,bank.ilike.%${sanitized}%`);
+      }
     }
     if (city) {
-      query = query.eq('city', city);
+      query = query.eq('city', city.slice(0, 50));
     }
     if (type) {
-      query = query.eq('property_type', type);
+      const validTypes = ['residential', 'commercial', 'industrial', 'land', 'vehicle'];
+      if (validTypes.includes(type)) {
+        query = query.eq('property_type', type);
+      }
     }
     if (bank) {
-      query = query.eq('bank', bank);
+      query = query.eq('bank', bank.slice(0, 50));
     }
     if (minPrice) {
-      query = query.gte('reserve_price', parseInt(minPrice));
+      const minPriceNum = parseInt(minPrice);
+      if (!isNaN(minPriceNum) && minPriceNum >= 0) {
+        query = query.gte('reserve_price', minPriceNum);
+      }
     }
     if (maxPrice) {
-      query = query.lte('reserve_price', parseInt(maxPrice));
+      const maxPriceNum = parseInt(maxPrice);
+      if (!isNaN(maxPriceNum) && maxPriceNum >= 0) {
+        query = query.lte('reserve_price', maxPriceNum);
+      }
     }
 
     // Sorting
@@ -56,7 +69,7 @@ export async function GET(request: NextRequest) {
     const { data, error, count } = await query;
 
     if (error) {
-      console.error('Supabase error:', error);
+      console.error('Supabase error:', error.message);
       return NextResponse.json({ properties: [], total: 0 }, { status: 200 });
     }
 
@@ -135,6 +148,23 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
 
+    // Input validation
+    if (!body.title || !body.bank || !body.location || !body.city || !body.state || !body.reserve_price) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+    if (typeof body.reserve_price !== 'number' || body.reserve_price < 0 || body.reserve_price > 10000000000) {
+      return NextResponse.json({ error: 'Invalid reserve price' }, { status: 400 });
+    }
+    // Sanitize string fields
+    body.title = String(body.title).slice(0, 200);
+    body.bank = String(body.bank).slice(0, 100);
+    body.location = String(body.location).slice(0, 500);
+    body.city = String(body.city).slice(0, 100);
+    body.state = String(body.state).slice(0, 100);
+    body.description = body.description ? String(body.description).slice(0, 2000) : null;
+    body.source_url = body.source_url ? String(body.source_url).slice(0, 500) : null;
+    body.branch = body.branch ? String(body.branch).slice(0, 100) : null;
+
     const { data, error } = await supabase
       .from('properties')
       .insert(body)
@@ -142,8 +172,8 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (error) {
-      console.error('Supabase insert error:', error);
-      return NextResponse.json({ error: error.message }, { status: 400 });
+      console.error('Supabase insert error:', error.message);
+      return NextResponse.json({ error: 'Failed to create property' }, { status: 400 });
     }
 
     return NextResponse.json({ property: data }, { status: 201 });

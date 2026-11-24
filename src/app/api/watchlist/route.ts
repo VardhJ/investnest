@@ -21,7 +21,8 @@ export async function GET(request: NextRequest) {
       .eq('user_id', user.id);
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 400 });
+      console.error('Watchlist fetch error:', error.message);
+      return NextResponse.json({ error: 'Failed to fetch watchlist' }, { status: 400 });
     }
 
     return NextResponse.json({ watchlist: data || [] });
@@ -55,7 +56,8 @@ export async function POST(request: NextRequest) {
       if (error.code === '23505') {
         return NextResponse.json({ error: 'Already in watchlist' }, { status: 409 });
       }
-      return NextResponse.json({ error: error.message }, { status: 400 });
+      console.error('Watchlist insert error:', error.message);
+      return NextResponse.json({ error: 'Failed to add to watchlist' }, { status: 400 });
     }
 
     return NextResponse.json({ item: data }, { status: 201 });
@@ -88,7 +90,8 @@ export async function DELETE(request: NextRequest) {
       .eq('property_id', propertyId);
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 400 });
+      console.error('Watchlist delete error:', error.message);
+      return NextResponse.json({ error: 'Failed to remove from watchlist' }, { status: 400 });
     }
 
     return NextResponse.json({ success: true });

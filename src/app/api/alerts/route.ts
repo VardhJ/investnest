@@ -22,7 +22,8 @@ export async function GET(request: NextRequest) {
       .order('created_at', { ascending: false });
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 400 });
+      console.error('Alerts fetch error:', error.message);
+      return NextResponse.json({ error: 'Failed to fetch alerts' }, { status: 400 });
     }
 
     return NextResponse.json({ alerts: data || [] });
@@ -60,7 +61,8 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 400 });
+      console.error('Alert create error:', error.message);
+      return NextResponse.json({ error: 'Failed to create alert' }, { status: 400 });
     }
 
     return NextResponse.json({ alert: data }, { status: 201 });
@@ -93,7 +95,8 @@ export async function DELETE(request: NextRequest) {
       .eq('user_id', user.id);
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 400 });
+      console.error('Alert delete error:', error.message);
+      return NextResponse.json({ error: 'Failed to delete alert' }, { status: 400 });
     }
 
     return NextResponse.json({ success: true });
@@ -126,7 +129,8 @@ export async function PATCH(request: NextRequest) {
       .single();
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 400 });
+      console.error('Alert update error:', error.message);
+      return NextResponse.json({ error: 'Failed to update alert' }, { status: 400 });
     }
 
     return NextResponse.json({ alert: data });
