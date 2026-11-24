@@ -21,6 +21,7 @@ export default function Navbar() {
     { href: '/products', label: 'Alternative Assets' },
     { href: '/calculator', label: 'Yield Calculator' },
     { href: '/learn', label: 'Research & Guides' },
+    { href: '/analytics', label: 'Market Analytics' },
   ];
 
   return (
