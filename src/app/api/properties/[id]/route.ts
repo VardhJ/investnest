@@ -34,6 +34,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       status: data.status,
       createdAt: data.created_at,
       updatedAt: data.updated_at,
+      firstSeenAt: data.first_seen_at,
       areaSqft: data.area_sqft,
       bedrooms: data.bedrooms,
       bathrooms: data.bathrooms,

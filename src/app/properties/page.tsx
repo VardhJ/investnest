@@ -293,7 +293,7 @@ export default function PropertiesPage() {
                       )}
 
                       {/* New Badge */}
-                      {property.createdAt && (Date.now() - new Date(property.createdAt).getTime()) < 7 * 24 * 60 * 60 * 1000 && (
+                      {property.firstSeenAt && (Date.now() - new Date(property.firstSeenAt).getTime()) < 7 * 24 * 60 * 60 * 1000 && (
                         <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-extrabold bg-emerald-500 text-white shadow-sm z-10">
                           NEW
                         </div>

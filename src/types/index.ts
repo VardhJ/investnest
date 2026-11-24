@@ -39,6 +39,7 @@ export interface Property {
   sourceUrl: string;
   createdAt: string;
   updatedAt: string;
+  firstSeenAt: string | null;
   // Extended details
   areaSqft: number | null;
   bedrooms: number | null;

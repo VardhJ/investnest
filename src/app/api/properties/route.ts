@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
 
     if (newOnly) {
       const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-      query = query.gte('created_at', sevenDaysAgo);
+      query = query.gte('first_seen_at', sevenDaysAgo);
     }
 
     // Sanitize search input to prevent filter injection
@@ -100,6 +100,7 @@ export async function GET(request: NextRequest) {
       status: p.status,
       createdAt: p.created_at,
       updatedAt: p.updated_at,
+      firstSeenAt: p.first_seen_at,
       areaSqft: p.area_sqft,
       bedrooms: p.bedrooms,
       bathrooms: p.bathrooms,
