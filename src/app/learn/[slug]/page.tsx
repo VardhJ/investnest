@@ -2180,6 +2180,17 @@ Taxes can eat 20-30% of your investment returns. Understanding tax rules helps y
 
 export const dynamic = 'force-dynamic';
 
+// Helper to render **bold** inline text
+function renderInlineBold(text: string): React.ReactNode {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={i} className="font-semibold text-gray-900">{part.slice(2, -2)}</strong>;
+    }
+    return part;
+  });
+}
+
 export default async function LearnArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const article = articles[slug];
@@ -2204,24 +2215,24 @@ export default async function LearnArticlePage({ params }: { params: Promise<{ s
           <div className="prose prose-blue max-w-none">
             {article.content.split('\n').map((line, i) => {
               if (line.startsWith('## ')) {
-                return <h2 key={i} className="text-2xl font-bold mt-8 mb-4 text-gray-900">{line.replace('## ', '')}</h2>;
+                return <h2 key={i} className="text-2xl font-bold mt-8 mb-4 text-gray-900">{renderInlineBold(line.replace('## ', ''))}</h2>;
               }
               if (line.startsWith('### ')) {
-                return <h3 key={i} className="text-xl font-bold mt-6 mb-3 text-gray-900">{line.replace('### ', '')}</h3>;
+                return <h3 key={i} className="text-xl font-bold mt-6 mb-3 text-gray-900">{renderInlineBold(line.replace('### ', ''))}</h3>;
               }
               if (line.startsWith('|')) {
                 return null; // Tables handled separately
               }
               if (line.startsWith('- ')) {
-                return <li key={i} className="text-gray-700 ml-4">{line.replace('- ', '')}</li>;
+                return <li key={i} className="text-gray-700 ml-4">{renderInlineBold(line.replace('- ', ''))}</li>;
               }
               if (line.startsWith('**') && line.endsWith('**')) {
-                return <p key={i} className="font-bold text-gray-900 mt-4">{line.replace(/\*\*/g, '')}</p>;
+                return <p key={i} className="font-bold text-gray-900 mt-4">{renderInlineBold(line.replace(/\*\*/g, ''))}</p>;
               }
               if (line.trim() === '') {
                 return <br key={i} />;
               }
-              return <p key={i} className="text-gray-700 mb-3 leading-relaxed">{line}</p>;
+              return <p key={i} className="text-gray-700 mb-3 leading-relaxed">{renderInlineBold(line)}</p>;
             })}
           </div>
 
