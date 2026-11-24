@@ -1655,6 +1655,321 @@ PPF is a government-backed savings scheme with guaranteed returns and complete t
 *Disclaimer: This article is for educational purposes only. Please consult a financial advisor. InvestNest is not a financial advisor.*
     `,
   },
+  'e-auction-participation': {
+    title: 'How to Participate in E-Auctions in India — Step-by-Step',
+    category: 'Real Estate',
+    readTime: '8 min',
+    content: `
+## What is an E-Auction?
+
+An e-auction is an online auction where properties, assets, or goods are sold to the highest bidder. In India, banks use e-auctions to sell seized properties under the SARFAESI Act.
+
+## Types of E-Auctions in India
+
+| Platform | Used By | Property Types |
+|----------|---------|---------------|
+| IBAPI | All banks (IBA) | Residential, commercial, industrial, land |
+| MSTC | Government, NBFCs | Various |
+| e-Procurement | Government departments | Various |
+| Bank-specific | Individual banks | Bank's seized properties |
+
+## Step-by-Step: How to Participate
+
+### Step 1: Register on the E-Auction Platform
+1. Go to the bank's auction portal or IBAPI.in
+2. Click "Bidder Registration"
+3. Fill in personal details (name, PAN, Aadhaar, address)
+4. Upload KYC documents
+5. Verify email and mobile number
+6. Registration is usually free and one-time
+
+### Step 2: Find Properties
+- Browse available properties on IBAPI or bank portals
+- Filter by city, state, property type, price range
+- Check auction dates and reserve prices
+- Note the EMD (Earnest Money Deposit) amount
+
+### Step 3: Pay EMD
+- EMD is typically 5-10% of the reserve price
+- Pay via NEFT/RTGS to the bank's specified account
+- Get a payment receipt/transaction ID
+- EMD is refundable if you don't win the bid
+
+### Step 4: Bid in the Auction
+- Auctions are conducted online (e-auction)
+- Bidding window is usually 1-3 hours
+- Each bid must be higher than the current highest bid
+- Bid increments are usually ₹10,000 or ₹25,000
+- You can bid multiple times
+- The auction may extend if a bid is placed in the last few minutes
+
+### Step 5: Complete the Purchase
+- Pay the balance amount within 15-30 days
+- Bank issues sale certificate
+- Register the property in your name at the sub-registrar
+- Pay stamp duty and registration fees
+
+## Tips for First-Time Bidders
+
+1. **Register early** — don't wait until auction day
+2. **Pay EMD 2-3 days before** — NEFT can take time
+3. **Set a maximum bid** — don't get caught in bidding wars
+4. **Have financing ready** — banks require payment within 15-30 days
+5. **Visit the property** — before bidding, if possible
+6. **Check title** — get a lawyer to verify
+7. **Read the auction notice** — carefully, for all terms and conditions
+
+## Common Mistakes to Avoid
+
+- Not reading the auction notice fully
+- Bidding without visiting the property
+- Not having funds ready for payment
+- Ignoring outstanding dues (maintenance, taxes)
+- Not checking if the property is occupied
+- Bidding above your budget in excitement
+
+## E-Auction vs Regular Auction
+
+| Factor | E-Auction | Regular Auction |
+|--------|-----------|-----------------|
+| Location | Online (anywhere) | Physical (specific venue) |
+| Transparency | High (all bids visible) | Medium |
+| Competition | Higher (more bidders) | Lower |
+| Convenience | High | Low |
+| Speed | Fast (1-3 hours) | Slow (whole day) |
+
+---
+
+*Disclaimer: This article is for educational purposes only. E-auction rules vary by bank and platform. Please consult a legal expert before participating. InvestNest is not a financial advisor.*
+    `,
+  },
+  'best-cities-real-estate-2026': {
+    title: 'Best Cities for Real Estate Investment in India (2026)',
+    category: 'Real Estate',
+    readTime: '7 min',
+    content: `
+## Top Cities for Real Estate Investment in 2026
+
+Choosing the right city is the most important decision in real estate investment. Here's our analysis based on rental yields, price appreciation, infrastructure, and job growth.
+
+## Tier 1 Cities
+
+### 1. Bangalore
+- **Rental Yield:** 3.0-3.5%
+- **Price Appreciation:** 8-12% annually
+- **Key Drivers:** IT sector, startup ecosystem, metro expansion
+- **Best Areas:** Whitefield, Electronic City, Hebbal, Sarjapur Road
+- **Avg. Property Price:** ₹60L-₹1.5Cr (2BHK)
+
+### 2. Hyderabad
+- **Rental Yield:** 3.5-4.0%
+- **Price Appreciation:** 10-15% annually
+- **Key Drivers:** IT/ITES growth, Pharma, affordable prices
+- **Best Areas:** Gachibowli, HITEC City, Kondapur, Kukatpally
+- **Avg. Property Price:** ₹50L-₹1.2Cr (2BHK)
+
+### 3. Pune
+- **Rental Yield:** 3.0-3.5%
+- **Price Appreciation:** 7-10% annually
+- **Key Drivers:** IT, manufacturing, education hub
+- **Best Areas:** Hinjewadi, Wakad, Baner, Kharadi
+- **Avg. Property Price:** ₹55L-₹1.3Cr (2BHK)
+
+## Tier 2 Cities (High Growth Potential)
+
+### 4. Ahmedabad
+- **Rental Yield:** 3.0-3.5%
+- **Price Appreciation:** 8-12% annually
+- **Key Drivers:** GIFT City, manufacturing, infrastructure
+- **Best Areas:** SG Highway, Satellite, Bopal, Prahlad Nagar
+- **Avg. Property Price:** ₹40L-₹90L (2BHK)
+
+### 5. Lucknow
+- **Rental Yield:** 2.5-3.0%
+- **Price Appreciation:** 7-10% annually
+- **Key Drivers:** Government capital, infrastructure projects
+- **Best Areas:** Gomti Nagar, Hazratganj, Indira Nagar
+- **Avg. Property Price:** ₹35L-₹80L (2BHK)
+
+### 6. Kochi
+- **Rental Yield:** 2.5-3.0%
+- **Price Appreciation:** 6-9% annually
+- **Key Drivers:** IT park, port, tourism
+- **Best Areas:** Kakkanad, Edappally, Vyttila
+- **Avg. Property Price:** ₹40L-₹90L (2BHK)
+
+## Tier 3 Cities (Emerging Opportunities)
+
+### 7. Indore
+- **Rental Yield:** 3.0-4.0%
+- **Price Appreciation:** 8-12% annually
+- **Key Drivers:** Cleanest city, IT growth, affordable
+- **Best Areas:** Vijay Nagar, AB Road, Super Corridor
+- **Avg. Property Price:** ₹30L-₹70L (2BHK)
+
+### 8. Nagpur
+- **Rental Yield:** 3.0-3.5%
+- **Price Appreciation:** 7-10% annually
+- **Key Drivers:** Logistics hub, MIHAN project, affordability
+- **Best Areas:** Wardha Road, Manish Nagar, Besa
+- **Avg. Property Price:** ₹30L-₹65L (2BHK)
+
+### 9. Jaipur
+- **Rental Yield:** 2.5-3.0%
+- **Price Appreciation:** 6-9% annually
+- **Key Drivers:** Tourism, IT growth, infrastructure
+- **Best Areas:** Mansarovar, Vaishali Nagar, Jagatpura
+- **Avg. Property Price:** ₹35L-₹80L (2BHK)
+
+### 10. Coimbatore
+- **Rental Yield:** 3.0-3.5%
+- **Price Appreciation:** 7-10% annually
+- **Key Drivers:** Manufacturing, IT, education
+- **Best Areas:** RS Puram, Peelamedu, Saravanampatti
+- **Avg. Property Price:** ₹35L-₹75L (2BHK)
+
+## SARFAESI Opportunities by City
+
+Bank-seized properties are available in all major cities. Use InvestNest to find:
+- **Mumbai:** 200+ properties, avg. 25% discount
+- **Delhi NCR:** 150+ properties, avg. 28% discount
+- **Bangalore:** 180+ properties, avg. 26% discount
+- **Hyderabad:** 120+ properties, avg. 27% discount
+- **Pune:** 100+ properties, avg. 25% discount
+
+---
+
+*Disclaimer: This article is for educational purposes only. Real estate prices and yields vary. Always conduct due diligence. InvestNest is not a financial advisor.*
+    `,
+  },
+  'sarfaesi-title-check': {
+    title: 'How to Check Property Title Before Buying — Complete Guide',
+    category: 'Real Estate',
+    readTime: '9 min',
+    content: `
+## Why Title Verification is Critical
+
+A property's title is the legal proof of ownership. If the title is defective, you could lose your entire investment. This is especially important for SARFAESI auction properties.
+
+## What is a Property Title?
+
+A property title is a legal document that establishes ownership of a property. It includes:
+- The owner's name
+- Property description (location, area, boundaries)
+- Chain of ownership (how it was transferred over time)
+- Any encumbrances (loans, liens, mortgages)
+
+## Title Verification Checklist
+
+### 1. Mother Deed (Chain of Title)
+- Trace ownership back at least **30 years**
+- Each transfer must have a registered sale deed
+- Check for gaps in the chain (missing transfers)
+- Verify the seller's name matches the current owner
+
+### 2. Encumbrance Certificate (EC)
+- Get EC from the sub-registrar office
+- Covers 13-30 years of property history
+- Shows all transactions, mortgages, liens
+- **Must show "No Encumbrances" for clean title**
+
+### 3. Property Tax Receipts
+- Verify taxes paid up to date
+- Check for any pending dues
+- Get receipts for last 3-5 years
+
+### 4. Khata Certificate
+- Required in Bangalore, Hyderabad, and other cities
+- Shows property is registered with municipal corporation
+- Two types: A-Khata (legal) and B-Khata (semi-legal)
+
+### 5. Occupancy Certificate (OC)
+- For completed buildings
+- Issued by municipal corporation
+- Confirms building complies with approved plans
+
+### 6. RERA Registration
+- For under-construction properties
+- Check on state RERA website
+- Verify project details, builder info, completion timeline
+
+### 7. Court Records
+- Check if property is involved in any litigation
+- Search district court records
+- Check High Court for any stay orders
+
+## SARFAESI-Specific Title Checks
+
+### Additional Checks for Auction Properties
+1. **Bank's title search** — banks do their own title verification before auction
+2. **Encumbrance at time of default** — check if property was mortgaged
+3. **Multiple claimants** — previous owner's family might claim
+4. **Pending litigation** — previous owner might have filed case against bank
+5. **Outstanding dues** — maintenance, taxes, utility bills
+
+### Documents to Get from Bank
+- Copy of title deed
+- Encumbrance certificate (from bank)
+- Possession letter
+- NOC from bank
+- Sale certificate (after winning auction)
+
+## Red Flags to Watch For
+
+| Red Flag | Risk | Action |
+|----------|------|--------|
+| Missing title deed | Property may not be legally owned | Walk away |
+| Multiple owners without NOC | Future disputes | Get NOC from all owners |
+| Pending court case | Property may be seized | Check court records |
+| B-Khata (Bangalore) | Semi-legal status | Proceed with caution |
+| Unregistered sale | Not legally valid | Don't buy |
+| Property in "revenue land" | May not be convertible | Check with local authority |
+| Outstanding bank loan | Bank can seize property | Get bank NOC |
+
+## How to Get Title Verification Done
+
+### Option 1: Lawyer
+- Hire a real estate lawyer
+- Cost: ₹10,000-₹50,000
+- Most thorough option
+- Recommended for properties > ₹50L
+
+### Option 2: Title Search Company
+- Companies like TitleSearch, PropertyChecker
+- Cost: ₹5,000-₹15,000
+- Faster than lawyer
+- Good for initial screening
+
+### Option 3: DIY (Basic)
+- Get encumbrance certificate from sub-registrar
+- Check property tax receipts
+- Search court records online
+- Verify RERA registration
+- Cost: ₹500-₹2,000
+- Not as thorough as professional search
+
+## Cost of Title Verification
+
+| Method | Cost | Time | Thoroughness |
+|--------|------|------|-------------|
+| DIY | ₹500-2,000 | 1-2 days | Basic |
+| Title search company | ₹5,000-15,000 | 3-5 days | Good |
+| Real estate lawyer | ₹10,000-50,000 | 7-15 days | Excellent |
+
+## Key Takeaways
+
+1. **Never skip title verification** — it's the most important step
+2. **Get an encumbrance certificate** — it's the single most important document
+3. **Hire a lawyer** for properties > ₹50L
+4. **Check for litigation** — search court records
+5. **For SARFAESI properties** — get the bank's title search report
+6. **Keep all documents** — you'll need them for registration and resale
+
+---
+
+*Disclaimer: This article is for educational purposes only. Title verification requires professional legal expertise. Always consult a real estate lawyer. InvestNest is not a legal advisor.*
+    `,
+  },
   'emergency-fund': {
     title: 'Emergency Fund — How Much and Where to Keep It',
     category: 'Basics',

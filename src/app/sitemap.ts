@@ -19,6 +19,9 @@ const articleSlugs = [
   'gold-vs-real-estate',
   'nps-vs-ppf',
   'emergency-fund',
+  'e-auction-participation',
+  'best-cities-real-estate-2026',
+  'sarfaesi-title-check',
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

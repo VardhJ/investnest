@@ -113,6 +113,27 @@ const articles = [
     category: 'Basics',
     readTime: '5 min',
   },
+  {
+    title: 'How to Participate in E-Auctions in India',
+    slug: 'e-auction-participation',
+    description: 'Step-by-step guide to participating in bank e-auctions for seized properties.',
+    category: 'Real Estate',
+    readTime: '8 min',
+  },
+  {
+    title: 'Best Cities for Real Estate Investment (2026)',
+    slug: 'best-cities-real-estate-2026',
+    description: 'Top 10 cities for real estate investment in India based on yields and appreciation.',
+    category: 'Real Estate',
+    readTime: '7 min',
+  },
+  {
+    title: 'How to Check Property Title Before Buying',
+    slug: 'sarfaesi-title-check',
+    description: 'Complete checklist for property title verification — essential for SARFAESI buyers.',
+    category: 'Real Estate',
+    readTime: '9 min',
+  },
 ];
 
 export default function LearnPage() {
