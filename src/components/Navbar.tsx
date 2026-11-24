@@ -27,9 +27,14 @@ export default function Navbar() {
               Calculator
             </Link>
             {user && (
-              <Link href="/watchlist" className="text-gray-700 hover:text-blue-600 font-medium transition">
-                Watchlist
-              </Link>
+              <>
+                <Link href="/watchlist" className="text-gray-700 hover:text-blue-600 font-medium transition">
+                  Watchlist
+                </Link>
+                <Link href="/alerts" className="text-gray-700 hover:text-blue-600 font-medium transition">
+                  Alerts
+                </Link>
+              </>
             )}
             {isAdmin && (
               <Link href="/admin" className="text-orange-600 hover:text-orange-700 font-medium transition">

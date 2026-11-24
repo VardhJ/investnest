@@ -1342,6 +1342,170 @@ Most financial planners recommend:
 *Disclaimer: This article is for educational purposes only. Returns are historical and not guaranteed. Please consult a financial advisor. InvestNest is not a financial advisor.*
     `,
   },
+  'nps-vs-ppf': {
+    title: 'NPS vs PPF — Which is Better for Retirement?',
+    category: 'Retirement',
+    readTime: '7 min',
+    content: `
+## NPS vs PPF — The Retirement Dilemma
+
+Both NPS (National Pension System) and PPF (Public Provident Fund) are government-backed retirement savings schemes. But they serve different purposes and have different rules.
+
+## Key Differences
+
+| Feature | NPS | PPF |
+|---------|-----|-----|
+| Returns | 8-10% (market-linked) | 7.1% (fixed, revised quarterly) |
+| Risk | Medium (equity + debt) | Very Low (government guaranteed) |
+| Lock-in | Until age 60 | 15 years (extendable) |
+| Tax benefit | 80C + 80CCD(1B) = ₹2L | 80C = ₹1.5L |
+| Withdrawal | 60% lump sum, 40% annuity | Full amount at maturity |
+| Minimum | ₹1,000/year | ₹500/year |
+| Maximum | No limit | ₹1.5L/year |
+
+## NPS Deep Dive
+
+### What is NPS?
+NPS is a market-linked pension scheme regulated by PFRDA. Your money is invested in equity, corporate bonds, and government securities based on your chosen allocation.
+
+### Types of NPS Accounts
+- **Tier I:** Retirement account (locked until 60, tax benefits)
+- **Tier II:** Voluntary savings (no lock-in, no tax benefits)
+
+### NPS Fund Options
+| Option | Equity | Corporate Bonds | Govt Securities |
+|--------|--------|----------------|-----------------|
+| Aggressive (LC75) | 75% | 10% | 15% |
+| Moderate (LC50) | 50% | 25% | 25% |
+| Conservative (LC25) | 25% | 35% | 40% |
+| Auto Choice | Age-based (reduces equity as you age) | | |
+
+### NPS Tax Benefits
+- **80C:** Up to ₹1.5L
+- **80CCD(1B):** Additional ₹50,000 (exclusive to NPS)
+- **Total:** Up to ₹2L per year
+- **At maturity:** 60% lump sum is tax-free, 40% annuity is taxable
+
+## PPF Deep Dive
+
+### What is PPF?
+PPF is a government-backed savings scheme with guaranteed returns and complete tax exemption (EEE status).
+
+### PPF Features
+- **Interest rate:** 7.1% (revised quarterly by government)
+- **Lock-in:** 15 years (can extend in 5-year blocks)
+- **Loan facility:** Available from year 3-6
+- **Partial withdrawal:** From year 7
+- **Tax:** Fully tax-free (EEE — Exempt, Exempt, Exempt)
+
+## NPS vs PPF: Who Should Choose What?
+
+### Choose NPS If:
+- You're in the 30% tax bracket (₹2L deduction saves ₹60,000/year in taxes)
+- You have 20+ years until retirement
+- You're comfortable with market-linked returns
+- You want higher returns (8-10% vs 7.1%)
+
+### Choose PPF If:
+- You want guaranteed, risk-free returns
+- You want complete tax exemption (EEE)
+- You have a 15-year time horizon
+- You're conservative and don't want market exposure
+
+### Choose Both If:
+- You have ₹2L+ to invest annually in retirement
+- You want the best of both worlds (guaranteed + market-linked)
+- You want maximum tax benefits
+
+## The Optimal Strategy
+
+| Your Situation | Recommendation |
+|---------------|----------------|
+| Age 25-35, high income | NPS (aggressive) + PPF |
+| Age 35-45, moderate income | NPS (moderate) + PPF |
+| Age 45-55, conservative | PPF only + NPS (conservative) |
+| Age 55+, near retirement | PPF + NPS (conservative) |
+
+---
+
+*Disclaimer: This article is for educational purposes only. Please consult a financial advisor. InvestNest is not a financial advisor.*
+    `,
+  },
+  'emergency-fund': {
+    title: 'Emergency Fund — How Much and Where to Keep It',
+    category: 'Basics',
+    readTime: '5 min',
+    content: `
+## What is an Emergency Fund?
+
+An emergency fund is money set aside for unexpected expenses — job loss, medical emergency, car repair, etc. It prevents you from going into debt or selling investments at a loss.
+
+## How Much Should You Save?
+
+| Situation | Recommended Fund |
+|-----------|-----------------|
+| Single, stable job | 3-4 months of expenses |
+| Married, single income | 6 months of expenses |
+| Self-employed/freelancer | 9-12 months of expenses |
+| Family with dependents | 6-9 months of expenses |
+
+**Example:** If your monthly expenses are ₹50,000, your emergency fund should be ₹3-6 lakhs.
+
+## Where to Keep Your Emergency Fund
+
+| Instrument | Returns | Liquidity | Safety |
+|-----------|---------|-----------|--------|
+| Savings Account | 3-4% | Instant | Very High |
+| Liquid Mutual Funds | 6-7% | 1 day | High |
+| Short-term FDs | 6-7% | Premature (penalty) | Very High |
+| Sweep-in FD | 6-7% | Instant (auto) | Very High |
+
+## Best Strategy: The 3-Tier Approach
+
+### Tier 1: Immediate (1 month expenses)
+- Keep in **savings account** (instant access)
+- Use for: small emergencies, daily expenses
+
+### Tier 2: Short-term (2-3 months expenses)
+- Keep in **liquid mutual funds** or **sweep-in FD**
+- Use for: job loss, medical bills
+
+### Tier 3: Backup (3-6 months expenses)
+- Keep in **short-term FDs** (3-6 month tenure)
+- Use for: extended emergencies
+
+## Common Mistakes
+
+1. **Not having one at all** — most common mistake
+2. **Keeping it in equity MFs** — too volatile for emergencies
+3. **Keeping it in PPF** — 15-year lock-in
+4. **Too much in savings account** — loses value to inflation
+5. **Using it for non-emergencies** — "I wanted to buy a phone" is not an emergency
+
+## How to Build Your Emergency Fund
+
+1. **Start small** — even ₹5,000/month is fine
+2. **Automate** — set up a SIP in a liquid fund
+3. **Use windfalls** — bonus, tax refund, gifts → add to fund
+4. **Don't invest it** — keep it safe and liquid
+5. **Review annually** — increase as expenses grow
+
+## Emergency Fund vs Insurance
+
+| | Emergency Fund | Insurance |
+|--|---------------|-----------|
+| Purpose | Cover expenses during crisis | Cover specific risks (health, life) |
+| Amount | 3-6 months expenses | Based on income and dependents |
+| Usage | Any emergency | Only covered events |
+| Returns | Low (3-7%) | None (pure protection) |
+
+**You need both.** Emergency fund for cash flow, insurance for catastrophic events.
+
+---
+
+*Disclaimer: This article is for educational purposes only. Please consult a financial advisor. InvestNest is not a financial advisor.*
+    `,
+  },
   'tax-on-investments': {
     title: 'Tax on Investments in India — Complete Guide (2026)',
     category: 'Basics',

@@ -92,6 +92,20 @@ const articles = [
     category: 'Investment Comparison',
     readTime: '7 min',
   },
+  {
+    title: 'NPS vs PPF — Which is Better for Retirement?',
+    slug: 'nps-vs-ppf',
+    description: 'Compare NPS and PPF for retirement planning — returns, tax benefits, and lock-in.',
+    category: 'Retirement',
+    readTime: '7 min',
+  },
+  {
+    title: 'Emergency Fund — How Much and Where to Keep It',
+    slug: 'emergency-fund',
+    description: 'Complete guide to building and maintaining an emergency fund.',
+    category: 'Basics',
+    readTime: '5 min',
+  },
 ];
 
 export default function LearnPage() {

@@ -16,6 +16,8 @@ const articleSlugs = [
   'e-auction-guide',
   'best-cities-real-estate',
   'gold-vs-real-estate',
+  'nps-vs-ppf',
+  'emergency-fund',
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
