@@ -38,7 +38,14 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
     const dealScore = calculateDealScore(property);
 
-    return NextResponse.json({ dealScore });
+    // Also fetch market value sources if available
+    const { data: mvSources } = await supabase
+      .from('market_value_sources')
+      .select('*')
+      .eq('property_id', id)
+      .eq('is_active', true);
+
+    return NextResponse.json({ dealScore, marketValueSources: mvSources || [] });
   } catch (e) {
     console.error('Deal score error:', e);
     return NextResponse.json({ error: 'Failed to calculate deal score' }, { status: 500 });

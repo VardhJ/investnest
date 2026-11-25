@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useAuth } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
@@ -204,9 +205,14 @@ export default function AdminPage() {
             <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Manual Auction Entry</h1>
             <p className="text-xs text-slate-500 mt-0.5">Authenticated: {user?.email}</p>
           </div>
-          <button onClick={signOut} className="text-xs font-semibold text-slate-500 hover:text-rose-600 transition">
-            Sign Out
-          </button>
+          <div className="flex items-center gap-3">
+            <Link href="/admin/analytics" className="text-xs font-semibold text-emerald-600 hover:text-emerald-700 transition">
+              Bank Analytics →
+            </Link>
+            <button onClick={signOut} className="text-xs font-semibold text-slate-500 hover:text-rose-600 transition">
+              Sign Out
+            </button>
+          </div>
         </div>
 
         {status && (

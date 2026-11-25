@@ -38,10 +38,18 @@ const BANK_SCORE: Record<string, number> = {
   'default': 60,
 };
 
+export interface MarketValueSource {
+  sourceName: string;
+  sourceUrl: string | null;
+  pricePerSqft: number;
+  methodology: string;
+}
+
 export interface DealScore {
   overall: number; // 0-100
   grade: 'A' | 'B' | 'C' | 'D' | 'F';
   label: string;
+  marketValueSource: MarketValueSource;
   components: {
     discount: number;      // 0-30
     location: number;      // 0-25
@@ -203,6 +211,14 @@ export function calculateDealScore(property: {
     recommendations.push('Budget 5-10% of purchase price for furnishing/renovation');
   }
 
+  // Market value source info
+  const marketValueSource: MarketValueSource = {
+    sourceName: 'City Average (IBAPI + Market Data)',
+    sourceUrl: null,
+    pricePerSqft,
+    methodology: `Estimated using ${cityKey} average price of ₹${pricePerSqft.toLocaleString('en-IN')}/sq ft × estimated area of ${estimatedArea} sq ft. Based on 2026 market averages for ${property.city || 'the city'}.`,
+  };
+
   // Calculate overall score
   const overall = components.discount + components.location + components.propertyType +
                   components.size + components.emd + components.bank;
@@ -237,6 +253,7 @@ export function calculateDealScore(property: {
     overall,
     grade,
     label,
+    marketValueSource,
     components,
     roi: {
       estimatedMarketValue,

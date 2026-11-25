@@ -319,6 +319,9 @@ export default function PropertyDetailPage() {
             )}
 
             <div className="mt-4 pt-3 border-t border-slate-200/80 text-xs text-slate-500">
+              <strong>Methodology:</strong> {dealScore.marketValueSource?.methodology}
+            </div>
+            <div className="mt-2 text-xs text-slate-500">
               <strong>Disclaimer:</strong> AI-generated estimate based on city averages. Actual market values may vary. Always verify independently.
             </div>
           </div>
