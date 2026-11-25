@@ -60,7 +60,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['Returns capped at 12%', 'Platform fees up to 4%'],
     bestFor: 'Beginner investors, small-ticket lending',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'LenDenClub website + RBI NBFC list (Sept 2026)',
   },
   {
@@ -88,7 +88,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['Higher minimum (₹1,000)', '2% transaction fee', 'Medium-high risk'],
     bestFor: 'Experienced investors, risk-graded lending',
     riskLevel: 4,
-    icon: '🤝',
+    icon: '',
     dataSource: 'Faircent website + RBI NBFC list (Sept 2026)',
   },
   {
@@ -116,7 +116,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['High minimum (₹25,000)', 'Higher risk profile'],
     bestFor: 'High-return seekers, SME lending',
     riskLevel: 4,
-    icon: '🤝',
+    icon: '',
     dataSource: 'Lendbox website + RBI NBFC list (Sept 2026)',
   },
   {
@@ -144,7 +144,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['No auto-invest', 'No mobile app', 'Higher advertised returns (verify actual)'],
     bestFor: 'Balanced investors, short-term lending',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RupeeCircle website + RBI NBFC list (Sept 2026)',
   },
   {
@@ -172,7 +172,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['Lower returns (8-12%)', 'High minimum (₹50,000)', 'No auto-invest'],
     bestFor: 'Conservative investors, salaried borrower exposure',
     riskLevel: 2,
-    icon: '🤝',
+    icon: '',
     dataSource: 'Finzy website + RBI NBFC list (Sept 2026)',
   },
   {
@@ -201,7 +201,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['No mobile app', 'Fees not disclosed'],
     bestFor: 'Low-NPA investors, women empowerment focus',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'IndiaP2P website + RBI NBFC list (Sept 2026)',
   },
   {
@@ -229,7 +229,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['No auto-invest', 'No mobile app', 'Higher risk'],
     bestFor: 'Liquidity seekers, higher return seekers',
     riskLevel: 4,
-    icon: '🤝',
+    icon: '',
     dataSource: 'i2iFunding website + RBI NBFC list (Sept 2026)',
   },
   {
@@ -257,7 +257,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['Limited public data', 'No mobile app'],
     bestFor: 'Short-term lenders',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026) + InvestKraft comparison',
   },
   {
@@ -285,7 +285,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['Limited public data'],
     bestFor: 'Transparency-focused investors',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026) + InvestKraft comparison',
   },
   {
@@ -313,7 +313,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['Limited public data'],
     bestFor: 'Business lending',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
   {
@@ -341,7 +341,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['Lower returns', 'Limited scale'],
     bestFor: 'Social impact investors',
     riskLevel: 2,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
   {
@@ -369,7 +369,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['Only for CRED users', 'Lower returns (9-12%)'],
     bestFor: 'CRED users with good credit scores',
     riskLevel: 2,
-    icon: '🤝',
+    icon: '',
     dataSource: 'CRED website + RBI NBFC list (Sept 2026)',
   },
   {
@@ -397,7 +397,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['Only via Mobikwik app', 'Shorter tenure (3-24 months)'],
     bestFor: 'Small investors, app-based lending',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'Mobikwik website + RBI NBFC list (Sept 2026)',
   },
   {
@@ -425,7 +425,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['Limited track record', 'Lower max loan (₹3L)'],
     bestFor: 'New platform seekers',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026) + InvestKraft',
   },
   {
@@ -453,7 +453,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['Limited P2P-specific data'],
     bestFor: '5Paisa users',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
   {
@@ -481,7 +481,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['Limited public data'],
     bestFor: 'P2P lending seekers',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
   {
@@ -509,7 +509,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['Limited public data'],
     bestFor: 'P2P lending seekers',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
   {
@@ -537,7 +537,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['Limited public data'],
     bestFor: 'P2P lending seekers',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
   {
@@ -565,7 +565,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['Limited public data'],
     bestFor: 'P2P lending seekers',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
   {
@@ -593,7 +593,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['Limited public data'],
     bestFor: 'P2P lending seekers',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
   {
@@ -621,7 +621,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['No public website found', 'Limited data'],
     bestFor: 'Unknown',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
   {
@@ -649,7 +649,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['No public website found', 'Limited data'],
     bestFor: 'Unknown',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
   {
@@ -677,7 +677,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['No public website found', 'Limited data'],
     bestFor: 'Unknown',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
   {
@@ -705,7 +705,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['No public website found', 'Limited data'],
     bestFor: 'Unknown',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
   {
@@ -733,7 +733,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['No public website found', 'Limited data'],
     bestFor: 'Unknown',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
   {
@@ -761,7 +761,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['No public website found', 'Limited data'],
     bestFor: 'Unknown',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
   {
@@ -789,7 +789,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['No public website found', 'Limited data'],
     bestFor: 'Unknown',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
   {
@@ -817,7 +817,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['No public website found', 'Limited data'],
     bestFor: 'Unknown',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
   {
@@ -845,7 +845,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['No public website found', 'Limited data'],
     bestFor: 'Unknown',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
   {
@@ -873,7 +873,7 @@ export const p2pPlatforms: P2PPlatform[] = [
     cons: ['No public website found', 'Limited data'],
     bestFor: 'Unknown',
     riskLevel: 3,
-    icon: '🤝',
+    icon: '',
     dataSource: 'RBI NBFC list (Sept 2026)',
   },
 ];

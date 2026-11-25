@@ -194,7 +194,7 @@ export default function PropertiesPage() {
                     : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                 }`}
               >
-                {showNewOnly ? '✓ New (7 days)' : 'New (7 days)'}
+                {showNewOnly ? ' New (7 days)' : 'New (7 days)'}
               </button>
             </div>
 

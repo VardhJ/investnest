@@ -217,7 +217,7 @@ export default function P2PPlatformsPage() {
                   <ul className="text-xs text-slate-600 space-y-0.5">
                     {platform.pros.slice(0, 3).map((pro, i) => (
                       <li key={i} className="flex items-start gap-1">
-                        <span className="text-emerald-500">✓</span> {pro}
+                        <span className="text-emerald-500"></span> {pro}
                       </li>
                     ))}
                   </ul>
@@ -230,7 +230,7 @@ export default function P2PPlatformsPage() {
                   <ul className="text-xs text-slate-600 space-y-0.5">
                     {platform.cons.slice(0, 2).map((con, i) => (
                       <li key={i} className="flex items-start gap-1">
-                        <span className="text-red-500">✗</span> {con}
+                        <span className="text-red-500"></span> {con}
                       </li>
                     ))}
                   </ul>

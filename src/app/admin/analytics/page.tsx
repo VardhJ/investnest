@@ -37,7 +37,7 @@ export default function AdminAnalyticsPage() {
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Access Denied</h1>
           <p className="text-gray-600 mb-4">You do not have admin access.</p>
-          <Link href="/" className="text-blue-600 hover:underline">← Go Home</Link>
+          <Link href="/" className="text-blue-600 hover:underline">Go Home</Link>
         </div>
       </div>
     );

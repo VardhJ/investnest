@@ -547,19 +547,19 @@ You need a demat account with any broker (Zerodha, Groww, ICICI Direct, etc.)
 | Capital gains (LTCG) | 10% above ₹1L (if held >1 year) |
 
 ## Pros of REITs
-- ✅ Low minimum investment (₹300-400)
-- ✅ High liquidity (trade on exchange anytime)
-- ✅ Professional management
-- ✅ Diversified portfolio of properties
-- ✅ Tax-efficient dividends
-- ✅ Transparent (SEBI-regulated, listed)
+-  Low minimum investment (₹300-400)
+-  High liquidity (trade on exchange anytime)
+-  Professional management
+-  Diversified portfolio of properties
+-  Tax-efficient dividends
+-  Transparent (SEBI-regulated, listed)
 
 ## Cons of REITs
-- ❌ Limited to commercial real estate (no residential)
-- ❌ Only 3 REITs in India (limited choices)
-- ❌ Low trading volume (can be hard to sell large quantities)
-- ❌ Market volatility (units fluctuate like stocks)
-- ❌ No control over property selection
+-  Limited to commercial real estate (no residential)
+-  Only 3 REITs in India (limited choices)
+-  Low trading volume (can be hard to sell large quantities)
+-  Market volatility (units fluctuate like stocks)
+-  No control over property selection
 
 ## REITs vs Direct Real Estate
 
@@ -644,18 +644,18 @@ P2P platforms in India are regulated by the **RBI (Reserve Bank of India)** unde
 | RupeeCircle | ₹5,000 | 12-15% | Yes |
 
 ## Pros of P2P Lending
-- ✅ Higher returns than FDs (10-14% vs 6-8%)
-- ✅ Low minimum investment (₹5,000)
-- ✅ Monthly income (EMI payments)
-- ✅ Diversification across multiple borrowers
-- ✅ RBI-regulated (safer than unregulated lending)
+-  Higher returns than FDs (10-14% vs 6-8%)
+-  Low minimum investment (₹5,000)
+-  Monthly income (EMI payments)
+-  Diversification across multiple borrowers
+-  RBI-regulated (safer than unregulated lending)
 
 ## Cons of P2P Lending
-- ❌ Credit risk (borrowers can default)
-- ❌ No DICGC insurance (unlike bank FDs)
-- ❌ Illiquid (can't withdraw before loan tenure ends)
-- ❌ Tax inefficient (interest taxed at slab rate)
-- ❌ Platform risk (if platform shuts down)
+-  Credit risk (borrowers can default)
+-  No DICGC insurance (unlike bank FDs)
+-  Illiquid (can't withdraw before loan tenure ends)
+-  Tax inefficient (interest taxed at slab rate)
+-  Platform risk (if platform shuts down)
 
 ## P2P vs Fixed Deposits
 
@@ -732,18 +732,18 @@ Invoice discounting is a way for businesses to get early payment on their invoic
 | TradeCred | ₹50,000 | 10-12% | Various |
 
 ## Pros
-- ✅ Short tenure (30-90 days) - quick returns
-- ✅ Higher than FD returns
-- ✅ Relatively lower risk (corporate buyers usually pay)
-- ✅ Predictable cash flows
-- ✅ Diversification across multiple invoices
+-  Short tenure (30-90 days) - quick returns
+-  Higher than FD returns
+-  Relatively lower risk (corporate buyers usually pay)
+-  Predictable cash flows
+-  Diversification across multiple invoices
 
 ## Cons
-- ❌ Buyer default risk (if buyer doesn't pay)
-- ❌ Platform risk (if platform shuts down)
-- ❌ Minimum ₹1L (not for small investors)
-- ❌ Not widely available (limited invoices)
-- ❌ Tax inefficient (interest taxed at slab rate)
+-  Buyer default risk (if buyer doesn't pay)
+-  Platform risk (if platform shuts down)
+-  Minimum ₹1L (not for small investors)
+-  Not widely available (limited invoices)
+-  Tax inefficient (interest taxed at slab rate)
 
 ## Invoice Discounting vs P2P Lending
 
@@ -798,17 +798,17 @@ A fixed deposit is a bank account where you deposit money for a fixed period at 
 | Small Finance Banks | 8.0-9.0% | 8.0-8.5% | 7.5-8.0% |
 
 ### Pros of FDs
-- ✅ Guaranteed returns (no market risk)
-- ✅ DICGC insurance (up to ₹5L)
-- ✅ Simple and predictable
-- ✅ Loan against FD available
-- ✅ Senior citizen rates (0.5% extra)
+-  Guaranteed returns (no market risk)
+-  DICGC insurance (up to ₹5L)
+-  Simple and predictable
+-  Loan against FD available
+-  Senior citizen rates (0.5% extra)
 
 ### Cons of FDs
-- ❌ Low returns (often below inflation)
-- ❌ Tax inefficient (interest taxed at slab rate, TDS at 10%)
-- ❌ Premature withdrawal penalty
-- ❌ No growth potential beyond fixed rate
+-  Low returns (often below inflation)
+-  Tax inefficient (interest taxed at slab rate, TDS at 10%)
+-  Premature withdrawal penalty
+-  No growth potential beyond fixed rate
 
 ## Mutual Funds (MFs)
 
@@ -825,18 +825,18 @@ A mutual fund pools money from many investors and invests in stocks, bonds, or o
 | Index Funds | Medium | 10-12% | Low-cost passive |
 
 ### Pros of MFs
-- ✅ Higher return potential (equity funds)
-- ✅ Professional management
-- ✅ SIP option (start with ₹500/month)
-- ✅ Diversification
-- ✅ Tax-efficient (LTCG at 10% vs slab rate for FDs)
-- ✅ Liquid (redeem anytime, except ELSS)
+-  Higher return potential (equity funds)
+-  Professional management
+-  SIP option (start with ₹500/month)
+-  Diversification
+-  Tax-efficient (LTCG at 10% vs slab rate for FDs)
+-  Liquid (redeem anytime, except ELSS)
 
 ### Cons of MFs
-- ❌ Market risk (no guaranteed returns)
-- ❌ Expense ratio (0.5-2% annual fee)
-- ❌ Requires some knowledge
-- ❌ Short-term volatility can be stressful
+-  Market risk (no guaranteed returns)
+-  Expense ratio (0.5-2% annual fee)
+-  Requires some knowledge
+-  Short-term volatility can be stressful
 
 ## Head-to-Head Comparison
 
@@ -972,21 +972,21 @@ Buying a property is the biggest financial decision most Indians make. A wrong d
 - [ ] Bank NOC (if mortgaged)
 
 ### 9. Red Flags to Watch For
-- 🚩 Price significantly below market (could be fraud)
-- 🚩 Seller in a hurry (pressure tactics)
-- 🚩 Missing documents (always get originals)
-- 🚩 Verbal promises (get everything in writing)
-- 🚩 Cash-only deals (avoid, always use bank transfer)
-- 🚩 Multiple owners (need NOC from all)
-- 🚩 Pending litigation (check court records)
+- Price significantly below market (could be fraud)
+- Seller in a hurry (pressure tactics)
+- Missing documents (always get originals)
+- Verbal promises (get everything in writing)
+- Cash-only deals (avoid, always use bank transfer)
+- Multiple owners (need NOC from all)
+- Pending litigation (check court records)
 
 ### 10. SARFAESI-Specific Checks
-- 🚩 **Title search** - is the property free of encumbrances?
-- 🚩 **Possession** - is the property vacant?
-- 🚩 **Outstanding dues** - maintenance, taxes, utility bills
-- 🚩 **Physical condition** - banks don't repair before auction
-- 🚩 **EMD forfeiture** - if you win but don't pay, you lose EMD
-- 🚩 **Timeline** - payment usually required within 15-30 days
+- **Title search** - is the property free of encumbrances?
+- **Possession** - is the property vacant?
+- **Outstanding dues** - maintenance, taxes, utility bills
+- **Physical condition** - banks don't repair before auction
+- **EMD forfeiture** - if you win but don't pay, you lose EMD
+- **Timeline** - payment usually required within 15-30 days
 
 ## Property Valuation Methods
 
@@ -1488,12 +1488,12 @@ An e-auction is an online auction where properties, assets, or goods are sold to
 
 ## Common Mistakes to Avoid
 
-- ❌ Not reading the auction notice fully
-- ❌ Bidding without visiting the property
-- ❌ Not having funds ready for payment
-- ❌ Ignoring outstanding dues (maintenance, taxes)
-- ❌ Not checking if the property is occupied
-- ❌ Bidding above your budget in excitement
+-  Not reading the auction notice fully
+-  Bidding without visiting the property
+-  Not having funds ready for payment
+-  Ignoring outstanding dues (maintenance, taxes)
+-  Not checking if the property is occupied
+-  Bidding above your budget in excitement
 
 ## E-Auction vs Regular Auction
 
@@ -1639,37 +1639,37 @@ Gold and real estate are the two most popular investment choices in India. Every
 ## Gold: Pros and Cons
 
 ### Pros
-- ✅ Highly liquid (sell anytime)
-- ✅ No maintenance cost (SGBs)
-- ✅ Inflation hedge
-- ✅ Cultural value
-- ✅ SGBs give 2.5% interest + tax-free at maturity
-- ✅ No tenant/occupancy risk
+-  Highly liquid (sell anytime)
+-  No maintenance cost (SGBs)
+-  Inflation hedge
+-  Cultural value
+-  SGBs give 2.5% interest + tax-free at maturity
+-  No tenant/occupancy risk
 
 ### Cons
-- ❌ No passive income (except SGBs)
-- ❌ Storage cost (physical gold)
-- ❌ Making charges (jewelry: 10-25%)
-- ❌ No leverage (can't take loan against gold easily)
-- ❌ Emotional attachment (hard to sell jewelry)
+-  No passive income (except SGBs)
+-  Storage cost (physical gold)
+-  Making charges (jewelry: 10-25%)
+-  No leverage (can't take loan against gold easily)
+-  Emotional attachment (hard to sell jewelry)
 
 ## Real Estate: Pros and Cons
 
 ### Pros
-- ✅ Rental income (passive income)
-- ✅ Leverage (home loan at 8.5%)
-- ✅ Tangible asset
-- ✅ Tax benefits (80C, 24b)
-- ✅ Inflation hedge
-- ✅ Can be used (live in it)
+-  Rental income (passive income)
+-  Leverage (home loan at 8.5%)
+-  Tangible asset
+-  Tax benefits (80C, 24b)
+-  Inflation hedge
+-  Can be used (live in it)
 
 ### Cons
-- ❌ Very illiquid (takes months to sell)
-- ❌ High transaction costs (6-10%)
-- ❌ Maintenance and repair costs
-- ❌ Tenant risk (vacancy, default)
-- ❌ Requires large capital
-- ❌ Location risk
+-  Very illiquid (takes months to sell)
+-  High transaction costs (6-10%)
+-  Maintenance and repair costs
+-  Tenant risk (vacancy, default)
+-  Requires large capital
+-  Location risk
 
 ## When to Choose Gold
 

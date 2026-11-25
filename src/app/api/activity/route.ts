@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
     (newProps || []).forEach(p => {
       activities.push({
         type: 'new',
-        icon: '🆕',
+        icon: '',
         title: p.title,
         bank: p.bank,
         city: p.city,
@@ -62,7 +62,7 @@ export async function GET(request: NextRequest) {
     (soldProps || []).forEach(p => {
       activities.push({
         type: 'sold',
-        icon: '✅',
+        icon: '',
         title: p.title,
         bank: p.bank,
         city: p.city,
@@ -80,7 +80,7 @@ export async function GET(request: NextRequest) {
       const prev = history[history.length - 2]?.price;
       activities.push({
         type: 'price_change',
-        icon: last < prev ? '📉' : '📈',
+        icon: last < prev ? '' : '',
         title: p.title,
         bank: p.bank,
         city: p.city,
