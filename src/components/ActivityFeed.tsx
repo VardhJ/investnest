@@ -17,10 +17,10 @@ interface Activity {
   color: string;
 }
 
-const colorClasses: Record<string, string> = {
-  emerald: 'bg-emerald-50 border-emerald-200 text-emerald-700',
-  slate: 'bg-slate-50 border-slate-200 text-slate-700',
-  amber: 'bg-amber-50 border-amber-200 text-amber-700',
+const labelColors: Record<string, string> = {
+  emerald: 'bg-emerald-100 text-emerald-700 border-emerald-200',
+  slate: 'bg-slate-100 text-slate-700 border-slate-200',
+  amber: 'bg-amber-100 text-amber-700 border-amber-200',
 };
 
 const formatPrice = (price: number) => {
@@ -42,7 +42,7 @@ const timeAgo = (date: string) => {
   return 'Just now';
 };
 
-export default function ActivityFeed({ limit = 10 }: { limit?: number }) {
+export default function ActivityFeed({ limit = 4 }: { limit?: number }) {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({ newCount: 0, soldCount: 0, priceChangeCount: 0 });
@@ -64,11 +64,12 @@ export default function ActivityFeed({ limit = 10 }: { limit?: number }) {
 
   if (loading) {
     return (
-      <div className="space-y-3">
-        {[...Array(5)].map((_, i) => (
-          <div key={i} className="bg-white rounded-xl p-4 border border-slate-200/80 animate-pulse">
-            <div className="h-4 bg-slate-200 rounded w-3/4 mb-2"></div>
-            <div className="h-3 bg-slate-100 rounded w-1/2"></div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="bg-white rounded-2xl border border-slate-200/80 p-5 animate-pulse">
+            <div className="h-4 bg-slate-200 rounded w-3/4 mb-3"></div>
+            <div className="h-3 bg-slate-100 rounded w-1/2 mb-2"></div>
+            <div className="h-5 bg-slate-100 rounded w-1/3"></div>
           </div>
         ))}
       </div>
@@ -86,49 +87,59 @@ export default function ActivityFeed({ limit = 10 }: { limit?: number }) {
   return (
     <div>
       {/* Stats Bar */}
-      <div className="flex flex-wrap gap-3 mb-6">
+      <div className="flex flex-wrap gap-2 mb-6">
         {stats.newCount > 0 && (
-          <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">
-            🆕 {stats.newCount} New
+          <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">
+            New {stats.newCount}
           </span>
         )}
         {stats.soldCount > 0 && (
-          <span className="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700">
-            ✅ {stats.soldCount} Likely Sold
+          <span className="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
+            Likely Sold {stats.soldCount}
           </span>
         )}
         {stats.priceChangeCount > 0 && (
-          <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">
-            📊 {stats.priceChangeCount} Price Changes
+          <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700 border border-amber-200">
+            Price Changes {stats.priceChangeCount}
           </span>
         )}
       </div>
 
-      {/* Activity Items */}
-      <div className="space-y-3">
+      {/* Activity Items - Grid matching property cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {activities.map((activity, i) => (
           <div
             key={i}
-            className={`flex items-start gap-3 p-4 rounded-xl border ${colorClasses[activity.color]} transition-all hover:shadow-sm`}
+            className="bg-white rounded-2xl border border-slate-200/80 p-5 hover:border-emerald-300 hover:shadow-md transition-all flex flex-col"
           >
-            <span className="text-xl shrink-0">{activity.icon}</span>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-bold uppercase tracking-wider">{activity.label}</span>
-                <span className="text-xs text-slate-400">{timeAgo(activity.date)}</span>
-              </div>
-              <div className="text-sm font-semibold text-slate-900 line-clamp-1">{activity.title}</div>
-              <div className="text-xs text-slate-500 mt-0.5">
-                {activity.bank} • {activity.city}, {activity.state}
-              </div>
-              <div className="text-sm font-bold text-slate-900 mt-1">
+            {/* Label */}
+            <div className="flex items-center justify-between mb-3">
+              <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border ${labelColors[activity.color]}`}>
+                {activity.label}
+              </span>
+              <span className="text-[10px] text-slate-400 font-medium">{timeAgo(activity.date)}</span>
+            </div>
+
+            {/* Title */}
+            <h3 className="font-bold text-slate-900 text-sm mb-2 line-clamp-2 flex-1">
+              {activity.title}
+            </h3>
+
+            {/* Bank & Location */}
+            <div className="text-xs text-slate-500 mb-3">
+              {activity.bank} • {activity.city}
+            </div>
+
+            {/* Price */}
+            <div className="flex items-center justify-between">
+              <span className="text-lg font-extrabold text-slate-900">
                 {formatPrice(activity.price)}
-                {activity.oldPrice && activity.oldPrice !== activity.price && (
-                  <span className="text-xs text-slate-400 line-through ml-2">
-                    {formatPrice(activity.oldPrice)}
-                  </span>
-                )}
-              </div>
+              </span>
+              {activity.oldPrice && activity.oldPrice !== activity.price && (
+                <span className="text-xs text-slate-400 line-through">
+                  {formatPrice(activity.oldPrice)}
+                </span>
+              )}
             </div>
           </div>
         ))}

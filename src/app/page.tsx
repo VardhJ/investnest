@@ -103,7 +103,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <ActivityFeed limit={8} />
+          <ActivityFeed limit={4} />
         </div>
       </section>
 
