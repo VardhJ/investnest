@@ -46,6 +46,13 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
+    if (!body.property_id || typeof body.property_id !== 'string') {
+      return NextResponse.json({ error: 'Invalid property_id' }, { status: 400 });
+    }
+    // Validate UUID format
+    if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(body.property_id)) {
+      return NextResponse.json({ error: 'Invalid property_id format' }, { status: 400 });
+    }
     const { data, error } = await supabase
       .from('watchlist')
       .insert({ user_id: user.id, property_id: body.property_id })

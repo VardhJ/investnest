@@ -21,14 +21,29 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
+    // Validate UUID format
+    if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(body.property_id)) {
+      return NextResponse.json({ error: 'Invalid property_id format' }, { status: 400 });
+    }
+
+    // Validate price
+    if (typeof body.listed_price !== 'number' || body.listed_price < 0 || body.listed_price > 100000000000) {
+      return NextResponse.json({ error: 'Invalid listed_price' }, { status: 400 });
+    }
+
+    // Sanitize source fields
+    const sourceName = body.source_name ? String(body.source_name).slice(0, 100) : 'User Suggestion';
+    const sourceUrl = body.source_url ? String(body.source_url).slice(0, 500) : null;
+    const methodology = body.methodology ? String(body.methodology).slice(0, 500) : 'User-submitted';
+
     const { data, error } = await supabase
       .from('market_value_sources')
       .insert({
         property_id: body.property_id,
-        source_name: body.source_name || 'User Suggestion',
-        source_url: body.source_url || null,
+        source_name: sourceName,
+        source_url: sourceUrl,
         listed_price: body.listed_price,
-        methodology: body.methodology || 'User-submitted',
+        methodology: methodology,
         is_active: true,
       })
       .select()

@@ -47,11 +47,24 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
+    // Validate inputs
+    if (body.city && typeof body.city !== 'string') {
+      return NextResponse.json({ error: 'Invalid city' }, { status: 400 });
+    }
+    if (body.property_type && !['residential', 'commercial', 'industrial', 'land', 'vehicle'].includes(body.property_type)) {
+      return NextResponse.json({ error: 'Invalid property_type' }, { status: 400 });
+    }
+    if (body.max_price && (isNaN(body.max_price) || body.max_price < 0 || body.max_price > 10000000000)) {
+      return NextResponse.json({ error: 'Invalid max_price' }, { status: 400 });
+    }
+    if (body.min_discount && (isNaN(body.min_discount) || body.min_discount < 0 || body.min_discount > 100)) {
+      return NextResponse.json({ error: 'Invalid min_discount' }, { status: 400 });
+    }
     const { data, error } = await supabase
       .from('alerts')
       .insert({
         user_id: user.id,
-        city: body.city || null,
+        city: body.city ? String(body.city).slice(0, 50) : null,
         property_type: body.property_type || null,
         max_price: body.max_price || null,
         min_discount: body.min_discount || null,

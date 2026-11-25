@@ -43,6 +43,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setIsAdmin(false);
       return;
     }
+    // Cache admin status in sessionStorage to avoid repeated DB calls
+    const cached = sessionStorage.getItem(`admin_${userId}`);
+    if (cached !== null) {
+      setIsAdmin(cached === 'true');
+      return;
+    }
     try {
       const { data, error } = await supabase
         .from('user_profiles')
@@ -51,12 +57,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         .single();
       
       if (error || !data) {
-        // Profile doesn't exist yet (trigger hasn't fired or RLS blocks)
         setIsAdmin(false);
+        sessionStorage.setItem(`admin_${userId}`, 'false');
         return;
       }
       
-      setIsAdmin(data.role === 'admin');
+      const isAdminUser = data.role === 'admin';
+      setIsAdmin(isAdminUser);
+      sessionStorage.setItem(`admin_${userId}`, String(isAdminUser));
     } catch {
       setIsAdmin(false);
     }
@@ -92,6 +100,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signOut = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session?.user?.id) {
+      sessionStorage.removeItem(`admin_${session.user.id}`);
+    }
     await supabase.auth.signOut();
     setIsAdmin(false);
   };

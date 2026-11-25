@@ -7,7 +7,10 @@ export const supabase: SupabaseClient = createClient(supabaseUrl, supabaseAnonKe
 
 // Server-side client with service role key
 export function getServiceSupabase() {
-  const serviceKey = process.env.SUPABASE_SERVICE_KEY || '';
+  const serviceKey = process.env.SUPABASE_SERVICE_KEY;
+  if (!serviceKey) {
+    throw new Error('SUPABASE_SERVICE_KEY is not configured');
+  }
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL || supabaseUrl;
-  return createClient(url, serviceKey || supabaseAnonKey);
+  return createClient(url, serviceKey);
 }
