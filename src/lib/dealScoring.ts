@@ -1,7 +1,7 @@
 // Deal Scoring Engine for SARFAESI Properties
 // Generates a 0-100 "Deal Score" and ROI estimates for auction properties
 
-// City-wise average price per sq ft (INR) — based on 2026 market data
+// City-wise average price per sq ft (INR) - based on 2026 market data
 const CITY_PRICE_PER_SQFT: Record<string, number> = {
   'Mumbai': 12000, 'Delhi': 8000, 'Bangalore': 7000, 'Bengaluru': 7000,
   'Hyderabad': 6000, 'Chennai': 6500, 'Kolkata': 5000, 'Pune': 6500,
@@ -124,7 +124,7 @@ export function calculateDealScore(property: {
     recommendations.push('Verify market value independently before bidding');
   }
   if (discountPct >= 30) {
-    recommendations.push('Excellent discount — strong investment opportunity');
+    recommendations.push('Excellent discount - strong investment opportunity');
   }
 
   // 2. Location Score (0-25 points)
@@ -135,7 +135,7 @@ export function calculateDealScore(property: {
 
   // Location-based risks
   if (tier === 3) {
-    risks.push('Tier 3 city — lower liquidity and appreciation potential');
+    risks.push('Tier 3 city - lower liquidity and appreciation potential');
   }
 
   // 3. Property Type Score (0-15 points)
@@ -164,10 +164,10 @@ export function calculateDealScore(property: {
     else components.size = 3;
   } else {
     components.size = 5; // Unknown, neutral
-    risks.push('Property area not specified — verify before bidding');
+    risks.push('Property area not specified - verify before bidding');
   }
 
-  // 5. EMD Score (0-10 points) — lower EMD % is better
+  // 5. EMD Score (0-10 points) - lower EMD % is better
   const emdPct = property.emd && reservePrice > 0 ? (property.emd / reservePrice) * 100 : 10;
   if (emdPct <= 5) components.emd = 10;
   else if (emdPct <= 8) components.emd = 8;
@@ -175,7 +175,7 @@ export function calculateDealScore(property: {
   else components.emd = 3;
 
   if (emdPct > 10) {
-    risks.push(`High EMD (${emdPct.toFixed(1)}% of reserve price) — significant capital locked`);
+    risks.push(`High EMD (${emdPct.toFixed(1)}% of reserve price) - significant capital locked`);
   }
 
   // 6. Bank Score (0-10 points)
@@ -184,20 +184,20 @@ export function calculateDealScore(property: {
   components.bank = Math.round(bankScore / 10);
 
   if (bankScore < 70) {
-    risks.push(`${property.bank} has lower reliability score — verify title carefully`);
+    risks.push(`${property.bank} has lower reliability score - verify title carefully`);
     recommendations.push('Get independent title verification for this bank');
   }
 
   // Additional risk checks
   if (property.constructionYear && property.constructionYear < 2010) {
-    risks.push(`Property is ${new Date().getFullYear() - property.constructionYear} years old — may need renovation`);
+    risks.push(`Property is ${new Date().getFullYear() - property.constructionYear} years old - may need renovation`);
   }
   if (property.possessionStatus === 'occupied') {
-    risks.push('Property is currently occupied — eviction may be required');
+    risks.push('Property is currently occupied - eviction may be required');
     recommendations.push('Factor in eviction costs and timeline (3-12 months)');
   }
   if (!property.possessionStatus) {
-    risks.push('Possession status unknown — verify if property is vacant');
+    risks.push('Possession status unknown - verify if property is vacant');
   }
   if (property.furnishing === 'unfurnished' && property.propertyType === 'residential') {
     recommendations.push('Budget 5-10% of purchase price for furnishing/renovation');
@@ -225,7 +225,7 @@ export function calculateDealScore(property: {
 
   // Add general recommendations
   if (risks.length === 0) {
-    recommendations.push('Low risk profile — good investment candidate');
+    recommendations.push('Low risk profile - good investment candidate');
   }
   if (overall >= 70) {
     recommendations.push('Consider bidding up to 10-15% above reserve price');

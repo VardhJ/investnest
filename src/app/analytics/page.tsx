@@ -144,7 +144,7 @@ export default function AnalyticsPage() {
         {/* Best Deals Section */}
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold text-slate-900">Best Deals — Lowest Reserve Prices</h2>
+            <h2 className="text-xl font-bold text-slate-900">Best Deals - Lowest Reserve Prices</h2>
             <Link href="/properties?sortBy=price" className="text-sm font-semibold text-emerald-700 hover:text-emerald-800">
               View all →
             </Link>
@@ -172,7 +172,7 @@ export default function AnalyticsPage() {
 
         {/* Bank Comparison */}
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80">
-          <h2 className="text-xl font-bold text-slate-900 mb-6">Bank Comparison — Auction Activity</h2>
+          <h2 className="text-xl font-bold text-slate-900 mb-6">Bank Comparison - Auction Activity</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
@@ -206,7 +206,7 @@ export default function AnalyticsPage() {
 
         {/* City Heatmap */}
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80">
-          <h2 className="text-xl font-bold text-slate-900 mb-6">City Heatmap — Property Concentration</h2>
+          <h2 className="text-xl font-bold text-slate-900 mb-6">City Heatmap - Property Concentration</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
             {data.cityDistribution.map((city) => {
               const intensity = city.count / maxCityCount;
@@ -258,7 +258,7 @@ export default function AnalyticsPage() {
 
         {/* State Distribution */}
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80">
-          <h2 className="text-xl font-bold text-slate-900 mb-6">Geographic Distribution — Top States</h2>
+          <h2 className="text-xl font-bold text-slate-900 mb-6">Geographic Distribution - Top States</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
             {data.stateDistribution.map((state) => (
               <div

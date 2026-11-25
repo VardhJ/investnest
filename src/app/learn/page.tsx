@@ -2,14 +2,14 @@ import Link from 'next/link';
 
 const articles = [
   {
-    title: 'How Our AI Deal Score Works — Methodology Explained',
+    title: 'How Our AI Deal Score Works - Methodology Explained',
     slug: 'deal-score-logic',
     description: 'Understand how InvestNest calculates deal scores, ROI estimates, and risk factors for properties.',
     category: 'InvestNest',
     readTime: '6 min',
   },
   {
-    title: 'MSTC E-Auction — Complete Buyer Registration & Bidding Guide',
+    title: 'MSTC E-Auction - Complete Buyer Registration & Bidding Guide',
     slug: 'mstc-e-auction-guide',
     description: 'Step-by-step institutional guide to registering and bidding on the official MSTC e-auction portal for bank-seized properties.',
     category: 'Bank Auctions',
@@ -75,21 +75,21 @@ const articles = [
     readTime: '9 min',
   },
   {
-    title: 'Gold vs Real Estate — Which is Better for Long-Term Wealth?',
+    title: 'Gold vs Real Estate - Which is Better for Long-Term Wealth?',
     slug: 'gold-vs-real-estate',
     description: 'Historical yield analysis, liquidity comparison, and portfolio allocation principles for physical vs paper assets.',
     category: 'Strategy',
     readTime: '7 min',
   },
   {
-    title: 'NPS vs PPF — Retirement Planning Blueprint',
+    title: 'NPS vs PPF - Retirement Planning Blueprint',
     slug: 'nps-vs-ppf',
     description: 'Comparing Tier 1 National Pension Scheme and Public Provident Fund on tax exemptions (EEE status), lock-in, and yields.',
     category: 'Retirement',
     readTime: '7 min',
   },
   {
-    title: 'Emergency Fund — Sizing and Liquid Allocation',
+    title: 'Emergency Fund - Sizing and Liquid Allocation',
     slug: 'emergency-fund',
     description: 'How much liquidity to maintain in arbitrage funds and overnight instruments before exploring alternative illiquid yield.',
     category: 'Basics',

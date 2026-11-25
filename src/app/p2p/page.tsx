@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { p2pPlatforms } from '@/data/p2p-platforms';
 
 export const metadata = {
-  title: 'P2P Lending in India — Compare 28 RBI-Registered Platforms',
+  title: 'P2P Lending in India - Compare 28 RBI-Registered Platforms',
   description: 'Discover and compare all 28 RBI-registered P2P lending platforms in India. Returns, fees, risk levels, and more. Free comparison tool.',
 };
 
@@ -23,7 +23,7 @@ export default function P2PLandingPage() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]">
-              P2P Lending in India — Compare All RBI-Registered Platforms
+              P2P Lending in India - Compare All RBI-Registered Platforms
             </h1>
 
             <p className="mt-6 text-lg sm:text-xl text-slate-300 leading-relaxed max-w-2xl">
@@ -81,11 +81,11 @@ export default function P2PLandingPage() {
             <p className="text-base text-slate-600 leading-relaxed mb-6">
               Peer-to-peer (P2P) lending connects individual lenders with borrowers through an online platform. 
               Instead of going to a bank, borrowers get loans directly from investors like you. 
-              You earn interest on the money you lend — typically 10-18% annually, much higher than FDs (6-8%).
+              You earn interest on the money you lend - typically 10-18% annually, much higher than FDs (6-8%).
             </p>
             <p className="text-base text-slate-600 leading-relaxed mb-6">
               All P2P platforms in India are regulated by the RBI under the NBFC-P2P framework. 
-              The platform is just an intermediary — it doesn't lend its own money. 
+              The platform is just an intermediary - it doesn't lend its own money. 
               Credit risk is borne by you (the lender), not the platform.
             </p>
             <div className="grid md:grid-cols-3 gap-4">

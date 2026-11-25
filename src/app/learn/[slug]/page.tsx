@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 
 const articles: Record<string, { title: string; category: string; readTime: string; content: string }> = {
   'mstc-e-auction-guide': {
-    title: 'MSTC E-Auction — Complete Buyer Registration & Bidding Guide',
+    title: 'MSTC E-Auction - Complete Buyer Registration & Bidding Guide',
     category: 'Real Estate',
     readTime: '12 min',
     content: `
@@ -16,10 +16,10 @@ MSTC (Metal Scrap Trade Corporation) is a Government of India enterprise that op
 ## Why MSTC Matters for Property Buyers
 
 - **All major banks** use MSTC for property auctions (SBI, PNB, BoB, Canara, Union, etc.)
-- **Transparent bidding** — all bids are visible in real-time
-- **Government-backed** — safer than private auctions
-- **Pan-India** — properties across all states
-- **No middlemen** — you bid directly with the bank
+- **Transparent bidding** - all bids are visible in real-time
+- **Government-backed** - safer than private auctions
+- **Pan-India** - properties across all states
+- **No middlemen** - you bid directly with the bank
 
 ## Step 1: Register as a Bidder on MSTC
 
@@ -117,11 +117,11 @@ MSTC (Metal Scrap Trade Corporation) is a Government of India enterprise that op
 7. The auction may extend if a bid is placed in the last few minutes (auto-extension)
 
 ### Bidding Strategy
-- **Start with the reserve price** — don't overbid initially
-- **Watch other bidders** — see how aggressive they are
-- **Bid in the last 15 minutes** — many bidders wait until the end
-- **Don't get emotional** — stick to your maximum bid
-- **Set a hard limit** — never exceed your budget
+- **Start with the reserve price** - don't overbid initially
+- **Watch other bidders** - see how aggressive they are
+- **Bid in the last 15 minutes** - many bidders wait until the end
+- **Don't get emotional** - stick to your maximum bid
+- **Set a hard limit** - never exceed your budget
 
 ### What Happens After Bidding
 - **If you win:** You're the highest bidder. The bank will contact you.
@@ -140,16 +140,16 @@ MSTC (Metal Scrap Trade Corporation) is a Government of India enterprise that op
 | Possession | After registration | Take physical possession |
 
 ### Documents You'll Receive
-1. **Sale Certificate** — proof of purchase from the bank
-2. **Possession Letter** — if property was occupied
-3. **NOC** — from bank confirming loan is closed
-4. **Original property documents** — title deed, etc.
+1. **Sale Certificate** - proof of purchase from the bank
+2. **Possession Letter** - if property was occupied
+3. **NOC** - from bank confirming loan is closed
+4. **Original property documents** - title deed, etc.
 
 ### Documents You Need to Submit
-1. **Payment proof** — bank transfer receipt for balance amount
-2. **KYC documents** — PAN, Aadhaar, address proof
-3. **Registration documents** — for sub-registrar
-4. **Stamp duty payment** — varies by state (5-8%)
+1. **Payment proof** - bank transfer receipt for balance amount
+2. **KYC documents** - PAN, Aadhaar, address proof
+3. **Registration documents** - for sub-registrar
+4. **Stamp duty payment** - varies by state (5-8%)
 
 ### Total Cost Breakdown (Example: ₹50L Property)
 
@@ -189,7 +189,7 @@ MSTC (Metal Scrap Trade Corporation) is a Government of India enterprise that op
 - **Cause:** Previous owner or tenant still living there
 - **Fix:** Bank is responsible for eviction. This can take 3-12 months. Factor this into your decision.
 
-## MSTC vs IBAPI — What's the Difference?
+## MSTC vs IBAPI - What's the Difference?
 
 | Platform | Purpose | Who Uses It |
 |----------|---------|-------------|
@@ -201,23 +201,23 @@ MSTC (Metal Scrap Trade Corporation) is a Government of India enterprise that op
 
 ## Tips for First-Time Bidders
 
-1. **Register early** — don't wait until auction day
-2. **Start with a small property** — learn the process with lower stakes
-3. **Visit the property** — photos can be misleading
-4. **Get a lawyer** — for title verification
-5. **Have funds ready** — don't bid if you can't pay
-6. **Read the auction notice** — every word matters
-7. **Check for outstanding dues** — maintenance, taxes, etc.
-8. **Factor in all costs** — not just the reserve price
-9. **Don't bid emotionally** — stick to your budget
-10. **Be patient** — the right property will come
+1. **Register early** - don't wait until auction day
+2. **Start with a small property** - learn the process with lower stakes
+3. **Visit the property** - photos can be misleading
+4. **Get a lawyer** - for title verification
+5. **Have funds ready** - don't bid if you can't pay
+6. **Read the auction notice** - every word matters
+7. **Check for outstanding dues** - maintenance, taxes, etc.
+8. **Factor in all costs** - not just the reserve price
+9. **Don't bid emotionally** - stick to your budget
+10. **Be patient** - the right property will come
 
 ## Key Takeaways
 
 - MSTC is the **official bidding platform** for bank property auctions
 - Registration is **free and one-time**
 - EMD is **5-10% of reserve price** and **refundable** if you lose
-- Auctions are **transparent** — you can see all bids
+- Auctions are **transparent** - you can see all bids
 - Payment is due within **15-30 days** of winning
 - Always do **thorough due diligence** before bidding
 
@@ -227,7 +227,7 @@ MSTC (Metal Scrap Trade Corporation) is a Government of India enterprise that op
     `,
   },
   'deal-score-logic': {
-    title: 'How Our AI Deal Score Works — Methodology Explained',
+    title: 'How Our AI Deal Score Works - Methodology Explained',
     category: 'InvestNest',
     readTime: '6 min',
     content: `
@@ -350,11 +350,11 @@ Based on the analysis:
 
 ## Important Limitations
 
-1. **Market value is estimated** — based on city averages, not actual property valuation
-2. **No photos** — IBAPI doesn't provide property photos
-3. **No auction dates** — IBAPI doesn't provide real auction dates
-4. **No historical data** — we're building this over time
-5. **City-level averages** — actual prices vary by neighborhood
+1. **Market value is estimated** - based on city averages, not actual property valuation
+2. **No photos** - IBAPI doesn't provide property photos
+3. **No auction dates** - IBAPI doesn't provide real auction dates
+4. **No historical data** - we're building this over time
+5. **City-level averages** - actual prices vary by neighborhood
 
 ## Why This Matters
 
@@ -377,7 +377,7 @@ No other platform in India provides this level of property analysis for SARFAESI
     content: `
 ## What is SARFAESI?
 
-SARFAESI stands for **Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest Act, 2002**. It's a law that allows banks and financial institutions to auction properties of borrowers who have defaulted on their loans — **without going to court**.
+SARFAESI stands for **Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest Act, 2002**. It's a law that allows banks and financial institutions to auction properties of borrowers who have defaulted on their loans - **without going to court**.
 
 ## How It Works
 
@@ -399,7 +399,7 @@ Banks are not in the real estate business. Their goal is to **recover dues**, no
 ## How to Participate in a SARFAESI Auction
 
 ### Step 1: Find Properties
-- Visit [IBAPI.in](https://www.ibapi.in) — the official bank property auction portal
+- Visit [IBAPI.in](https://www.ibapi.in) - the official bank property auction portal
 - Check individual bank websites (SBI, PNB, HDFC, ICICI, etc.)
 - Use platforms like InvestNest that aggregate all listings
 
@@ -431,7 +431,7 @@ Banks are not in the real estate business. Their goal is to **recover dues**, no
 - **Always get a lawyer to do title search**
 
 ### 2. Physical Condition
-- Properties are sold "as-is" — banks don't repair them
+- Properties are sold "as-is" - banks don't repair them
 - Previous occupants might have damaged the property
 - Visit the property before bidding
 
@@ -453,13 +453,13 @@ Banks are not in the real estate business. Their goal is to **recover dues**, no
 
 ## Tips for First-Time Bidders
 
-1. **Start small** — bid on a property in a familiar area
-2. **Do thorough due diligence** — title search, physical inspection, legal review
-3. **Set a budget** — don't get caught up in bidding wars
-4. **Factor in all costs** — not just the reserve price
-5. **Have financing ready** — banks require payment within 15-30 days
-6. **Visit the property** — photos can be misleading
-7. **Check for encumbrances** — outstanding loans, tax dues, etc.
+1. **Start small** - bid on a property in a familiar area
+2. **Do thorough due diligence** - title search, physical inspection, legal review
+3. **Set a budget** - don't get caught up in bidding wars
+4. **Factor in all costs** - not just the reserve price
+5. **Have financing ready** - banks require payment within 15-30 days
+6. **Visit the property** - photos can be misleading
+7. **Check for encumbrances** - outstanding loans, tax dues, etc.
 
 ## SARFAESI vs Regular Property Purchase
 
@@ -486,13 +486,13 @@ Banks are not in the real estate business. Their goal is to **recover dues**, no
     `,
   },
   'invest-reits-india': {
-    title: 'How to Invest in REITs in India — Complete Guide',
+    title: 'How to Invest in REITs in India - Complete Guide',
     category: 'Real Estate',
     readTime: '7 min',
     content: `
 ## What are REITs?
 
-REITs (Real Estate Investment Trusts) are companies that own and operate income-generating real estate. Think of them as **mutual funds for real estate** — you buy units on the stock exchange, and the REIT manages the properties and distributes rental income as dividends.
+REITs (Real Estate Investment Trusts) are companies that own and operate income-generating real estate. Think of them as **mutual funds for real estate** - you buy units on the stock exchange, and the REIT manages the properties and distributes rental income as dividends.
 
 ## REITs in India
 
@@ -507,7 +507,7 @@ Currently, there are **3 listed REITs** in India:
 ## How REITs Work
 
 1. **REIT owns** commercial properties (office buildings, malls, warehouses)
-2. **Tenants pay rent** — usually large MNCs with long-term leases (3-9 years)
+2. **Tenants pay rent** - usually large MNCs with long-term leases (3-9 years)
 3. **REIT distributes 90%** of net distributable cash flow as dividends
 4. **You buy units** on NSE/BSE like stocks
 5. **You receive dividends** quarterly + benefit from capital appreciation
@@ -532,7 +532,7 @@ You need a demat account with any broker (Zerodha, Groww, ICICI Direct, etc.)
 
 ### Step 3: Buy Units
 - Minimum investment: 1 unit (around ₹300-400 per unit)
-- Buy like you buy stocks — market order or limit order
+- Buy like you buy stocks - market order or limit order
 
 ### Step 4: Receive Dividends
 - Dividends are credited to your bank account quarterly
@@ -593,7 +593,7 @@ You need a demat account with any broker (Zerodha, Groww, ICICI Direct, etc.)
     `,
   },
   'p2p-lending-guide': {
-    title: 'P2P Lending in India — Complete Guide (2026)',
+    title: 'P2P Lending in India - Complete Guide (2026)',
     category: 'Alternative',
     readTime: '6 min',
     content: `
@@ -670,12 +670,12 @@ P2P platforms in India are regulated by the **RBI (Reserve Bank of India)** unde
 
 ## Tips for P2P Investors
 
-1. **Diversify** — lend to 50+ borrowers, not just 5
-2. **Start with Grade A/B borrowers** — lower risk, still good returns
-3. **Use auto-invest** — platforms diversify better than manual selection
-4. **Reinvest EMIs** — compound your returns
+1. **Diversify** - lend to 50+ borrowers, not just 5
+2. **Start with Grade A/B borrowers** - lower risk, still good returns
+3. **Use auto-invest** - platforms diversify better than manual selection
+4. **Reinvest EMIs** - compound your returns
 5. **Don't invest more than 10-15%** of your portfolio in P2P
-6. **Check platform's NPA rate** — lower is better
+6. **Check platform's NPA rate** - lower is better
 
 ## Tax Implications
 
@@ -689,7 +689,7 @@ P2P platforms in India are regulated by the **RBI (Reserve Bank of India)** unde
     `,
   },
   'invoice-discounting': {
-    title: 'Invoice Discounting in India — How to Earn 10-13% in 30-90 Days',
+    title: 'Invoice Discounting in India - How to Earn 10-13% in 30-90 Days',
     category: 'Alternative',
     readTime: '5 min',
     content: `
@@ -732,7 +732,7 @@ Invoice discounting is a way for businesses to get early payment on their invoic
 | TradeCred | ₹50,000 | 10-12% | Various |
 
 ## Pros
-- ✅ Short tenure (30-90 days) — quick returns
+- ✅ Short tenure (30-90 days) - quick returns
 - ✅ Higher than FD returns
 - ✅ Relatively lower risk (corporate buyers usually pay)
 - ✅ Predictable cash flows
@@ -758,17 +758,17 @@ Invoice discounting is a way for businesses to get early payment on their invoic
 
 ## Risks to Watch
 
-1. **Buyer default** — if the corporate buyer doesn't pay, you lose money
-2. **Fraudulent invoices** — platform must verify invoice authenticity
-3. **Concentration risk** — if most invoices are from one buyer
-4. **Platform risk** — if the platform goes bankrupt
+1. **Buyer default** - if the corporate buyer doesn't pay, you lose money
+2. **Fraudulent invoices** - platform must verify invoice authenticity
+3. **Concentration risk** - if most invoices are from one buyer
+4. **Platform risk** - if the platform goes bankrupt
 
 ## Tips for Invoice Discounting Investors
 
-1. **Diversify across buyers** — don't put all money in one company's invoices
-2. **Check buyer credit rating** — prefer AAA/AA rated companies
-3. **Start small** — invest in 2-3 invoices first to understand the process
-4. **Read the invoice details** — verify the buyer, amount, and due date
+1. **Diversify across buyers** - don't put all money in one company's invoices
+2. **Check buyer credit rating** - prefer AAA/AA rated companies
+3. **Start small** - invest in 2-3 invoices first to understand the process
+4. **Read the invoice details** - verify the buyer, amount, and due date
 5. **Don't exceed 5-10%** of your portfolio in invoice discounting
 
 ---
@@ -777,7 +777,7 @@ Invoice discounting is a way for businesses to get early payment on their invoic
     `,
   },
   'fd-vs-mf': {
-    title: 'Fixed Deposits vs Mutual Funds — Which is Better?',
+    title: 'Fixed Deposits vs Mutual Funds - Which is Better?',
     category: 'Traditional',
     readTime: '8 min',
     content: `
@@ -902,7 +902,7 @@ The mutual fund gives you **2.5x more post-tax gain** over 5 years!
     `,
   },
   'property-evaluation': {
-    title: 'How to Evaluate a Property Before Buying — Complete Checklist',
+    title: 'How to Evaluate a Property Before Buying - Complete Checklist',
     category: 'Real Estate',
     readTime: '10 min',
     content: `
@@ -981,12 +981,12 @@ Buying a property is the biggest financial decision most Indians make. A wrong d
 - 🚩 Pending litigation (check court records)
 
 ### 10. SARFAESI-Specific Checks
-- 🚩 **Title search** — is the property free of encumbrances?
-- 🚩 **Possession** — is the property vacant?
-- 🚩 **Outstanding dues** — maintenance, taxes, utility bills
-- 🚩 **Physical condition** — banks don't repair before auction
-- 🚩 **EMD forfeiture** — if you win but don't pay, you lose EMD
-- 🚩 **Timeline** — payment usually required within 15-30 days
+- 🚩 **Title search** - is the property free of encumbrances?
+- 🚩 **Possession** - is the property vacant?
+- 🚩 **Outstanding dues** - maintenance, taxes, utility bills
+- 🚩 **Physical condition** - banks don't repair before auction
+- 🚩 **EMD forfeiture** - if you win but don't pay, you lose EMD
+- 🚩 **Timeline** - payment usually required within 15-30 days
 
 ## Property Valuation Methods
 
@@ -1028,13 +1028,13 @@ The minimum value set by the government (used for stamp duty). Actual market val
     `,
   },
   'understanding-risk': {
-    title: 'Understanding Risk in Investments — Complete Guide',
+    title: 'Understanding Risk in Investments - Complete Guide',
     category: 'Basics',
     readTime: '6 min',
     content: `
 ## What is Risk?
 
-In investing, **risk** is the possibility that you might lose some or all of your money, or that your investment won't perform as expected. Every investment carries some level of risk — even "safe" ones like FDs (inflation risk).
+In investing, **risk** is the possibility that you might lose some or all of your money, or that your investment won't perform as expected. Every investment carries some level of risk - even "safe" ones like FDs (inflation risk).
 
 ## Types of Investment Risk
 
@@ -1108,9 +1108,9 @@ Answer these questions:
    - C) > 30%
 
 **Results:**
-- Mostly A: **Conservative** — Stick to FDs, PPF, debt funds
-- Mostly B: **Moderate** — Mix of equity and debt funds
-- Mostly C: **Aggressive** — Equity funds, stocks, alternatives
+- Mostly A: **Conservative** - Stick to FDs, PPF, debt funds
+- Mostly B: **Moderate** - Mix of equity and debt funds
+- Mostly C: **Aggressive** - Equity funds, stocks, alternatives
 
 ## Risk Management Strategies
 
@@ -1155,7 +1155,7 @@ For direct stock investments, set a stop-loss to limit downside.
     `,
   },
   'home-loan-guide': {
-    title: 'Home Loan Guide India — Everything You Need to Know',
+    title: 'Home Loan Guide India - Everything You Need to Know',
     category: 'Real Estate',
     readTime: '7 min',
     content: `
@@ -1229,13 +1229,13 @@ A home loan is money borrowed from a bank or housing finance company (HFC) to pu
 
 ## Tips for Getting the Best Home Loan
 
-1. **Check your credit score** — 750+ gets the best rates
-2. **Compare multiple banks** — don't just go to your salary account bank
-3. **Negotiate processing fees** — banks often waive them
-4. **Consider balance transfer** — if your current rate is >1% higher
+1. **Check your credit score** - 750+ gets the best rates
+2. **Compare multiple banks** - don't just go to your salary account bank
+3. **Negotiate processing fees** - banks often waive them
+4. **Consider balance transfer** - if your current rate is >1% higher
 5. **Keep EMI < 40%** of your monthly income
-6. **Choose shorter tenure** if possible — saves lakhs in interest
-7. **Make prepayments** — even small ones reduce tenure significantly
+6. **Choose shorter tenure** if possible - saves lakhs in interest
+7. **Make prepayments** - even small ones reduce tenure significantly
 
 ## Home Loan EMI Calculator
 
@@ -1249,7 +1249,7 @@ Use our [calculator](/calculator) to estimate your EMI:
     `,
   },
   'credit-score-guide': {
-    title: 'Credit Score in India — How It Affects Your Investments',
+    title: 'Credit Score in India - How It Affects Your Investments',
     category: 'Basics',
     readTime: '6 min',
     content: `
@@ -1280,12 +1280,12 @@ Better credit = easier access to margin trading, loan against securities, etc.
 
 ## How to Improve Your Credit Score
 
-1. **Pay EMIs on time** — most important factor (35% weight)
-2. **Keep credit utilization below 30%** — don't max out your cards
-3. **Don't close old credit cards** — longer history = better score
-4. **Mix of credit types** — home loan + credit card is better than just cards
+1. **Pay EMIs on time** - most important factor (35% weight)
+2. **Keep credit utilization below 30%** - don't max out your cards
+3. **Don't close old credit cards** - longer history = better score
+4. **Mix of credit types** - home loan + credit card is better than just cards
 5. **Check your CIBIL report** annually for errors (free once a year)
-6. **Don't apply for too many loans** — each inquiry reduces your score
+6. **Don't apply for too many loans** - each inquiry reduces your score
 
 ## How to Check Your Credit Score for Free
 
@@ -1299,11 +1299,11 @@ Better credit = easier access to margin trading, loan against securities, etc.
 
 ## Common Credit Score Mistakes
 
-1. **Missing an EMI** — even one late payment can drop your score by 50-100 points
-2. **Using >50% of credit limit** — signals high dependency on credit
-3. **Closing old cards** — reduces your credit history length
-4. **Applying for multiple loans** — each hard inquiry reduces score by 5-10 points
-5. **Not checking for errors** — CIBIL reports can have mistakes
+1. **Missing an EMI** - even one late payment can drop your score by 50-100 points
+2. **Using >50% of credit limit** - signals high dependency on credit
+3. **Closing old cards** - reduces your credit history length
+4. **Applying for multiple loans** - each hard inquiry reduces score by 5-10 points
+5. **Not checking for errors** - CIBIL reports can have mistakes
 
 ---
 
@@ -1311,7 +1311,7 @@ Better credit = easier access to margin trading, loan against securities, etc.
     `,
   },
   'mutual-fund-sip': {
-    title: 'SIP in Mutual Funds — How to Start and Maximize Returns',
+    title: 'SIP in Mutual Funds - How to Start and Maximize Returns',
     category: 'Traditional',
     readTime: '7 min',
     content: `
@@ -1383,12 +1383,12 @@ For short-term goals (1-3 years), use debt fund SIPs. Returns are lower (6-8%) b
 
 ## Common SIP Mistakes
 
-1. **Stopping SIPs during market crashes** — this is when you buy the cheapest
-2. **Checking NAV daily** — causes panic and poor decisions
-3. **Not increasing SIP with salary** — inflation erodes your investment power
-4. **Too many funds** — 3-5 funds is enough
-5. **Ignoring expense ratio** — 0.5% difference compounds to lakhs over 20 years
-6. **Redeeming early** — breaks compounding
+1. **Stopping SIPs during market crashes** - this is when you buy the cheapest
+2. **Checking NAV daily** - causes panic and poor decisions
+3. **Not increasing SIP with salary** - inflation erodes your investment power
+4. **Too many funds** - 3-5 funds is enough
+5. **Ignoring expense ratio** - 0.5% difference compounds to lakhs over 20 years
+6. **Redeeming early** - breaks compounding
 
 ## SIP vs Lump Sum
 
@@ -1424,7 +1424,7 @@ Use our [calculator](/calculator) to estimate your SIP returns:
     `,
   },
   'e-auction-guide': {
-    title: 'How to Participate in E-Auctions in India — Step-by-Step Guide',
+    title: 'How to Participate in E-Auctions in India - Step-by-Step Guide',
     category: 'Real Estate',
     readTime: '8 min',
     content: `
@@ -1478,13 +1478,13 @@ An e-auction is an online auction where properties, assets, or goods are sold to
 
 ## Tips for First-Time Bidders
 
-1. **Register early** — don't wait until auction day
-2. **Pay EMD 2-3 days before** — NEFT can take time
-3. **Set a maximum bid** — don't get caught in bidding wars
-4. **Have financing ready** — banks require payment within 15-30 days
-5. **Visit the property** — before bidding, if possible
-6. **Check title** — get a lawyer to verify
-7. **Read the auction notice** — carefully, for all terms and conditions
+1. **Register early** - don't wait until auction day
+2. **Pay EMD 2-3 days before** - NEFT can take time
+3. **Set a maximum bid** - don't get caught in bidding wars
+4. **Have financing ready** - banks require payment within 15-30 days
+5. **Visit the property** - before bidding, if possible
+6. **Check title** - get a lawyer to verify
+7. **Read the auction notice** - carefully, for all terms and conditions
 
 ## Common Mistakes to Avoid
 
@@ -1619,7 +1619,7 @@ Bank-seized properties are available in all major cities. Use InvestNest to find
     `,
   },
   'gold-vs-real-estate': {
-    title: 'Gold vs Real Estate — Which is the Better Investment?',
+    title: 'Gold vs Real Estate - Which is the Better Investment?',
     category: 'Investment Comparison',
     readTime: '7 min',
     content: `
@@ -1673,19 +1673,19 @@ Gold and real estate are the two most popular investment choices in India. Every
 
 ## When to Choose Gold
 
-- **Short-term parking** (1-3 years) — gold is more liquid
-- **Hedge against inflation** — gold preserves purchasing power
-- **Small amounts** — can invest ₹500 in digital gold
-- **No management hassle** — SGBs are completely passive
-- **Emergency fund** — gold can be sold quickly
+- **Short-term parking** (1-3 years) - gold is more liquid
+- **Hedge against inflation** - gold preserves purchasing power
+- **Small amounts** - can invest ₹500 in digital gold
+- **No management hassle** - SGBs are completely passive
+- **Emergency fund** - gold can be sold quickly
 
 ## When to Choose Real Estate
 
 - **Long-term wealth building** (5-10+ years)
-- **Rental income needed** — real estate generates cash flow
-- **Leverage available** — home loans at 8.5% make it accessible
-- **Tax benefits** — 80C and 24(b) deductions
-- **Physical use** — you can live in or use the property
+- **Rental income needed** - real estate generates cash flow
+- **Leverage available** - home loans at 8.5% make it accessible
+- **Tax benefits** - 80C and 24(b) deductions
+- **Physical use** - you can live in or use the property
 
 ## The Verdict
 
@@ -1711,11 +1711,11 @@ Most financial planners recommend:
     `,
   },
   'nps-vs-ppf': {
-    title: 'NPS vs PPF — Which is Better for Retirement?',
+    title: 'NPS vs PPF - Which is Better for Retirement?',
     category: 'Retirement',
     readTime: '7 min',
     content: `
-## NPS vs PPF — The Retirement Dilemma
+## NPS vs PPF - The Retirement Dilemma
 
 Both NPS (National Pension System) and PPF (Public Provident Fund) are government-backed retirement savings schemes. But they serve different purposes and have different rules.
 
@@ -1764,7 +1764,7 @@ PPF is a government-backed savings scheme with guaranteed returns and complete t
 - **Lock-in:** 15 years (can extend in 5-year blocks)
 - **Loan facility:** Available from year 3-6
 - **Partial withdrawal:** From year 7
-- **Tax:** Fully tax-free (EEE — Exempt, Exempt, Exempt)
+- **Tax:** Fully tax-free (EEE - Exempt, Exempt, Exempt)
 
 ## NPS vs PPF: Who Should Choose What?
 
@@ -1800,7 +1800,7 @@ PPF is a government-backed savings scheme with guaranteed returns and complete t
     `,
   },
   'e-auction-participation': {
-    title: 'How to Participate in E-Auctions in India — Step-by-Step',
+    title: 'How to Participate in E-Auctions in India - Step-by-Step',
     category: 'Real Estate',
     readTime: '8 min',
     content: `
@@ -1855,13 +1855,13 @@ An e-auction is an online auction where properties, assets, or goods are sold to
 
 ## Tips for First-Time Bidders
 
-1. **Register early** — don't wait until auction day
-2. **Pay EMD 2-3 days before** — NEFT can take time
-3. **Set a maximum bid** — don't get caught in bidding wars
-4. **Have financing ready** — banks require payment within 15-30 days
-5. **Visit the property** — before bidding, if possible
-6. **Check title** — get a lawyer to verify
-7. **Read the auction notice** — carefully, for all terms and conditions
+1. **Register early** - don't wait until auction day
+2. **Pay EMD 2-3 days before** - NEFT can take time
+3. **Set a maximum bid** - don't get caught in bidding wars
+4. **Have financing ready** - banks require payment within 15-30 days
+5. **Visit the property** - before bidding, if possible
+6. **Check title** - get a lawyer to verify
+7. **Read the auction notice** - carefully, for all terms and conditions
 
 ## Common Mistakes to Avoid
 
@@ -1987,7 +1987,7 @@ Bank-seized properties are available in all major cities. Use InvestNest to find
     `,
   },
   'sarfaesi-title-check': {
-    title: 'How to Check Property Title Before Buying — Complete Guide',
+    title: 'How to Check Property Title Before Buying - Complete Guide',
     category: 'Real Estate',
     readTime: '9 min',
     content: `
@@ -2045,11 +2045,11 @@ A property title is a legal document that establishes ownership of a property. I
 ## SARFAESI-Specific Title Checks
 
 ### Additional Checks for Auction Properties
-1. **Bank's title search** — banks do their own title verification before auction
-2. **Encumbrance at time of default** — check if property was mortgaged
-3. **Multiple claimants** — previous owner's family might claim
-4. **Pending litigation** — previous owner might have filed case against bank
-5. **Outstanding dues** — maintenance, taxes, utility bills
+1. **Bank's title search** - banks do their own title verification before auction
+2. **Encumbrance at time of default** - check if property was mortgaged
+3. **Multiple claimants** - previous owner's family might claim
+4. **Pending litigation** - previous owner might have filed case against bank
+5. **Outstanding dues** - maintenance, taxes, utility bills
 
 ### Documents to Get from Bank
 - Copy of title deed
@@ -2102,12 +2102,12 @@ A property title is a legal document that establishes ownership of a property. I
 
 ## Key Takeaways
 
-1. **Never skip title verification** — it's the most important step
-2. **Get an encumbrance certificate** — it's the single most important document
+1. **Never skip title verification** - it's the most important step
+2. **Get an encumbrance certificate** - it's the single most important document
 3. **Hire a lawyer** for properties > ₹50L
-4. **Check for litigation** — search court records
-5. **For SARFAESI properties** — get the bank's title search report
-6. **Keep all documents** — you'll need them for registration and resale
+4. **Check for litigation** - search court records
+5. **For SARFAESI properties** - get the bank's title search report
+6. **Keep all documents** - you'll need them for registration and resale
 
 ---
 
@@ -2115,13 +2115,13 @@ A property title is a legal document that establishes ownership of a property. I
     `,
   },
   'emergency-fund': {
-    title: 'Emergency Fund — How Much and Where to Keep It',
+    title: 'Emergency Fund - How Much and Where to Keep It',
     category: 'Basics',
     readTime: '5 min',
     content: `
 ## What is an Emergency Fund?
 
-An emergency fund is money set aside for unexpected expenses — job loss, medical emergency, car repair, etc. It prevents you from going into debt or selling investments at a loss.
+An emergency fund is money set aside for unexpected expenses - job loss, medical emergency, car repair, etc. It prevents you from going into debt or selling investments at a loss.
 
 ## How Much Should You Save?
 
@@ -2159,19 +2159,19 @@ An emergency fund is money set aside for unexpected expenses — job loss, medic
 
 ## Common Mistakes
 
-1. **Not having one at all** — most common mistake
-2. **Keeping it in equity MFs** — too volatile for emergencies
-3. **Keeping it in PPF** — 15-year lock-in
-4. **Too much in savings account** — loses value to inflation
-5. **Using it for non-emergencies** — "I wanted to buy a phone" is not an emergency
+1. **Not having one at all** - most common mistake
+2. **Keeping it in equity MFs** - too volatile for emergencies
+3. **Keeping it in PPF** - 15-year lock-in
+4. **Too much in savings account** - loses value to inflation
+5. **Using it for non-emergencies** - "I wanted to buy a phone" is not an emergency
 
 ## How to Build Your Emergency Fund
 
-1. **Start small** — even ₹5,000/month is fine
-2. **Automate** — set up a SIP in a liquid fund
-3. **Use windfalls** — bonus, tax refund, gifts → add to fund
-4. **Don't invest it** — keep it safe and liquid
-5. **Review annually** — increase as expenses grow
+1. **Start small** - even ₹5,000/month is fine
+2. **Automate** - set up a SIP in a liquid fund
+3. **Use windfalls** - bonus, tax refund, gifts → add to fund
+4. **Don't invest it** - keep it safe and liquid
+5. **Review annually** - increase as expenses grow
 
 ## Emergency Fund vs Insurance
 
@@ -2190,7 +2190,7 @@ An emergency fund is money set aside for unexpected expenses — job loss, medic
     `,
   },
   'tax-on-investments': {
-    title: 'Tax on Investments in India — Complete Guide (2026)',
+    title: 'Tax on Investments in India - Complete Guide (2026)',
     category: 'Basics',
     readTime: '9 min',
     content: `
@@ -2259,8 +2259,8 @@ Taxes can eat 20-30% of your investment returns. Understanding tax rules helps y
 | PPF | ₹1.5L | 15 years |
 | NSC | ₹1.5L | 5 years |
 | Tax-saver FD | ₹1.5L | 5 years |
-| Home loan principal | ₹1.5L | — |
-| Life insurance premium | ₹1.5L | — |
+| Home loan principal | ₹1.5L | - |
+| Life insurance premium | ₹1.5L | - |
 
 **Total 80C limit: ₹1.5 lakh per year**
 
@@ -2299,21 +2299,21 @@ Taxes can eat 20-30% of your investment returns. Understanding tax rules helps y
 
 ## Tax Planning Tips
 
-1. **Use 80C fully** — invest ₹1.5L in ELSS/PPF/NPS
-2. **Use 80CCD(1B)** — additional ₹50K in NPS
-3. **Use 80D** — health insurance for self and parents
-4. **Hold equity for >1 year** — LTCG at 10% vs STCG at 15%
-5. **Harvest LTCG** — sell and reinvest to use ₹1L exemption annually
-6. **Use indexation** — for real estate and gold (20% with indexation)
-7. **Consider SGBs** — tax-free at maturity
+1. **Use 80C fully** - invest ₹1.5L in ELSS/PPF/NPS
+2. **Use 80CCD(1B)** - additional ₹50K in NPS
+3. **Use 80D** - health insurance for self and parents
+4. **Hold equity for >1 year** - LTCG at 10% vs STCG at 15%
+5. **Harvest LTCG** - sell and reinvest to use ₹1L exemption annually
+6. **Use indexation** - for real estate and gold (20% with indexation)
+7. **Consider SGBs** - tax-free at maturity
 
 ## Common Tax Mistakes
 
-1. **Not declaring P2P interest** — it's taxable, even if no TDS
-2. **Selling equity within 1 year** — 15% STCG vs 10% LTCG
-3. **Not using 80C fully** — losing ₹1.5L deduction
-4. **Ignoring advance tax** — if tax liability > ₹10,000, pay advance tax
-5. **Not keeping records** — maintain purchase/sale records for capital gains
+1. **Not declaring P2P interest** - it's taxable, even if no TDS
+2. **Selling equity within 1 year** - 15% STCG vs 10% LTCG
+3. **Not using 80C fully** - losing ₹1.5L deduction
+4. **Ignoring advance tax** - if tax liability > ₹10,000, pay advance tax
+5. **Not keeping records** - maintain purchase/sale records for capital gains
 
 ---
 

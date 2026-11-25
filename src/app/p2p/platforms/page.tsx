@@ -269,7 +269,7 @@ export default function P2PPlatformsPage() {
 
         {/* Regulatory Info */}
         <div className="mt-8 bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
-          <strong>Disclaimer:</strong> All platforms listed are registered with RBI as NBFC-P2P. Data is sourced from RBI's official NBFC list (Sept 2026) and platform websites. Returns, fees, and features may change. P2P lending involves credit risk — lenders can lose principal. RBI does not guarantee returns. Always verify current details on the platform's official website before investing.
+          <strong>Disclaimer:</strong> All platforms listed are registered with RBI as NBFC-P2P. Data is sourced from RBI's official NBFC list (Sept 2026) and platform websites. Returns, fees, and features may change. P2P lending involves credit risk - lenders can lose principal. RBI does not guarantee returns. Always verify current details on the platform's official website before investing.
         </div>
       </div>
     </div>

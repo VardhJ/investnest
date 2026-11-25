@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 
-// Regulatory updates data — sourced from RBI publications
+// Regulatory updates data - sourced from RBI publications
 // NOTE: This is compiled from publicly available RBI information.
 // Last updated: Nov 2026
 const regulatoryUpdates = [
@@ -12,7 +12,7 @@ const regulatoryUpdates = [
     date: '2025-09-30',
     type: 'Registration',
     platform: 'All Platforms',
-    title: 'RBI NBFC-P2P List Updated — 28 Platforms Registered',
+    title: 'RBI NBFC-P2P List Updated - 28 Platforms Registered',
     description: 'RBI published the updated list of NBFC-P2P registered companies as of September 30, 2026. Total 28 platforms are currently registered. No new registrations or cancellations in this update.',
     source: 'RBI List of NBFCs (Sept 2026)',
     sourceUrl: 'https://rbi.org.in/Scripts/BS_NBFCList.aspx',
@@ -32,7 +32,7 @@ const regulatoryUpdates = [
     date: '2025-03-20',
     type: 'Registration',
     platform: '1 Finance P2P',
-    title: '1 Finance P2P Private Limited — New RBI Registration',
+    title: '1 Finance P2P Private Limited - New RBI Registration',
     description: '1 Finance P2P Private Limited registered as NBFC-P2P with RBI regional office Ahmedabad. CIN: U64990GJ2023PTC146103. This is one of the newer entrants in the P2P space.',
     source: 'RBI NBFC List (March 2026)',
     sourceUrl: 'https://rbi.org.in/Scripts/BS_NBFCList.aspx',
@@ -72,7 +72,7 @@ const regulatoryUpdates = [
     date: '2024-06-20',
     type: 'Registration',
     platform: '5Paisa P2P',
-    title: '5Paisa P2P Limited — RBI Registration Confirmed',
+    title: '5Paisa P2P Limited - RBI Registration Confirmed',
     description: '5Paisa P2P Limited (CIN: U67120MH2017PLC302564) confirmed as registered NBFC-P2P with RBI Mumbai regional office. Platform integrated within 5Paisa brokerage app.',
     source: 'RBI NBFC List (June 2026)',
     sourceUrl: 'https://rbi.org.in/Scripts/BS_NBFCList.aspx',

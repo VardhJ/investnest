@@ -1,7 +1,7 @@
-# InvestNest — Investment Discovery & Education Platform
+# InvestNest - Investment Discovery & Education Platform
 
 ## Vision
-Help everyday Indians discover, understand, and access investment products beyond traditional markets — starting with bank-seized properties (SARFAESI auctions).
+Help everyday Indians discover, understand, and access investment products beyond traditional markets - starting with bank-seized properties (SARFAESI auctions).
 
 ## Tech Stack (100% Free Tier)
 - **Frontend:** Next.js 14 (App Router) + Tailwind CSS
