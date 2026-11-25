@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { investmentProducts } from '@/data/products';
+import ActivityFeed from '@/components/ActivityFeed';
 
 export default function Home() {
   const realEstateProducts = investmentProducts.filter(p => p.category === 'real-estate');
@@ -70,6 +71,39 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* 1.5. RECENT ACTIVITY FEED */}
+      <section className="py-16 bg-white border-b border-slate-200/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-3">
+                <span>Live</span>
+                <span>•</span>
+                <span>Updated Daily</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                Recent Auction Activity
+              </h2>
+              <p className="mt-3 text-base text-slate-600 max-w-2xl leading-relaxed">
+                New listings, price changes, and properties likely sold — updated every 24 hours from IBAPI.
+              </p>
+            </div>
+            <div className="mt-6 md:mt-0">
+              <Link
+                href="/properties"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 hover:text-emerald-800 group"
+              >
+                <span>View all properties</span>
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+          <ActivityFeed limit={8} />
         </div>
       </section>
 
