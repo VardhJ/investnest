@@ -10,6 +10,7 @@ export default function PropertyDetailPage() {
   const params = useParams();
   const [property, setProperty] = useState<any>(null);
   const [dealScore, setDealScore] = useState<any>(null);
+  const [marketValueSources, setMarketValueSources] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,6 +21,7 @@ export default function PropertyDetailPage() {
       ]).then(([propData, scoreData]) => {
         setProperty(propData.property);
         setDealScore(scoreData.dealScore || null);
+        setMarketValueSources(scoreData.marketValueSources || []);
         if (propData.property) {
           import('@/lib/analytics').then(({ trackEvent }) => {
             trackEvent('property_viewed', {
@@ -321,8 +323,84 @@ export default function PropertyDetailPage() {
             <div className="mt-4 pt-3 border-t border-slate-200/80 text-xs text-slate-500">
               <strong>Methodology:</strong> {dealScore.marketValueSource?.methodology}
             </div>
+
+            {/* Community Market Value Sources */}
+            {marketValueSources.length > 0 && (
+              <div className="mt-3 text-xs text-slate-500">
+                <strong>Community Estimates:</strong>
+                <ul className="mt-1 space-y-1">
+                  {marketValueSources.map((src: any) => (
+                    <li key={src.id} className="flex items-center gap-2">
+                      <span className="text-emerald-600">•</span>
+                      {src.source_name}: {formatPrice(src.listed_price)}
+                      {src.source_url && (
+                        <a href={src.source_url} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">(link)</a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <div className="mt-2 text-xs text-slate-500">
-              <strong>Disclaimer:</strong> AI-generated estimate based on city averages. Actual market values may vary. Always verify independently.
+              <strong>Confidence:</strong> {dealScore.marketValueSource?.confidence === 'high' ? 'High' : dealScore.marketValueSource?.confidence === 'medium' ? 'Medium' : 'Low'} (based on {dealScore.marketValueSource?.pricePerSqft ? 'city averages' : 'limited data'})
+            </div>
+            <div className="mt-2 text-xs text-slate-500">
+              <strong>Disclaimer:</strong> AI-generated estimate based on city averages and government circle rates. Actual market values may vary significantly. Always verify independently.
+            </div>
+
+            {/* Suggest Market Value */}
+            <div className="mt-4 pt-3 border-t border-slate-200/80">
+              <details className="text-xs text-slate-500">
+                <summary className="cursor-pointer text-emerald-600 hover:text-emerald-700 font-medium">
+                  Know the actual market value? Suggest an update
+                </summary>
+                <div className="mt-3 space-y-2">
+                  <input
+                    type="number"
+                    placeholder="Market value (₹)"
+                    id="suggestMv"
+                    className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 bg-white"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Source (e.g., MagicBricks link, local broker)"
+                    id="suggestSource"
+                    className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-900 bg-white"
+                  />
+                  <button
+                    onClick={async () => {
+                      const mv = (document.getElementById('suggestMv') as HTMLInputElement)?.value;
+                      const src = (document.getElementById('suggestSource') as HTMLInputElement)?.value;
+                      if (!mv) { alert('Please enter a market value'); return; }
+                      try {
+                        const { data: { session } } = await (await import('@/lib/supabase')).supabase.auth.getSession();
+                        const token = session?.access_token;
+                        const res = await fetch('/api/market-value', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+                          body: JSON.stringify({
+                            property_id: property.id,
+                            listed_price: parseInt(mv),
+                            source_name: src || 'User Suggestion',
+                            source_url: src?.startsWith('http') ? src : null,
+                            methodology: 'User-submitted market value estimate',
+                          }),
+                        });
+                        if (res.ok) {
+                          alert('Thank you! Your suggestion has been submitted for review.');
+                        } else {
+                          alert('Failed to submit. Please try again.');
+                        }
+                      } catch (e) {
+                        alert('Failed to submit. Please try again.');
+                      }
+                    }}
+                    className="px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-medium hover:bg-emerald-700 transition"
+                  >
+                    Submit Suggestion
+                  </button>
+                </div>
+              </details>
             </div>
           </div>
         )}
