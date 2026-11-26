@@ -10,9 +10,14 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   if (!product) return {};
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.investnest.in';
   return {
-    title: `${product.name} - Returns, Risk & Taxation`,
-    description: product.description?.slice(0, 160) || `Learn about ${product.name}: expected returns, risk, taxation, and regulation in India.`,
+    title: `${product.name} in India – Returns, Risk & Tax Guide`,
+    description: `${product.description?.slice(0, 140) || `Learn about ${product.name}`}. Expected returns: ${product.expectedReturns}. Min investment: ₹${product.minInvestment?.toLocaleString('en-IN')}.`,
     alternates: { canonical: `${siteUrl}/products/${product.id}` },
+    openGraph: {
+      title: `${product.name} – ${product.expectedReturns} | InvestNest`,
+      description: product.description?.slice(0, 160),
+      images: [{ url: `${siteUrl}/og/default.png`, width: 1200, height: 630 }],
+    },
   };
 }
 
@@ -43,12 +48,25 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       <JsonLd
         data={{
           '@context': 'https://schema.org',
-          '@type': 'Product',
+          '@type': 'FinancialProduct',
           name: product.name,
           description: product.description,
-          category: product.category,
+          category: product.subcategory,
           url: `${siteUrl}/products/${product.id}`,
-          brand: { '@type': 'Brand', name: 'InvestNest' },
+          provider: { '@type': 'Organization', name: 'InvestNest', url: siteUrl },
+          annualPercentageRate: product.expectedReturns,
+          feesAndCommissionsSpecification: product.taxImplications,
+        }}
+      />
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+            { '@type': 'ListItem', position: 2, name: 'Investment Products', item: `${siteUrl}/products` },
+            { '@type': 'ListItem', position: 3, name: product.name, item: `${siteUrl}/products/${product.id}` },
+          ],
         }}
       />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

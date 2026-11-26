@@ -1,10 +1,18 @@
 import Link from 'next/link';
 import { p2pPlatforms } from '@/data/p2p-platforms';
+import JsonLd from '@/components/JsonLd';
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.investnest.in';
 
 export const metadata = {
-  title: 'P2P Lending in India - Compare 28 RBI-Registered Platforms',
-  description: 'Discover and compare all 28 RBI-registered P2P lending platforms in India. Returns, fees, risk levels, and more. Free comparison tool.',
-  alternates: { canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.investnest.in'}/p2p` },
+  title: 'P2P Lending in India – Compare 28 RBI-Registered NBFC Platforms',
+  description: 'Discover and compare all 28 RBI-registered P2P lending platforms in India. Compare 10–18% returns, fees, default risk, and regulations. Free comparison tool.',
+  alternates: { canonical: `${siteUrl}/p2p` },
+  openGraph: {
+    title: 'P2P Lending in India – Compare 28 RBI-Registered Platforms',
+    description: 'Compare all 28 RBI-registered P2P lending platforms in India. 10–18% advertised returns, min investments, and risk levels.',
+    images: [{ url: `${siteUrl}/og/default.png`, width: 1200, height: 630 }],
+  },
 };
 
 export default function P2PLandingPage() {
@@ -13,6 +21,16 @@ export default function P2PLandingPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+            { '@type': 'ListItem', position: 2, name: 'P2P Lending', item: `${siteUrl}/p2p` },
+          ],
+        }}
+      />
       {/* Hero */}
       <section className="relative overflow-hidden bg-slate-950 text-white pt-16 pb-20 lg:pt-24 lg:pb-28">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(5,150,105,0.18),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(16,185,129,0.12),transparent_40%)] pointer-events-none" />

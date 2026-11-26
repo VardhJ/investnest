@@ -2,11 +2,25 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
 
-const articles: Record<string, { title: string; category: string; readTime: string; content: string }> = {
+// Article metadata including dates (used for schema + sitemap accuracy)
+interface ArticleData {
+  title: string;
+  category: string;
+  readTime: string;
+  description?: string;
+  publishedDate?: string;
+  updatedDate?: string;
+  content: string;
+}
+
+const articles: Record<string, ArticleData> = {
   'mstc-e-auction-guide': {
     title: 'MSTC E-Auction - Complete Buyer Registration & Bidding Guide',
     category: 'Real Estate',
     readTime: '12 min',
+    description: 'Step-by-step guide to registering and bidding on the MSTC e-auction portal for SARFAESI bank-seized properties. Covers EMD payment, bidding process, and post-auction steps.',
+    publishedDate: '2026-10-01',
+    updatedDate: '2026-11-01',
     content: `
 ## What is MSTC?
 
@@ -2336,7 +2350,141 @@ function renderInlineBold(text: string): React.ReactNode {
   });
 }
 
+// Render a markdown table into a proper <table>
+function renderTable(tableLines: string[]): React.ReactNode {
+  const rows = tableLines
+    .filter(l => !l.match(/^\|\s*[-:]+\s*(\|\s*[-:]+\s*)*\|?$/)) // skip separator
+    .map(l =>
+      l
+        .replace(/^\|/, '')
+        .replace(/\|$/, '')
+        .split('|')
+        .map(cell => cell.trim())
+    );
+  if (rows.length === 0) return null;
+  const [header, ...body] = rows;
+  return (
+    <div className="overflow-x-auto my-6">
+      <table className="w-full text-xs border-collapse border border-slate-200 rounded-xl overflow-hidden">
+        <thead>
+          <tr className="bg-slate-100">
+            {header.map((h: string, i: number) => (
+              <th key={i} className="px-3 py-2 text-left font-bold text-slate-800 border border-slate-200">
+                {renderInlineBold(h)}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {body.map((row: string[], ri: number) => (
+            <tr key={ri} className={ri % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
+              {row.map((cell: string, ci: number) => (
+                <td key={ci} className="px-3 py-2 text-slate-700 border border-slate-200">
+                  {renderInlineBold(cell)}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+// Full markdown renderer with proper ul/ol grouping and table support
+function renderContent(content: string): React.ReactNode {
+  const lines = content.split('\n');
+  const elements: React.ReactNode[] = [];
+  let i = 0;
+
+  while (i < lines.length) {
+    const line = lines[i];
+
+    // Table: accumulate consecutive | lines
+    if (line.startsWith('|')) {
+      const tableLines: string[] = [];
+      while (i < lines.length && lines[i].startsWith('|')) {
+        tableLines.push(lines[i]);
+        i++;
+      }
+      elements.push(<React.Fragment key={`table-${i}`}>{renderTable(tableLines)}</React.Fragment>);
+      continue;
+    }
+
+    // Unordered list: accumulate consecutive - lines
+    if (line.startsWith('- ')) {
+      const listItems: string[] = [];
+      while (i < lines.length && lines[i].startsWith('- ')) {
+        listItems.push(lines[i].replace(/^- /, ''));
+        i++;
+      }
+      elements.push(
+        <ul key={`ul-${i}`} className="list-disc list-outside ml-5 my-3 space-y-1">
+          {listItems.map((item, j) => (
+            <li key={j} className="text-slate-700 text-sm leading-relaxed">
+              {renderInlineBold(item)}
+            </li>
+          ))}
+        </ul>
+      );
+      continue;
+    }
+
+    // Ordered list: accumulate consecutive `N.` lines
+    if (/^\d+\.\s/.test(line)) {
+      const listItems: string[] = [];
+      while (i < lines.length && /^\d+\.\s/.test(lines[i])) {
+        listItems.push(lines[i].replace(/^\d+\.\s/, ''));
+        i++;
+      }
+      elements.push(
+        <ol key={`ol-${i}`} className="list-decimal list-outside ml-5 my-3 space-y-1">
+          {listItems.map((item, j) => (
+            <li key={j} className="text-slate-700 text-sm leading-relaxed">
+              {renderInlineBold(item)}
+            </li>
+          ))}
+        </ol>
+      );
+      continue;
+    }
+
+    if (line.startsWith('## ')) {
+      elements.push(
+        <h2 key={i} className="text-xl sm:text-2xl font-bold mt-8 mb-4 text-slate-900 border-b border-slate-100 pb-2">
+          {renderInlineBold(line.replace('## ', ''))}
+        </h2>
+      );
+    } else if (line.startsWith('### ')) {
+      elements.push(
+        <h3 key={i} className="text-lg font-bold mt-6 mb-3 text-slate-900">
+          {renderInlineBold(line.replace('### ', ''))}
+        </h3>
+      );
+    } else if (line.startsWith('#### ')) {
+      elements.push(
+        <h4 key={i} className="text-base font-bold mt-4 mb-2 text-slate-900">
+          {renderInlineBold(line.replace('#### ', ''))}
+        </h4>
+      );
+    } else if (line.trim() === '' || line.trim() === '---') {
+      elements.push(<br key={i} />);
+    } else {
+      elements.push(
+        <p key={i} className="text-slate-700 mb-3 text-sm leading-relaxed">
+          {renderInlineBold(line)}
+        </p>
+      );
+    }
+
+    i++;
+  }
+
+  return <>{elements}</>;
+}
+
 import type { Metadata } from 'next';
+import React from 'react';
 
 export function generateStaticParams() {
   return Object.keys(articles).map(slug => ({ slug }));
@@ -2349,8 +2497,23 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.investnest.in';
   return {
     title: article.title,
-    description: `${article.title} - ${article.category} guide by InvestNest. Read time ${article.readTime}.`,
+    description: article.description || `${article.title} – ${article.category} guide by InvestNest.`,
     alternates: { canonical: `${siteUrl}/learn/${slug}` },
+    openGraph: {
+      title: article.title,
+      description: article.description || `${article.title} – ${article.category} guide by InvestNest.`,
+      type: 'article',
+      publishedTime: article.publishedDate,
+      modifiedTime: article.updatedDate,
+      authors: ['InvestNest'],
+      images: [{ url: `${siteUrl}/og/default.png`, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: article.description,
+      images: [`${siteUrl}/og/default.png`],
+    },
   };
 }
 
@@ -2371,24 +2534,45 @@ export default async function LearnArticlePage({ params }: { params: Promise<{ s
           '@context': 'https://schema.org',
           '@type': 'Article',
           headline: article.title,
-          description: `${article.title} - ${article.category} guide by InvestNest.`,
-          author: { '@type': 'Organization', name: 'InvestNest' },
-          publisher: { '@type': 'Organization', name: 'InvestNest' },
-          mainEntityOfPage: `${siteUrl}/learn/${slug}`,
+          description: article.description,
+          author: {
+            '@type': 'Organization',
+            name: 'InvestNest',
+            url: siteUrl,
+          },
+          publisher: {
+            '@type': 'Organization',
+            name: 'InvestNest',
+            url: siteUrl,
+            logo: { '@type': 'ImageObject', url: `${siteUrl}/og/default.png` },
+          },
+          datePublished: article.publishedDate,
+          dateModified: article.updatedDate,
+          mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}/learn/${slug}` },
+          image: `${siteUrl}/og/default.png`,
+          articleSection: article.category,
+        }}
+      />
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+            { '@type': 'ListItem', position: 2, name: 'Learn', item: `${siteUrl}/learn` },
+            { '@type': 'ListItem', position: 3, name: article.title, item: `${siteUrl}/learn/${slug}` },
+          ],
         }}
       />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
-        <div className="mb-6 flex items-center gap-2 text-xs font-medium text-slate-500">
-          <Link href="/learn" className="hover:text-emerald-700 flex items-center gap-1">
-            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            <span>Research & Learn</span>
-          </Link>
+        <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs font-medium text-slate-500">
+          <Link href="/" className="hover:text-emerald-700">Home</Link>
+          <span>/</span>
+          <Link href="/learn" className="hover:text-emerald-700">Research &amp; Learn</Link>
           <span>/</span>
           <span className="text-slate-800 font-semibold truncate max-w-sm">{article.title}</span>
-        </div>
+        </nav>
 
         <article className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-10">
           <div className="flex items-center gap-2 mb-4">
@@ -2403,47 +2587,7 @@ export default async function LearnArticlePage({ params }: { params: Promise<{ s
           </h1>
 
           <div className="prose max-w-none text-slate-700">
-            {article.content.split('\n').map((line, i) => {
-              if (line.startsWith('## ')) {
-                return (
-                  <h2 key={i} className="text-xl sm:text-2xl font-bold mt-8 mb-4 text-slate-900 border-b border-slate-100 pb-2">
-                    {renderInlineBold(line.replace('## ', ''))}
-                  </h2>
-                );
-              }
-              if (line.startsWith('### ')) {
-                return (
-                  <h3 key={i} className="text-lg font-bold mt-6 mb-3 text-slate-900">
-                    {renderInlineBold(line.replace('### ', ''))}
-                  </h3>
-                );
-              }
-              if (line.startsWith('|')) {
-                return null;
-              }
-              if (line.startsWith('- ')) {
-                return (
-                  <li key={i} className="text-slate-700 ml-4 mb-1 text-sm leading-relaxed">
-                    {renderInlineBold(line.replace('- ', ''))}
-                  </li>
-                );
-              }
-              if (line.startsWith('**') && line.endsWith('**')) {
-                return (
-                  <p key={i} className="font-bold text-slate-900 mt-4 text-sm">
-                    {renderInlineBold(line.replace(/\*\*/g, ''))}
-                  </p>
-                );
-              }
-              if (line.trim() === '') {
-                return <br key={i} />;
-              }
-              return (
-                <p key={i} className="text-slate-700 mb-3 text-sm leading-relaxed">
-                  {renderInlineBold(line)}
-                </p>
-              );
-            })}
+            {renderContent(article.content)}
           </div>
 
           <div className="mt-10 pt-6 border-t border-slate-100 text-xs text-slate-500 leading-relaxed bg-slate-50 p-4 rounded-xl">
@@ -2451,7 +2595,26 @@ export default async function LearnArticlePage({ params }: { params: Promise<{ s
           </div>
         </article>
 
-        <div className="mt-8 text-center">
+        {/* Related Articles */}
+        <div className="mt-8 p-6 bg-white rounded-2xl border border-slate-200">
+          <h2 className="text-base font-bold text-slate-900 mb-4">Continue Learning</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+            <Link href="/learn/sarfaesi-auctions" className="text-emerald-700 hover:underline font-medium">
+              SARFAESI Auctions Explained →
+            </Link>
+            <Link href="/learn/mstc-e-auction-guide" className="text-emerald-700 hover:underline font-medium">
+              MSTC E-Auction Guide →
+            </Link>
+            <Link href="/learn/sarfaesi-title-check" className="text-emerald-700 hover:underline font-medium">
+              Property Title Verification →
+            </Link>
+            <Link href="/learn/e-auction-participation" className="text-emerald-700 hover:underline font-medium">
+              E-Auction Participation →
+            </Link>
+          </div>
+        </div>
+
+        <div className="mt-6 text-center">
           <Link
             href="/learn"
             className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 hover:text-emerald-800"

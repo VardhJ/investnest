@@ -29,8 +29,8 @@ export const metadata: Metadata = {
     template: '%s | InvestNest',
   },
   description: 'Explore bank-seized properties, REITs, P2P lending, invoice discounting, fractional real estate, and more. Free investment education and discovery platform for Indians.',
-  keywords: ['investment', 'SARFAESI', 'bank seized properties', 'REITs', 'P2P lending', 'invoice discounting', 'fractional real estate', 'alternative investments', 'India', 'property auction', 'bank auction properties'],
-  authors: [{ name: 'InvestNest' }],
+  keywords: ['investment', 'SARFAESI', 'bank seized properties', 'REITs', 'P2P lending', 'invoice discounting', 'fractional real estate', 'alternative investments', 'India', 'property auction', 'bank auction properties', 'MSTC e-auction', 'IBAPI', 'bank auction India'],
+  authors: [{ name: 'InvestNest', url: SITE_URL }],
   openGraph: {
     title: 'InvestNest - Discover Investments Beyond Stocks & MFs',
     description: 'Explore bank-seized properties, REITs, P2P lending, invoice discounting, fractional real estate, and more. Free investment education for Indians.',
@@ -38,13 +38,13 @@ export const metadata: Metadata = {
     siteName: 'InvestNest',
     locale: 'en_IN',
     type: 'website',
-    images: [],
+    images: [{ url: `${SITE_URL}/og/default.png`, width: 1200, height: 630, alt: 'InvestNest – Alternative Investment Discovery Platform' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'InvestNest - Discover Investments Beyond Stocks & MFs',
     description: 'Explore bank-seized properties, REITs, P2P lending, and more.',
-    images: [],
+    images: [`${SITE_URL}/og/default.png`],
   },
   robots: {
     index: true,
@@ -68,7 +68,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <body className={inter.className}>
         <JsonLd
           data={{
@@ -76,7 +76,11 @@ export default function RootLayout({
             '@type': 'Organization',
             name: 'InvestNest',
             url: SITE_URL,
+            logo: `${SITE_URL}/og/default.png`,
             description: 'Investment discovery and education platform for Indians: bank-seized properties, REITs, P2P lending, and alternative assets.',
+            sameAs: [
+              'https://www.investnest.in',
+            ],
           }}
         />
         <JsonLd

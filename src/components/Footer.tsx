@@ -86,8 +86,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/products/p2p-lending" className="hover:text-white transition-colors">
-                  P2P Lending NBFCs
+                <Link href="/p2p" className="hover:text-white transition-colors">
+                  P2P Lending Hub
+                </Link>
+              </li>
+              <li>
+                <Link href="/p2p/platforms" className="hover:text-white transition-colors">
+                  All 28 P2P Platforms
                 </Link>
               </li>
             </ul>

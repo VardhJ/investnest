@@ -1,6 +1,34 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { investmentProducts } from '@/data/products';
 import ActivityFeed from '@/components/ActivityFeed';
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.investnest.in';
+
+export const metadata: Metadata = {
+  title: {
+    absolute: 'InvestNest – Discover Bank Auction Properties & Alternative Investments in India',
+  },
+  description: 'Discover bank-seized properties at 15–30% below market value, listed REITs, RBI-registered P2P platforms, and high-yield alternative assets. 100% free discovery platform for Indian investors.',
+  alternates: {
+    canonical: siteUrl,
+  },
+  openGraph: {
+    title: 'InvestNest – Discover Investments Beyond Stocks & FDs',
+    description: 'Explore 500+ SARFAESI bank-seized properties at 15–30% discount, REITs, P2P lending, and 16 alternative asset classes in India.',
+    url: siteUrl,
+    siteName: 'InvestNest',
+    locale: 'en_IN',
+    type: 'website',
+    images: [{ url: `${siteUrl}/og/default.png`, width: 1200, height: 630, alt: 'InvestNest Alternative Investment Platform' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'InvestNest – Bank Auction Properties & Alternative Investments',
+    description: 'Explore bank-seized properties, REITs, P2P lending, and more.',
+    images: [`${siteUrl}/og/default.png`],
+  },
+};
 
 export default function Home() {
   const realEstateProducts = investmentProducts.filter(p => p.category === 'real-estate');

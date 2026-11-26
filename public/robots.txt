@@ -4,5 +4,8 @@ Disallow: /api/
 Disallow: /admin
 Disallow: /watchlist
 Disallow: /alerts
+Disallow: /login
+Disallow: /signup
+Disallow: /analytics
 
 Sitemap: https://www.investnest.in/sitemap.xml
