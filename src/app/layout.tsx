@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 
 import Navbar from '@/components/Navbar';
+import JsonLd from '@/components/JsonLd';
 import Footer from '@/components/Footer';
 import { AuthProvider } from '@/lib/auth';
 import { AnalyticsProvider } from '@/lib/analytics';
@@ -69,6 +70,28 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'InvestNest',
+            url: SITE_URL,
+            description: 'Investment discovery and education platform for Indians: bank-seized properties, REITs, P2P lending, and alternative assets.',
+          }}
+        />
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'InvestNest',
+            url: SITE_URL,
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: `${SITE_URL}/properties?search={search_term_string}`,
+              'query-input': 'required name=search_term_string',
+            },
+          }}
+        />
         <AuthProvider>
           <AnalyticsProvider>
             <Navbar />

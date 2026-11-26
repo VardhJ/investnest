@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { investmentProducts } from '@/data/products';
+import JsonLd from '@/components/JsonLd';
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
@@ -35,9 +36,21 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   };
 
   const isAuction = product.id === 'sarfaesi-properties';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.investnest.in';
 
   return (
     <div className="min-h-screen bg-slate-50 py-8 lg:py-12">
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'Product',
+          name: product.name,
+          description: product.description,
+          category: product.category,
+          url: `${siteUrl}/products/${product.id}`,
+          brand: { '@type': 'Brand', name: 'InvestNest' },
+        }}
+      />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <div className="mb-6 flex items-center gap-2 text-xs font-medium text-slate-500">

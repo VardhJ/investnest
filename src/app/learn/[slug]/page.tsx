@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import JsonLd from '@/components/JsonLd';
 
 const articles: Record<string, { title: string; category: string; readTime: string; content: string }> = {
   'mstc-e-auction-guide': {
@@ -2361,8 +2362,21 @@ export default async function LearnArticlePage({ params }: { params: Promise<{ s
     notFound();
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.investnest.in';
+
   return (
     <div className="min-h-screen bg-slate-50 py-8 lg:py-12">
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: article.title,
+          description: `${article.title} - ${article.category} guide by InvestNest.`,
+          author: { '@type': 'Organization', name: 'InvestNest' },
+          publisher: { '@type': 'Organization', name: 'InvestNest' },
+          mainEntityOfPage: `${siteUrl}/learn/${slug}`,
+        }}
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <div className="mb-6 flex items-center gap-2 text-xs font-medium text-slate-500">
