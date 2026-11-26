@@ -2322,7 +2322,7 @@ Taxes can eat 20-30% of your investment returns. Understanding tax rules helps y
   },
 };
 
-export const dynamic = 'force-dynamic';
+
 
 // Helper to render **bold** inline text
 function renderInlineBold(text: string): React.ReactNode {
@@ -2333,6 +2333,24 @@ function renderInlineBold(text: string): React.ReactNode {
     }
     return part;
   });
+}
+
+import type { Metadata } from 'next';
+
+export function generateStaticParams() {
+  return Object.keys(articles).map(slug => ({ slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const article = articles[slug];
+  if (!article) return {};
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.investnest.in';
+  return {
+    title: article.title,
+    description: `${article.title} - ${article.category} guide by InvestNest. Read time ${article.readTime}.`,
+    alternates: { canonical: `${siteUrl}/learn/${slug}` },
+  };
 }
 
 export default async function LearnArticlePage({ params }: { params: Promise<{ slug: string }> }) {

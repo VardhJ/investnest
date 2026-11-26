@@ -4,6 +4,7 @@ import { p2pPlatforms } from '@/data/p2p-platforms';
 export const metadata = {
   title: 'P2P Lending in India - Compare 28 RBI-Registered Platforms',
   description: 'Discover and compare all 28 RBI-registered P2P lending platforms in India. Returns, fees, risk levels, and more. Free comparison tool.',
+  alternates: { canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.investnest.in'}/p2p` },
 };
 
 export default function P2PLandingPage() {

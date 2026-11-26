@@ -26,7 +26,7 @@ const articleSlugs = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://investnest.in';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.investnest.in';
 
   const staticPages = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 1 },

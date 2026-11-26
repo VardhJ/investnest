@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { investmentProducts } from '@/data/products';
@@ -14,7 +14,7 @@ const categories = [
   { id: 'traditional', name: 'Equities & ETFs' },
 ];
 
-export default function ProductsPage() {
+function ProductsPageContent() {
   const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState(searchParams?.get('category') || 'all');
 
@@ -142,5 +142,13 @@ export default function ProductsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-slate-50" />}>
+      <ProductsPageContent />
+    </Suspense>
   );
 }

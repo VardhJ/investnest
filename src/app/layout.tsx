@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
-export const dynamic = 'force-dynamic';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { AuthProvider } from '@/lib/auth';
@@ -13,7 +12,7 @@ import GoogleAnalyticsTracker from '@/components/GoogleAnalyticsTracker';
 const inter = Inter({ subsets: ['latin'] });
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || '';
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://investnest.in';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.investnest.in';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -37,20 +36,13 @@ export const metadata: Metadata = {
     siteName: 'InvestNest',
     locale: 'en_IN',
     type: 'website',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'InvestNest - Investment Discovery Platform',
-      },
-    ],
+    images: [],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'InvestNest - Discover Investments Beyond Stocks & MFs',
     description: 'Explore bank-seized properties, REITs, P2P lending, and more.',
-    images: ['/og-image.png'],
+    images: [],
   },
   robots: {
     index: true,

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Property } from '@/types';
@@ -9,7 +9,7 @@ const CITIES = ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai', 'Kolkata
 const PROPERTY_TYPES = ['residential', 'commercial', 'industrial', 'land', 'vehicle'];
 const BANKS = ['SBI', 'PNB', 'HDFC', 'ICICI', 'Axis', 'Bank of Baroda', 'Canara Bank', 'Union Bank'];
 
-export default function PropertiesPage() {
+function PropertiesPageContent() {
   const searchParams = useSearchParams();
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
@@ -407,5 +407,13 @@ export default function PropertiesPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function PropertiesPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-slate-50" />}>
+      <PropertiesPageContent />
+    </Suspense>
   );
 }

@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth';
 
-export default function PropertyDetailPage() {
+function PropertyDetailPageContent() {
   const { user } = useAuth();
   const params = useParams();
   const [property, setProperty] = useState<any>(null);
@@ -520,5 +520,13 @@ export default function PropertyDetailPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function PropertyDetailPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-slate-50 flex items-center justify-center"><p className="text-sm text-slate-500">Loading...</p></div>}>
+      <PropertyDetailPageContent />
+    </Suspense>
   );
 }

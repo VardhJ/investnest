@@ -1,6 +1,19 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { investmentProducts } from '@/data/products';
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const product = investmentProducts.find(p => p.id === id);
+  if (!product) return {};
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.investnest.in';
+  return {
+    title: `${product.name} - Returns, Risk & Taxation`,
+    description: product.description?.slice(0, 160) || `Learn about ${product.name}: expected returns, risk, taxation, and regulation in India.`,
+    alternates: { canonical: `${siteUrl}/products/${product.id}` },
+  };
+}
 
 export function generateStaticParams() {
   return investmentProducts.map(product => ({ id: product.id }));
