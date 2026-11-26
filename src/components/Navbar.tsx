@@ -17,21 +17,27 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { href: '/properties', label: 'Auctions Hub', highlight: true },
-    { href: '/reits', label: 'REITs & InvITs Hub' },
-    { href: '/p2p/platforms', label: 'Credit & P2P Hub' },
-    { href: '/products', label: '17-Asset Catalog', hasDropdown: true },
+    { href: '/properties', label: 'Alternative Investments', hasDropdown: true, highlight: true },
+    { href: '/products', label: 'Product Catalog', hasDropdown: true },
     { href: '/calculator', label: 'Post-Tax Calculator' },
-    { href: '/learn', label: 'Research' },
+    { href: '/learn', label: 'Learn' },
   ];
 
-  const alternativeAssets = [
+  const alternativeInvestments: { href: string; label: string; description: string; highlight?: boolean }[] = [
     { href: '/properties', label: 'Hub 1: SARFAESI Bank Auctions', description: '4,200+ seized properties at 15-30% discount', highlight: true },
     { href: '/analytics', label: 'Hub 1: Bank & City Auction Analytics', description: 'Live supply, reserve price & lender breakdown' },
     { href: '/reits', label: 'Hub 2: REIT, SM-REIT & InvIT Screener', description: 'Live NSE yields, NDCF tax split & SEBI SM-REITs', highlight: true },
     { href: '/p2p/platforms', label: 'Hub 3: NBFC-P2P Watchdog Scorecard', description: 'Escrow trustee, T+1 & NPA audit for 28 platforms', highlight: true },
     { href: '/products/corporate-bonds-obpp', label: 'Hub 3: Corporate Bonds (SEBI OBPP)', description: 'Senior secured listed NCDs (9-12.5% YTM)' },
     { href: '/products/securitized-debt-sdi', label: 'Hub 3: Securitized Debt (SDIs)', description: 'Listed pass-through certificates (10.5-13.5%)' },
+  ];
+
+  const productCategories: { href: string; label: string; description: string; highlight?: boolean }[] = [
+    { href: '/products?category=real-estate', label: 'Real Estate & Land', description: 'SARFAESI, REITs, SM-REITs, Fractional' },
+    { href: '/products?category=alternative', label: 'Alternative Credit', description: 'P2P Lending, Invoice Discounting, SDIs' },
+    { href: '/products?category=fixed-income', label: 'Fixed Income', description: 'Bank FDs, Corporate Bonds, G-Secs, PPF' },
+    { href: '/products?category=commodity', label: 'Commodities & Gold', description: 'Physical Gold, SGBs, Gold ETFs' },
+    { href: '/products?category=traditional', label: 'Equities & ETFs', description: 'Stocks, Mutual Funds, Index ETFs' },
   ];
 
   return (
@@ -76,7 +82,7 @@ export default function Navbar() {
                       </svg>
                     </Link>
                     <div className="absolute top-full left-0 mt-1 w-72 bg-white rounded-xl shadow-lg border border-slate-200/80 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                      {alternativeAssets.map((asset) => (
+                      {(link.label === 'Alternative Investments' ? alternativeInvestments : productCategories).map((asset) => (
                         <Link
                           key={asset.href}
                           href={asset.href}
@@ -238,7 +244,7 @@ export default function Navbar() {
                 </Link>
                 {link.hasDropdown && (
                   <div className="pl-4 space-y-1 mt-1">
-                    {alternativeAssets.map((asset) => (
+                    {(link.label === 'Alternative Investments' ? alternativeInvestments : productCategories).map((asset) => (
                       <Link
                         key={asset.href}
                         href={asset.href}
