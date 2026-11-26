@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
@@ -76,7 +77,11 @@ export default function RootLayout({
           </AnalyticsProvider>
         </AuthProvider>
         {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
-        {GA_ID && <GoogleAnalyticsTracker />}
+        {GA_ID && (
+          <Suspense fallback={null}>
+            <GoogleAnalyticsTracker />
+          </Suspense>
+        )}
       </body>
     </html>
   );
