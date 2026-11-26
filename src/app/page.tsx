@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { investmentProducts } from '@/data/products';
 import ActivityFeed from '@/components/ActivityFeed';
+import QuickAlertBox from '@/components/QuickAlertBox';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.investnest.in';
 
@@ -132,6 +133,13 @@ export default function Home() {
             </div>
           </div>
           <ActivityFeed limit={4} />
+          <div className="mt-10">
+            <QuickAlertBox
+              variant="dark"
+              title="Get Weekly Top 5 Below-Market Bank Auctions & Regulated Yield Digest"
+              subtitle="Receive curated SARFAESI property reserve-price drops, SEBI REIT/SM-REIT yield breakdowns, and RBI NBFC-P2P compliance alerts."
+            />
+          </div>
         </div>
       </section>
 

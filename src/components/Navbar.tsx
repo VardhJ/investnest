@@ -18,19 +18,20 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '/properties', label: 'Auction Deals', highlight: true },
-    { href: '/products', label: 'Alternative Assets', hasDropdown: true },
-    { href: '/calculator', label: 'Yield Calculator' },
-    { href: '/learn', label: 'Research & Guides' },
-    { href: '/analytics', label: 'Market Analytics' },
+    { href: '/reits', label: 'REITs & InvITs' },
+    { href: '/p2p/platforms', label: 'P2P Watchdog' },
+    { href: '/products', label: 'Asset Catalog', hasDropdown: true },
+    { href: '/calculator', label: 'Post-Tax Calculator' },
+    { href: '/learn', label: 'Research' },
   ];
 
   const alternativeAssets = [
     { href: '/properties', label: 'Bank Seized Properties', description: 'SARFAESI auction properties at 15-30% discount', highlight: true },
-    { href: '/p2p', label: 'P2P Lending', description: 'Compare 28 RBI-registered P2P platforms', highlight: true },
-    { href: '/products/reits', label: 'REITs', description: 'Commercial real estate investment trusts' },
-    { href: '/products/invoice-discounting', label: 'Invoice Discounting', description: 'Short-term trade finance (10-13% returns)' },
-    { href: '/products/fractional-real-estate', label: 'Fractional Real Estate', description: 'Own a fraction of commercial property' },
-    { href: '/products/invits', label: 'InvITs', description: 'Infrastructure investment trusts' },
+    { href: '/reits', label: 'REITs, SM-REITs & InvITs Screener', description: 'Live NSE yields, NDCF tax split & SEBI SM-REITs', highlight: true },
+    { href: '/p2p/platforms', label: 'NBFC-P2P Watchdog Scorecard', description: 'Escrow trustee, T+1 & NPA audit for 28 platforms', highlight: true },
+    { href: '/products/corporate-bonds-obpp', label: 'Corporate Bonds (SEBI OBPP)', description: 'Senior secured listed NCDs (9-12.5% YTM)' },
+    { href: '/products/securitized-debt-sdi', label: 'Securitized Debt (SDIs)', description: 'Listed pass-through certificates (10.5-13.5%)' },
+    { href: '/products/gsecs-rbi-retail-direct', label: 'G-Secs & T-Bills', description: 'Sovereign debt via RBI Retail Direct' },
   ];
 
   return (

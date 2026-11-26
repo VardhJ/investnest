@@ -71,28 +71,23 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/products/reits" className="hover:text-white transition-colors">
-                  Commercial REITs
+                <Link href="/reits" className="hover:text-white transition-colors">
+                  REIT, SM-REIT & InvIT Screener
                 </Link>
               </li>
               <li>
-                <Link href="/products/fractional-real-estate" className="hover:text-white transition-colors">
-                  Fractional Ownership
+                <Link href="/products/corporate-bonds-obpp" className="hover:text-white transition-colors">
+                  Corporate Bonds (SEBI OBPP)
                 </Link>
               </li>
               <li>
-                <Link href="/products/invoice-discounting" className="hover:text-white transition-colors">
-                  Invoice Discounting
-                </Link>
-              </li>
-              <li>
-                <Link href="/p2p" className="hover:text-white transition-colors">
-                  P2P Lending Hub
+                <Link href="/products/securitized-debt-sdi" className="hover:text-white transition-colors">
+                  Securitized Debt (SDIs)
                 </Link>
               </li>
               <li>
                 <Link href="/p2p/platforms" className="hover:text-white transition-colors">
-                  All 28 P2P Platforms
+                  NBFC-P2P Watchdog Scorecard
                 </Link>
               </li>
             </ul>

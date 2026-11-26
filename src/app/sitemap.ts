@@ -33,14 +33,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.investnest.in';
 
   const staticPages: MetadataRoute.Sitemap = [
-    { url: baseUrl, lastModified: new Date('2026-11-26'), changeFrequency: 'daily', priority: 1 },
+    { url: baseUrl, lastModified: new Date('2026-11-27'), changeFrequency: 'daily', priority: 1 },
     { url: `${baseUrl}/properties`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.9 },
-    { url: `${baseUrl}/products`, lastModified: new Date(productUpdatedAt), changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${baseUrl}/p2p`, lastModified: new Date(productUpdatedAt), changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${baseUrl}/p2p/platforms`, lastModified: new Date(productUpdatedAt), changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${baseUrl}/reits`, lastModified: new Date('2026-11-27'), changeFrequency: 'daily', priority: 0.9 },
+    { url: `${baseUrl}/products`, lastModified: new Date('2026-11-27'), changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${baseUrl}/p2p`, lastModified: new Date('2026-11-27'), changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${baseUrl}/p2p/platforms`, lastModified: new Date('2026-11-27'), changeFrequency: 'weekly', priority: 0.85 },
     { url: `${baseUrl}/p2p/regulatory`, lastModified: new Date(productUpdatedAt), changeFrequency: 'weekly', priority: 0.6 },
     { url: `${baseUrl}/learn`, lastModified: new Date('2026-11-15'), changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${baseUrl}/calculator`, lastModified: new Date(productUpdatedAt), changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${baseUrl}/calculator`, lastModified: new Date('2026-11-27'), changeFrequency: 'monthly', priority: 0.75 },
   ];
 
   const productPages: MetadataRoute.Sitemap = investmentProducts.map(product => ({

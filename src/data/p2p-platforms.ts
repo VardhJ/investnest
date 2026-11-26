@@ -32,6 +32,12 @@ export interface P2PPlatform {
   riskLevel: 1 | 2 | 3 | 4 | 5;
   icon: string;
   dataSource: string; // Source of the data
+  // Independent Watchdog Uniform Compliance Metrics (optional on base array, computed via helper)
+  escrowTrustee?: string;
+  tPlusOneSettlement?: 'Verified' | 'Transitioning' | 'Unverified';
+  publishesNpa?: 'Monthly / Quarterly' | 'Summary Only' | 'Not Disclosed';
+  netXirrEst?: string;
+  complianceScore?: number;
 }
 
 export const p2pPlatforms: P2PPlatform[] = [
@@ -893,4 +899,169 @@ export function getVerifiedPlatforms(): P2PPlatform[] {
 
 export function getPlatformsWithAutoInvest(): P2PPlatform[] {
   return p2pPlatforms.filter(p => p.autoInvest === true);
+}
+
+export interface P2PWatchdogMetrics {
+  escrowTrustee: string;
+  tPlusOneSettlement: 'Verified' | 'Transitioning' | 'Unverified';
+  publishesNpa: 'Monthly / Quarterly' | 'Summary Only' | 'Not Disclosed';
+  npaDisclosureDetail: string;
+  netXirrEst: string;
+  rbiCoRActive: boolean;
+  noAssuredReturnCompliant: boolean;
+  complianceScore: number; // 0 to 100
+  complianceTier: 'Tier 1: High Disclosure' | 'Tier 2: Partial Disclosure' | 'Tier 3: Opaque / Dormant';
+}
+
+const WATCHDOG_OVERRIDES: Record<string, Partial<P2PWatchdogMetrics>> = {
+  lendenclub: {
+    escrowTrustee: 'IDBI Trusteeship Services Ltd (ICICI Bank Escrow)',
+    tPlusOneSettlement: 'Verified',
+    publishesNpa: 'Monthly / Quarterly',
+    npaDisclosureDetail: 'Publishes portfolio-level NPA (~3.8-4.5% 90+ DPD) and historical XIRR cohorts',
+    netXirrEst: '9.8% - 11.2% Net XIRR',
+    complianceScore: 92,
+    complianceTier: 'Tier 1: High Disclosure',
+  },
+  faircent: {
+    escrowTrustee: 'IDBI Trusteeship Services Ltd',
+    tPlusOneSettlement: 'Verified',
+    publishesNpa: 'Monthly / Quarterly',
+    npaDisclosureDetail: 'Publishes risk-bucket default illustrations (Grade A to D)',
+    netXirrEst: '9.5% - 12.4% Net XIRR',
+    complianceScore: 88,
+    complianceTier: 'Tier 1: High Disclosure',
+  },
+  finzy: {
+    escrowTrustee: 'Axis Trustee Services Ltd',
+    tPlusOneSettlement: 'Verified',
+    publishesNpa: 'Monthly / Quarterly',
+    npaDisclosureDetail: 'Publishes salaried borrower NPA performance (<2.5% 90+ DPD)',
+    netXirrEst: '8.2% - 10.4% Net XIRR',
+    complianceScore: 90,
+    complianceTier: 'Tier 1: High Disclosure',
+  },
+  indiap2p: {
+    escrowTrustee: 'Catalyst Trusteeship Ltd',
+    tPlusOneSettlement: 'Verified',
+    publishesNpa: 'Summary Only',
+    npaDisclosureDetail: 'Publishes summary default claims on women-led borrower pools',
+    netXirrEst: '11.0% - 13.5% Net XIRR',
+    complianceScore: 82,
+    complianceTier: 'Tier 1: High Disclosure',
+  },
+  lendbox: {
+    escrowTrustee: 'Axis Trustee Services Ltd',
+    tPlusOneSettlement: 'Verified',
+    publishesNpa: 'Summary Only',
+    npaDisclosureDetail: 'Discloses product-level yields; public 30/60/90 DPD breakdown limited to logged-in dashboard',
+    netXirrEst: '10.0% - 12.5% Net XIRR',
+    complianceScore: 76,
+    complianceTier: 'Tier 2: Partial Disclosure',
+  },
+  rupeecircle: {
+    escrowTrustee: 'IDBI Trusteeship Services Ltd',
+    tPlusOneSettlement: 'Verified',
+    publishesNpa: 'Summary Only',
+    npaDisclosureDetail: 'Risk-tier expected loss disclosed during lender onboarding',
+    netXirrEst: '9.5% - 12.0% Net XIRR',
+    complianceScore: 74,
+    complianceTier: 'Tier 2: Partial Disclosure',
+  },
+  i2ifunding: {
+    escrowTrustee: 'Beacon Trusteeship Ltd',
+    tPlusOneSettlement: 'Verified',
+    publishesNpa: 'Summary Only',
+    npaDisclosureDetail: 'Historical recovery and default summary by risk category',
+    netXirrEst: '9.0% - 12.5% Net XIRR',
+    complianceScore: 74,
+    complianceTier: 'Tier 2: Partial Disclosure',
+  },
+  rangde: {
+    escrowTrustee: 'Bank Escrow Trustee (RBI NBFC-P2P Compliant)',
+    tPlusOneSettlement: 'Verified',
+    publishesNpa: 'Summary Only',
+    npaDisclosureDetail: 'Social impact repayment rate (~97% repayment reported)',
+    netXirrEst: '4.0% - 8.0% Social Return',
+    complianceScore: 78,
+    complianceTier: 'Tier 1: High Disclosure',
+  },
+  credmint: {
+    escrowTrustee: 'IDBI Trusteeship (via partner NBFC-P2P LiquiLoans / Lendbox)',
+    tPlusOneSettlement: 'Transitioning',
+    publishesNpa: 'Summary Only',
+    npaDisclosureDetail: 'Paused/restructured instant withdrawal pools post Aug 2024 RBI T+1 circular',
+    netXirrEst: '8.5% - 9.5% Net XIRR',
+    complianceScore: 68,
+    complianceTier: 'Tier 2: Partial Disclosure',
+  },
+  'mobikwik-xtra': {
+    escrowTrustee: 'Partner NBFC-P2P Bank Escrow Trustee',
+    tPlusOneSettlement: 'Transitioning',
+    publishesNpa: 'Summary Only',
+    npaDisclosureDetail: 'Transitioned from liquid pool to closed-tenure peer matching per RBI circular',
+    netXirrEst: '9.0% - 11.0% Net XIRR',
+    complianceScore: 65,
+    complianceTier: 'Tier 2: Partial Disclosure',
+  },
+};
+
+export function getPlatformWatchdogMetrics(platform: P2PPlatform): P2PWatchdogMetrics {
+  const override = WATCHDOG_OVERRIDES[platform.id];
+  const hasWebsite = Boolean(platform.website);
+  const hasPublicTerms = Boolean(platform.minInvestment !== null || platform.advertisedReturns !== null);
+
+  if (override) {
+    return {
+      escrowTrustee: override.escrowTrustee || 'Disclosed on Onboarding',
+      tPlusOneSettlement: override.tPlusOneSettlement || 'Verified',
+      publishesNpa: override.publishesNpa || 'Summary Only',
+      npaDisclosureDetail: override.npaDisclosureDetail || 'Standard RBI NBFC-P2P disclosure',
+      netXirrEst: override.netXirrEst || platform.actualReturns || 'Not Disclosed',
+      rbiCoRActive: true,
+      noAssuredReturnCompliant: true,
+      complianceScore: override.complianceScore || 75,
+      complianceTier: override.complianceTier || 'Tier 2: Partial Disclosure',
+    };
+  }
+
+  if (hasWebsite && hasPublicTerms) {
+    return {
+      escrowTrustee: 'Bank Escrow Trustee (Not Named Publicly)',
+      tPlusOneSettlement: 'Transitioning',
+      publishesNpa: 'Not Disclosed',
+      npaDisclosureDetail: 'Public 30/60/90-day NPA table not published on landing page',
+      netXirrEst: platform.actualReturns || 'Unverified (Gross only)',
+      rbiCoRActive: true,
+      noAssuredReturnCompliant: true,
+      complianceScore: 54,
+      complianceTier: 'Tier 2: Partial Disclosure',
+    };
+  }
+
+  if (hasWebsite) {
+    return {
+      escrowTrustee: 'Not Disclosed Publicly',
+      tPlusOneSettlement: 'Unverified',
+      publishesNpa: 'Not Disclosed',
+      npaDisclosureDetail: 'No public portfolio performance or NPA disclosure found',
+      netXirrEst: 'Not Disclosed',
+      rbiCoRActive: true,
+      noAssuredReturnCompliant: true,
+      complianceScore: 38,
+      complianceTier: 'Tier 3: Opaque / Dormant',
+    };
+  }
+
+  return {
+    escrowTrustee: 'No Public Portal Found',
+    tPlusOneSettlement: 'Unverified',
+    publishesNpa: 'Not Disclosed',
+    npaDisclosureDetail: 'Holds RBI NBFC-P2P CoR but operates no public retail lending portal',
+    netXirrEst: 'N/A (Dormant / B2B)',
+    rbiCoRActive: true,
+    noAssuredReturnCompliant: true,
+    complianceScore: 22,
+    complianceTier: 'Tier 3: Opaque / Dormant',
+  };
 }

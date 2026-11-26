@@ -24,8 +24,20 @@ export function initPostHog() {
 }
 
 export function trackEvent(event: string, properties?: Record<string, any>) {
-  if (typeof window === 'undefined' || !POSTHOG_KEY) return;
-  posthog.capture(event, properties);
+  if (typeof window === 'undefined') return;
+  if (POSTHOG_KEY) {
+    posthog.capture(event, properties);
+  }
+  try {
+    const w = window as any;
+    if (typeof w.gtag === 'function') {
+      w.gtag('event', event, properties || {});
+    } else if (Array.isArray(w.dataLayer)) {
+      w.dataLayer.push({ event, ...(properties || {}) });
+    }
+  } catch {
+    // Ignore GA dispatch errors
+  }
 }
 
 export function identifyUser(userId: string, properties?: Record<string, any>) {

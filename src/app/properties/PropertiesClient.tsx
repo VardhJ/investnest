@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Property } from '@/types';
+import QuickAlertBox from '@/components/QuickAlertBox';
 
 const CITIES = ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai', 'Kolkata', 'Pune', 'Ahmedabad', 'Jaipur', 'Lucknow'];
 const PROPERTY_TYPES = ['residential', 'commercial', 'industrial', 'land', 'vehicle'];
@@ -259,7 +260,17 @@ export default function PropertiesClient({ initialProperties = [], initialCity =
       </div>
 
       {/* Property Cards Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+        <QuickAlertBox
+          defaultCity={city || 'All India'}
+          defaultAssetType={propertyType || 'all'}
+          title={
+            city
+              ? `Get ${city} Bank Auction Price-Drop & Re-Auction Alerts`
+              : 'Get Instant Bank Auction Price-Drop & Re-Auction Alerts'
+          }
+          subtitle="When a bank's 1st auction receives no bids, the reserve price is typically reduced by 10-15% on re-listing. Subscribe to get instant alerts before the bidding window closes."
+        />
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3, 4, 5, 6].map((n) => (

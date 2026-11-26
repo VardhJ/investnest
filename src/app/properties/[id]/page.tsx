@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
+import { calculateDealScore } from '@/lib/dealScoring';
+import QuickAlertBox from '@/components/QuickAlertBox';
 import PropertyAnalyticsTracker from './PropertyAnalyticsTracker';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.investnest.in';
@@ -15,16 +17,38 @@ function formatPrice(price: number | null | undefined): string {
 export default async function PropertyDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
-  const [{ data: property }, { data: dealScoreData }] = await Promise.all([
-    supabase.from('properties').select('*').eq('id', id).single(),
-    supabase.from('deal_scores').select('*').eq('property_id', id).maybeSingle(),
-  ]);
+  const { data: property } = await supabase
+    .from('properties')
+    .select('*')
+    .eq('id', id)
+    .single();
 
   if (!property) notFound();
 
+  const dealScoreData = calculateDealScore({
+    title: property.title,
+    bank: property.bank,
+    city: property.city,
+    state: property.state,
+    propertyType: property.property_type,
+    reservePrice: property.reserve_price,
+    emd: property.emd,
+    areaSqft: property.area_sqft || null,
+    bedrooms: property.bedrooms || null,
+    bathrooms: property.bathrooms || null,
+    floor: property.floor || null,
+    totalFloors: property.total_floors || null,
+    parking: property.parking || null,
+    furnishing: property.furnishing || null,
+    possessionStatus: property.possession_status || null,
+    constructionYear: property.construction_year || null,
+    amenities: property.amenities || [],
+  });
+
+  const effectiveMarketValue = property.market_value || dealScoreData.roi.estimatedMarketValue;
   const potentialProfit =
-    property.market_value && property.reserve_price
-      ? property.market_value - property.reserve_price
+    effectiveMarketValue && property.reserve_price
+      ? effectiveMarketValue - property.reserve_price
       : null;
 
   return (
@@ -92,13 +116,13 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
                 <div className="text-xs text-slate-500 font-medium mb-0.5">Reserve Price</div>
                 <div className="text-lg font-extrabold text-slate-900">{formatPrice(property.reserve_price)}</div>
               </div>
-              {property.market_value && (
+              {effectiveMarketValue && (
                 <div>
-                  <div className="text-xs text-slate-500 font-medium mb-0.5">Market Value</div>
-                  <div className="text-lg font-extrabold text-slate-900">{formatPrice(property.market_value)}</div>
+                  <div className="text-xs text-slate-500 font-medium mb-0.5">Est. Market Value</div>
+                  <div className="text-lg font-extrabold text-slate-900">{formatPrice(effectiveMarketValue)}</div>
                 </div>
               )}
-              {potentialProfit && (
+              {potentialProfit && potentialProfit > 0 && (
                 <div>
                   <div className="text-xs text-slate-500 font-medium mb-0.5">Potential Upside</div>
                   <div className="text-lg font-extrabold text-emerald-600">{formatPrice(potentialProfit)}</div>
@@ -196,22 +220,52 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
             {/* Deal Score */}
             {dealScoreData && (
               <div className="bg-white rounded-2xl border border-slate-200 p-6">
-                <h2 className="text-base font-bold text-slate-900 mb-4">InvestNest Deal Score</h2>
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-emerald-50 border-2 border-emerald-500 flex items-center justify-center">
-                    <span className="text-2xl font-extrabold text-emerald-700">{dealScoreData.overall || '—'}</span>
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-base font-bold text-slate-900">InvestNest Valuation & Deal Score</h2>
+                  <span className="px-2.5 py-0.5 rounded text-xs font-extrabold bg-emerald-100 text-emerald-800">
+                    Grade {dealScoreData.grade}: {dealScoreData.label}
+                  </span>
+                </div>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-5 pb-5 border-b border-slate-100">
+                  <div className="w-16 h-16 rounded-full bg-emerald-50 border-2 border-emerald-500 flex items-center justify-center shrink-0">
+                    <span className="text-2xl font-extrabold text-emerald-700">{dealScoreData.overall}</span>
                   </div>
-                  <div>
-                    <div className="text-xs text-slate-500 font-medium">Overall Deal Score</div>
-                    <div className="text-sm text-slate-700 mt-1">Based on price vs market value, location, and auction history</div>
+                  <div className="space-y-1">
+                    <div className="text-xs text-slate-500 font-semibold uppercase tracking-wider">
+                      {dealScoreData.marketValueSource.sourceName}
+                    </div>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      {dealScoreData.marketValueSource.methodology}
+                    </p>
                   </div>
                 </div>
+                {dealScoreData.recommendations.length > 0 && (
+                  <div className="mt-4">
+                    <div className="text-xs font-bold text-slate-800 mb-2">Analyst Notes & Action Items</div>
+                    <ul className="space-y-1.5 text-xs text-slate-600">
+                      {dealScoreData.recommendations.map((rec, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0" />
+                          <span>{rec}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             )}
           </div>
 
           {/* Sidebar */}
           <div className="space-y-6">
+            <QuickAlertBox
+              variant="sidebar"
+              defaultCity={property.city || 'All India'}
+              defaultAssetType={property.property_type || 'all'}
+              title={`Track ${property.city || 'Local'} Re-Auctions & Price Drops`}
+              subtitle="Get notified if this property's reserve price is reduced in a subsequent auction round or similar bank-seized assets list nearby."
+            />
+
             {/* Due Diligence Checklist */}
             <div className="bg-white rounded-2xl border border-slate-200 p-6">
               <h3 className="text-base font-bold text-slate-900 mb-4">
