@@ -24,12 +24,10 @@ export default function Navbar() {
   ];
 
   const alternativeInvestments: { href: string; label: string; description: string; highlight?: boolean }[] = [
-    { href: '/properties', label: 'Hub 1: SARFAESI Bank Auctions', description: '4,200+ seized properties at 15-30% discount', highlight: true },
-    { href: '/analytics', label: 'Hub 1: Bank & City Auction Analytics', description: 'Live supply, reserve price & lender breakdown' },
-    { href: '/reits', label: 'Hub 2: REIT, SM-REIT & InvIT Screener', description: 'Live NSE yields, NDCF tax split & SEBI SM-REITs', highlight: true },
-    { href: '/p2p/platforms', label: 'Hub 3: NBFC-P2P Watchdog Scorecard', description: 'Escrow trustee, T+1 & NPA audit for 28 platforms', highlight: true },
-    { href: '/products/corporate-bonds-obpp', label: 'Hub 3: Corporate Bonds (SEBI OBPP)', description: 'Senior secured listed NCDs (9-12.5% YTM)' },
-    { href: '/products/securitized-debt-sdi', label: 'Hub 3: Securitized Debt (SDIs)', description: 'Listed pass-through certificates (10.5-13.5%)' },
+    { href: '/properties', label: 'Bank-Seized Property Auctions', description: '4,200+ SARFAESI properties at 15-30% discount', highlight: true },
+    { href: '/analytics', label: 'Bank & City Auction Analytics', description: 'Live supply, reserve price & lender breakdown' },
+    { href: '/reits', label: 'REIT, SM-REIT & InvIT Screener', description: 'Live NSE yields, NDCF tax split & SEBI SM-REITs', highlight: true },
+    { href: '/p2p/platforms', label: 'NBFC-P2P Watchdog Scorecard', description: 'Escrow trustee, T+1 & NPA audit for 28 platforms', highlight: true },
   ];
 
   const productCategories: { href: string; label: string; description: string; highlight?: boolean }[] = [
