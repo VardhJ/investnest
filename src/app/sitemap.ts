@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next';
 import { investmentProducts } from '@/data/products';
 import { supabase } from '@/lib/supabase';
+import { PROGRAMMATIC_CITIES } from '@/app/properties/city/[city]/page';
+import { PROGRAMMATIC_BANKS } from '@/app/properties/bank/[bank]/page';
 
 const articleSlugs: Array<{ slug: string; updatedAt: string }> = [
   { slug: 'deal-score-logic', updatedAt: '2026-11-01' },
@@ -58,6 +60,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  const cityHubPages: MetadataRoute.Sitemap = Object.keys(PROGRAMMATIC_CITIES).map((city) => ({
+    url: `${baseUrl}/properties/city/${city}`,
+    lastModified: new Date('2026-11-27'),
+    changeFrequency: 'daily',
+    priority: 0.85,
+  }));
+
+  const bankHubPages: MetadataRoute.Sitemap = Object.keys(PROGRAMMATIC_BANKS).map((bank) => ({
+    url: `${baseUrl}/properties/bank/${bank}`,
+    lastModified: new Date('2026-11-27'),
+    changeFrequency: 'daily',
+    priority: 0.85,
+  }));
+
   // Fetch active property listings from Supabase for sitemap
   let propertyPages: MetadataRoute.Sitemap = [];
   try {
@@ -80,5 +96,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('Sitemap: failed to fetch properties', e);
   }
 
-  return [...staticPages, ...productPages, ...articlePages, ...propertyPages];
+  return [
+    ...staticPages,
+    ...cityHubPages,
+    ...bankHubPages,
+    ...productPages,
+    ...articlePages,
+    ...propertyPages,
+  ];
 }

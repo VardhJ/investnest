@@ -30,30 +30,40 @@ export default function Footer() {
           {/* Column 1: Explore */}
           <div>
             <h4 className="text-xs font-semibold text-slate-200 tracking-wider uppercase mb-4">
-              Discovery
+              Intelligence Hubs
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
                 <Link href="/properties" className="hover:text-white transition-colors flex items-center gap-1.5">
-                  <span>Auction Properties</span>
+                  <span>SARFAESI Auctions Hub</span>
                   <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">
                     Hot
                   </span>
                 </Link>
               </li>
               <li>
-                <Link href="/products" className="hover:text-white transition-colors">
-                  All Asset Classes
+                <Link href="/reits" className="hover:text-white transition-colors">
+                  REIT, SM-REIT &amp; InvIT Hub
+                </Link>
+              </li>
+              <li>
+                <Link href="/p2p/platforms" className="hover:text-white transition-colors">
+                  NBFC-P2P Watchdog Hub
+                </Link>
+              </li>
+              <li>
+                <Link href="/analytics" className="hover:text-white transition-colors">
+                  Bank &amp; City Market Analytics
                 </Link>
               </li>
               <li>
                 <Link href="/calculator" className="hover:text-white transition-colors">
-                  Yield & Growth Calculator
+                  Post-Tax Yield Comparator
                 </Link>
               </li>
               <li>
                 <Link href="/learn" className="hover:text-white transition-colors">
-                  Research & Education Hub
+                  Research &amp; Due Diligence Hub
                 </Link>
               </li>
             </ul>

@@ -92,8 +92,23 @@ export default function AnalyticsPage() {
       {/* Header */}
       <div className="bg-white border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">Market Analytics Dashboard</h1>
-          <p className="text-slate-600">Real-time insights from {data.totalProperties.toLocaleString()} SARFAESI auction properties</p>
+          <div className="flex items-center gap-2 text-xs font-medium text-slate-500 mb-2">
+            <Link href="/properties" className="hover:text-emerald-700">Distressed Real Estate Hub (/properties)</Link>
+            <span>/</span>
+            <span className="text-slate-800 font-semibold">Bank &amp; City Market Analytics</span>
+          </div>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h1 className="text-3xl font-bold text-slate-900 mb-1">SARFAESI Auction Market Analytics</h1>
+              <p className="text-slate-600 text-sm">Real-time supply, reserve price, and bank recovery insights from {data.totalProperties.toLocaleString()} active properties</p>
+            </div>
+            <Link
+              href="/properties"
+              className="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl transition shrink-0"
+            >
+              Browse Live Auctions →
+            </Link>
+          </div>
         </div>
       </div>
 

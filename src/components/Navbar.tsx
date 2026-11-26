@@ -17,21 +17,21 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { href: '/properties', label: 'Auction Deals', highlight: true },
-    { href: '/reits', label: 'REITs & InvITs' },
-    { href: '/p2p/platforms', label: 'P2P Watchdog' },
-    { href: '/products', label: 'Asset Catalog', hasDropdown: true },
+    { href: '/properties', label: 'Auctions Hub', highlight: true },
+    { href: '/reits', label: 'REITs & InvITs Hub' },
+    { href: '/p2p/platforms', label: 'Credit & P2P Hub' },
+    { href: '/products', label: '17-Asset Catalog', hasDropdown: true },
     { href: '/calculator', label: 'Post-Tax Calculator' },
     { href: '/learn', label: 'Research' },
   ];
 
   const alternativeAssets = [
-    { href: '/properties', label: 'Bank Seized Properties', description: 'SARFAESI auction properties at 15-30% discount', highlight: true },
-    { href: '/reits', label: 'REITs, SM-REITs & InvITs Screener', description: 'Live NSE yields, NDCF tax split & SEBI SM-REITs', highlight: true },
-    { href: '/p2p/platforms', label: 'NBFC-P2P Watchdog Scorecard', description: 'Escrow trustee, T+1 & NPA audit for 28 platforms', highlight: true },
-    { href: '/products/corporate-bonds-obpp', label: 'Corporate Bonds (SEBI OBPP)', description: 'Senior secured listed NCDs (9-12.5% YTM)' },
-    { href: '/products/securitized-debt-sdi', label: 'Securitized Debt (SDIs)', description: 'Listed pass-through certificates (10.5-13.5%)' },
-    { href: '/products/gsecs-rbi-retail-direct', label: 'G-Secs & T-Bills', description: 'Sovereign debt via RBI Retail Direct' },
+    { href: '/properties', label: 'Hub 1: SARFAESI Bank Auctions', description: '4,200+ seized properties at 15-30% discount', highlight: true },
+    { href: '/analytics', label: 'Hub 1: Bank & City Auction Analytics', description: 'Live supply, reserve price & lender breakdown' },
+    { href: '/reits', label: 'Hub 2: REIT, SM-REIT & InvIT Screener', description: 'Live NSE yields, NDCF tax split & SEBI SM-REITs', highlight: true },
+    { href: '/p2p/platforms', label: 'Hub 3: NBFC-P2P Watchdog Scorecard', description: 'Escrow trustee, T+1 & NPA audit for 28 platforms', highlight: true },
+    { href: '/products/corporate-bonds-obpp', label: 'Hub 3: Corporate Bonds (SEBI OBPP)', description: 'Senior secured listed NCDs (9-12.5% YTM)' },
+    { href: '/products/securitized-debt-sdi', label: 'Hub 3: Securitized Debt (SDIs)', description: 'Listed pass-through certificates (10.5-13.5%)' },
   ];
 
   return (

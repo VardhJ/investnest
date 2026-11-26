@@ -1,22 +1,26 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { investmentProducts } from '@/data/products';
+import { reitsAndInvits, calculatePostTaxTrustYield } from '@/data/reits-invits';
 import ActivityFeed from '@/components/ActivityFeed';
 import QuickAlertBox from '@/components/QuickAlertBox';
+import HomePostTaxTable from '@/components/HomePostTaxTable';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.investnest.in';
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'InvestNest – Discover Bank Auction Properties & Alternative Investments in India',
+    absolute: 'InvestNest - Bank Auction Properties, REIT Screener & Alternative Investments India',
   },
-  description: 'Discover bank-seized properties at 15–30% below market value, listed REITs, RBI-registered P2P platforms, and high-yield alternative assets. 100% free discovery platform for Indian investors.',
+  description:
+    'Discover bank-seized SARFAESI properties at 15-30% below market value, listed REITs/SM-REITs/InvITs with post-tax NDCF splits, and RBI NBFC-P2P watchdog scores. 100% free intelligence platform for Indian investors.',
   alternates: {
     canonical: siteUrl,
   },
   openGraph: {
-    title: 'InvestNest – Discover Investments Beyond Stocks & FDs',
-    description: 'Explore 500+ SARFAESI bank-seized properties at 15–30% discount, REITs, P2P lending, and 16 alternative asset classes in India.',
+    title: 'InvestNest - Discover Investments Beyond Stocks & FDs',
+    description:
+      'Explore 4,200+ SARFAESI bank-seized properties at 15-30% discount, SEBI REIT/SM-REIT/InvIT post-tax screener, and 17 asset classes in India.',
     url: siteUrl,
     siteName: 'InvestNest',
     locale: 'en_IN',
@@ -25,191 +29,312 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'InvestNest – Bank Auction Properties & Alternative Investments',
-    description: 'Explore bank-seized properties, REITs, P2P lending, and more.',
+    title: 'InvestNest - Bank Auction Properties & Alternative Investments',
+    description: 'Explore bank-seized properties, REITs, SM-REITs, P2P lending watchdog, and more.',
     images: [`${siteUrl}/og/default.png`],
   },
 };
 
 export default function Home() {
-  const realEstateProducts = investmentProducts.filter(p => p.category === 'real-estate');
-  const alternativeProducts = investmentProducts.filter(p => p.category === 'alternative');
-  const featuredProducts = investmentProducts.filter(p => 
-    ['sarfaesi-properties', 'reits', 'invoice-discounting', 'fractional-real-estate', 'p2p-lending', 'invits'].includes(p.id)
+  const featuredProducts = investmentProducts.filter((p) =>
+    [
+      'sarfaesi-properties',
+      'reits',
+      'sm-reits',
+      'corporate-bonds-obpp',
+      'securitized-debt-sdi',
+      'invits',
+    ].includes(p.id)
   );
+
+  const topYieldTrusts = reitsAndInvits.slice(0, 6).map((t) => ({
+    ...t,
+    postTax30: calculatePostTaxTrustYield(t, 30),
+  }));
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
-      {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden bg-slate-950 text-white pt-16 pb-24 lg:pt-24 lg:pb-32">
-        {/* Ambient Gradient Background */}
+      {/* 1. HERO SECTION + 3 INTELLIGENCE HUB INTENT CARDS */}
+      <section className="relative overflow-hidden bg-slate-950 text-white pt-14 pb-20 lg:pt-20 lg:pb-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(5,150,105,0.18),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(16,185,129,0.12),transparent_40%)] pointer-events-none" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b15_1px,transparent_1px),linear-gradient(to_bottom,#1e293b15_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            {/* Pill Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/80 border border-slate-700/80 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-6">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              Alternative Investment Discovery Platform
+              <span>Alternative Investment & Distressed Asset Intelligence</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]">
               Look Beyond Traditional Stocks and 7% Fixed Deposits.
             </h1>
 
-            <p className="mt-6 text-lg sm:text-xl text-slate-300 leading-relaxed max-w-2xl">
-              Discover distressed bank-seized properties at <span className="text-emerald-400 font-semibold">15-30% below market value</span>, listed commercial REITs, corporate invoice discounting, and high-yield alternative assets.
+            <p className="mt-5 text-base sm:text-xl text-slate-300 leading-relaxed max-w-2xl">
+              Screen 4,200+ bank-seized SARFAESI properties at <span className="text-emerald-400 font-semibold">15-30% below market value</span>, compare post-tax NDCF yields on SEBI REITs, SM-REITs &amp; InvITs, and audit all 28 RBI NBFC-P2P licensees.
             </p>
 
-            <div className="mt-8 flex flex-col sm:flex-row gap-4">
+            <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/properties"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-base shadow-lg shadow-emerald-600/30 transition-all hover:scale-[1.01]"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm sm:text-base shadow-lg shadow-emerald-600/30 transition-all hover:scale-[1.01]"
               >
                 <span>Browse Bank Auction Deals</span>
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
               <Link
-                href="/products"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-800/90 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-base transition-colors"
+                href="/reits"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-slate-800/90 hover:bg-slate-800 text-slate-100 border border-slate-700 font-semibold text-sm sm:text-base transition-colors"
               >
-                Explore 16 Asset Classes
+                <span>REIT &amp; InvIT Screener</span>
               </Link>
-            </div>
-
-            {/* Quick Metrics */}
-            <div className="mt-12 pt-8 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-6">
-              <div>
-                <div className="text-2xl sm:text-3xl font-extrabold text-white">15-30%</div>
-                <div className="text-xs sm:text-sm text-slate-400 font-medium mt-0.5">Average Auction Discount</div>
-              </div>
-              <div>
-                <div className="text-2xl sm:text-3xl font-extrabold text-white">500+</div>
-                <div className="text-xs sm:text-sm text-slate-400 font-medium mt-0.5">SARFAESI Properties Tracked</div>
-              </div>
-              <div>
-                <div className="text-2xl sm:text-3xl font-extrabold text-white">10-14%</div>
-                <div className="text-xs sm:text-sm text-slate-400 font-medium mt-0.5">Alternative Asset Yields</div>
-              </div>
-              <div>
-                <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400">100% Free</div>
-                <div className="text-xs sm:text-sm text-slate-400 font-medium mt-0.5">Open Access Discovery</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 1.5. RECENT ACTIVITY FEED */}
-      <section className="py-16 bg-white border-b border-slate-200/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-3">
-                <span>Live</span>
-                <span>•</span>
-                <span>Updated Daily</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                Recent Auction Activity
-              </h2>
-              <p className="mt-3 text-base text-slate-600 max-w-2xl leading-relaxed">
-                New listings, price changes, and properties likely sold — updated every 24 hours from IBAPI.
-              </p>
-            </div>
-            <div className="mt-6 md:mt-0">
               <Link
-                href="/properties"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 hover:text-emerald-800 group"
+                href="/calculator"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-emerald-400 border border-emerald-500/40 font-semibold text-sm sm:text-base transition-colors"
               >
-                <span>View all properties</span>
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
+                <span>Post-Tax Yield Comparator</span>
               </Link>
             </div>
           </div>
-          <ActivityFeed limit={4} />
-          <div className="mt-10">
-            <QuickAlertBox
-              variant="dark"
-              title="Get Weekly Top 5 Below-Market Bank Auctions & Regulated Yield Digest"
-              subtitle="Receive curated SARFAESI property reserve-price drops, SEBI REIT/SM-REIT yield breakdowns, and RBI NBFC-P2P compliance alerts."
-            />
+
+          {/* 3 Core Pillar Hub Cards (Self-Selection Within 5 Seconds) */}
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5">
+            <Link
+              href="/properties"
+              className="group p-6 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-emerald-500/80 transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                    Hub 01 • Distressed Real Estate
+                  </span>
+                  <span className="text-xs font-extrabold text-emerald-400">15-30% Discount</span>
+                </div>
+                <h2 className="text-lg font-extrabold text-white group-hover:text-emerald-400 transition-colors">
+                  SARFAESI Bank Auction Screener
+                </h2>
+                <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
+                  4,200+ active residential, commercial, and industrial foreclosures from SBI, PNB, Union Bank, BoB, and HDFC with circle-rate deal scores.
+                </p>
+              </div>
+              <div className="mt-5 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-semibold text-emerald-400">
+                <span>Search Auctions by City &amp; Bank</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </Link>
+
+            <Link
+              href="/reits"
+              className="group p-6 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-emerald-500/80 transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    Hub 02 • Listed Yield Trusts
+                  </span>
+                  <span className="text-xs font-extrabold text-emerald-400">6.4% - 12.5% Yield</span>
+                </div>
+                <h2 className="text-lg font-extrabold text-white group-hover:text-emerald-400 transition-colors">
+                  REIT, SM-REIT &amp; InvIT Screener
+                </h2>
+                <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
+                  Compare Embassy, Mindspace, Brookfield, Nexus, PropShare SM-REIT, IndiGrid, and PowerGrid on post-tax Section 115UA NDCF splits.
+                </p>
+              </div>
+              <div className="mt-5 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-semibold text-emerald-400">
+                <span>Screen Post-Tax NDCF Yields</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </Link>
+
+            <Link
+              href="/p2p/platforms"
+              className="group p-6 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-emerald-500/80 transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                    Hub 03 • Private Credit &amp; Bonds
+                  </span>
+                  <span className="text-xs font-extrabold text-emerald-400">9.0% - 13.5% XIRR</span>
+                </div>
+                <h2 className="text-lg font-extrabold text-white group-hover:text-emerald-400 transition-colors">
+                  NBFC-P2P Watchdog &amp; SEBI OBPPs
+                </h2>
+                <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
+                  Audit all 28 RBI-registered NBFC-P2P platforms on Named Bank Escrow Trustee, T+1 settlement verification, and public 90-day NPA reporting.
+                </p>
+              </div>
+              <div className="mt-5 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-semibold text-emerald-400">
+                <span>Open 28-Platform Watchdog</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* 2. AUCTION DEALS SPOTLIGHT (CORE FOCUS) */}
+      {/* 2. LIVE MARKET PULSE: AUCTION ACTIVITY FEED + LISTED REIT/InvIT YIELD TERMINAL */}
+      <section className="py-16 bg-white border-b border-slate-200/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          {/* 2A. Recent Auction Activity */}
+          <div>
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-8">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-3">
+                  <span>Live Terminal</span>
+                  <span>•</span>
+                  <span>IBAPI &amp; NSE Feeds</span>
+                </div>
+                <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+                  Recent SARFAESI Auction Activity
+                </h2>
+                <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-2xl">
+                  New bank foreclosure listings, reserve price reductions, and properties concluded over the last 24 hours.
+                </p>
+              </div>
+              <div className="mt-4 md:mt-0 flex items-center gap-4">
+                <Link
+                  href="/analytics"
+                  className="text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900"
+                >
+                  Bank Analytics →
+                </Link>
+                <Link
+                  href="/properties"
+                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-emerald-700 hover:text-emerald-800"
+                >
+                  <span>View All Auctions</span>
+                  <span>→</span>
+                </Link>
+              </div>
+            </div>
+            <ActivityFeed limit={4} />
+          </div>
+
+          {/* 2B. Live Listed REIT, SM-REIT & InvIT Yield Snapshot */}
+          <div className="pt-10 border-t border-slate-100">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">
+                  SEBI Registered Yield Trusts
+                </span>
+                <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-0.5">
+                  Listed REIT, SM-REIT &amp; InvIT Post-Tax Yield Snapshot
+                </h3>
+              </div>
+              <Link
+                href="/reits"
+                className="text-xs sm:text-sm font-semibold text-emerald-700 hover:text-emerald-800 hover:underline"
+              >
+                Open Full NDCF Tax-Split Screener →
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {topYieldTrusts.map((trust) => (
+                <Link
+                  key={trust.id}
+                  href="/reits"
+                  className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-emerald-400 hover:bg-white transition-all flex items-center justify-between gap-3"
+                >
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-extrabold text-slate-900 text-sm">{trust.ticker}</span>
+                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-white border border-slate-200 text-slate-600">
+                        {trust.occupancyPct}% Occ
+                      </span>
+                    </div>
+                    <div className="text-xs text-slate-500 mt-0.5 truncate max-w-[190px]">
+                      {trust.name}
+                    </div>
+                    <div className="text-[10px] text-slate-400 mt-1">
+                      Tax-Free Div + RoC: {trust.taxSplit.dividendPct + trust.taxSplit.returnOfCapitalPct}%
+                    </div>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <div className="text-xs text-slate-400">Net (30% Slab)</div>
+                    <div className="text-lg font-extrabold text-emerald-700">
+                      {trust.postTax30.netYieldPct.toFixed(2)}%
+                    </div>
+                    <div className="text-[10px] text-slate-500">
+                      Gross: {trust.distributionYieldPct.toFixed(2)}%
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* 2C. Quick Alert Lead Capture Box */}
+          <QuickAlertBox
+            variant="dark"
+            title="Get Weekly Top 5 Below-Market Bank Auctions & Regulated Yield Digest"
+            subtitle="Receive curated SARFAESI property reserve-price drops, SEBI REIT/SM-REIT yield breakdowns, and RBI NBFC-P2P compliance alerts."
+          />
+        </div>
+      </section>
+
+      {/* 3. INTERACTIVE POST-TAX ASSET CLASS COMPARATOR */}
+      <section className="py-20 bg-slate-50 border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <HomePostTaxTable />
+        </div>
+      </section>
+
+      {/* 4. AUCTION DEALS SPOTLIGHT & PROGRAMMATIC CITY/BANK ENTRY POINTS */}
       <section className="py-20 bg-white border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold uppercase tracking-wider mb-3">
-                <span>Featured Category</span>
+                <span>Distressed Real Estate Hub</span>
                 <span>•</span>
                 <span>SARFAESI Act 2002</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                Bank-Seized Auction Properties
+                Browse Bank-Seized Auctions by City &amp; Lender
               </h2>
-              <p className="mt-3 text-base text-slate-600 max-w-2xl leading-relaxed">
-                When borrowers default on secured loans, public and private sector banks (SBI, PNB, HDFC, ICICI) recover capital by auctioning distressed residential, commercial, and industrial real estate directly to registered public bidders.
+              <p className="mt-2 text-base text-slate-600 max-w-2xl leading-relaxed">
+                Jump directly into localized SARFAESI auction directories benchmarked against State IGR Ready Reckoner and Circle Rates.
               </p>
             </div>
-            <div className="mt-6 md:mt-0">
+            <div className="mt-4 md:mt-0">
               <Link
                 href="/properties"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 hover:text-emerald-800 group"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 hover:text-emerald-800"
               >
-                <span>View all verified auctions</span>
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
+                <span>Open Full Auction Screener</span>
+                <span>→</span>
               </Link>
             </div>
           </div>
 
-          {/* Value Proposition Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-slate-300 transition-colors">
-              <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mb-4">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Discounted Reserve Prices</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Banks price auctions to recover the principal loan amount rather than speculative market peaks. This creates discounts between 15% to 30% against prevailing circle rates.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-slate-300 transition-colors">
-              <div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold mb-4">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Direct Bank Title Transfer</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Sales are executed directly under statutory authority with a Bank Sale Certificate, establishing clean conveyance free from prior non-statutory mortgagor encumbrances.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-slate-300 transition-colors">
-              <div className="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold mb-4">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Standardized E-Auctions</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Regulated bidding conducted via national platforms (MSTC and IBAPI). Transparent bidding increments, public dates, and structured Earnest Money Deposit (EMD) escrow.
-              </p>
-            </div>
+          {/* City & Bank Directory Matrix */}
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-12">
+            {[
+              { slug: 'mumbai', name: 'Mumbai', rate: 'IGR Ready Reckoner' },
+              { slug: 'delhi', name: 'Delhi NCR', rate: 'Delhi Circle Rate' },
+              { slug: 'bangalore', name: 'Bangalore', rate: 'Kaveri Guidance' },
+              { slug: 'hyderabad', name: 'Hyderabad', rate: 'Telangana IGR' },
+              { slug: 'chennai', name: 'Chennai', rate: 'TNREGINET Value' },
+              { slug: 'pune', name: 'Pune', rate: 'Maharashtra IGR' },
+              { slug: 'kolkata', name: 'Kolkata', rate: 'WB Circle Rate' },
+              { slug: 'ahmedabad', name: 'Ahmedabad', rate: 'Gujarat Jantri' },
+              { slug: 'jaipur', name: 'Jaipur', rate: 'Rajasthan DLC' },
+              { slug: 'lucknow', name: 'Lucknow', rate: 'UP Collector Rate' },
+            ].map((c) => (
+              <Link
+                key={c.slug}
+                href={`/properties/city/${c.slug}`}
+                className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-emerald-500 hover:bg-white transition-all"
+              >
+                <div className="font-bold text-slate-900 text-sm">{c.name} Auctions</div>
+                <div className="text-[11px] text-slate-500 mt-0.5">{c.rate}</div>
+              </Link>
+            ))}
           </div>
 
           {/* Step-by-Step Bidding Framework */}
@@ -231,7 +356,7 @@ export default function Home() {
                 <div className="w-8 h-8 rounded-lg bg-emerald-600/30 text-emerald-400 flex items-center justify-center font-bold text-sm mb-3">
                   01
                 </div>
-                <h4 className="font-bold text-white text-base mb-1">Search & Screen</h4>
+                <h4 className="font-bold text-white text-base mb-1">Search &amp; Screen</h4>
                 <p className="text-xs text-slate-400 leading-relaxed">
                   Filter listings by city, bank, reserve price, and property category on InvestNest to calculate fair value.
                 </p>
@@ -241,7 +366,7 @@ export default function Home() {
                 <div className="w-8 h-8 rounded-lg bg-emerald-600/30 text-emerald-400 flex items-center justify-center font-bold text-sm mb-3">
                   02
                 </div>
-                <h4 className="font-bold text-white text-base mb-1">Physical & Legal Check</h4>
+                <h4 className="font-bold text-white text-base mb-1">Physical &amp; Legal Check</h4>
                 <p className="text-xs text-slate-400 leading-relaxed">
                   Inspect physical site, assess municipal tax receipts, and verify physical vs symbolic possession with the designated branch officer.
                 </p>
@@ -251,7 +376,7 @@ export default function Home() {
                 <div className="w-8 h-8 rounded-lg bg-emerald-600/30 text-emerald-400 flex items-center justify-center font-bold text-sm mb-3">
                   03
                 </div>
-                <h4 className="font-bold text-white text-base mb-1">Register & Deposit EMD</h4>
+                <h4 className="font-bold text-white text-base mb-1">Register &amp; Deposit EMD</h4>
                 <p className="text-xs text-slate-400 leading-relaxed">
                   Submit 10% Earnest Money Deposit into MSTC Global Wallet or bank nodal account 48-72h prior to the scheduled bidding date.
                 </p>
@@ -261,7 +386,7 @@ export default function Home() {
                 <div className="w-8 h-8 rounded-lg bg-emerald-600/30 text-emerald-400 flex items-center justify-center font-bold text-sm mb-3">
                   04
                 </div>
-                <h4 className="font-bold text-white text-base mb-1">E-Auction & Transfer</h4>
+                <h4 className="font-bold text-white text-base mb-1">E-Auction &amp; Transfer</h4>
                 <p className="text-xs text-slate-400 leading-relaxed">
                   Bid digitally in real-time. Winning bidders remit 25% within 24 hours, settle the balance in 15 days, and receive the Sale Certificate.
                 </p>
@@ -277,139 +402,33 @@ export default function Home() {
                 className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300"
               >
                 <span>Read Complete Auction Masterclass</span>
-                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
+                <span>→</span>
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. ASSET CLASS COMPARISON (DEZERV STYLE) */}
-      <section className="py-20 bg-slate-50 border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mb-12">
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">
-              Portfolio Diversification
-            </span>
-            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
-              Alternative Yield vs Traditional Instruments
-            </h2>
-            <p className="mt-3 text-slate-600 text-base leading-relaxed">
-              Most Indian investors limit their capital to bank deposits, mutual funds, and gold. Here is how non-traditional asset classes compare on returns, minimum ticket size, and risk profile.
-            </p>
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden text-sm">
-              <thead>
-                <tr className="bg-slate-100/80 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-600">
-                  <th className="py-4 px-6">Asset Class</th>
-                  <th className="py-4 px-6">Category</th>
-                  <th className="py-4 px-6">Expected Yield / Return</th>
-                  <th className="py-4 px-6">Min. Ticket</th>
-                  <th className="py-4 px-6">Liquidity</th>
-                  <th className="py-4 px-6">Risk Rating</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 text-slate-700 font-medium">
-                <tr className="bg-emerald-50/40 hover:bg-emerald-50/70 transition-colors">
-                  <td className="py-4 px-6 font-bold text-slate-900">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-emerald-600" />
-                      <span>SARFAESI Property Auctions</span>
-                    </div>
-                  </td>
-                  <td className="py-4 px-6 text-emerald-800 font-semibold">Real Estate</td>
-                  <td className="py-4 px-6 text-emerald-700 font-bold">15-30% discount to market</td>
-                  <td className="py-4 px-6">₹5,00,000</td>
-                  <td className="py-4 px-6 text-slate-500">Low (Tangible)</td>
-                  <td className="py-4 px-6">
-                    <span className="px-2 py-0.5 rounded text-xs font-bold bg-amber-100 text-amber-800">4 / 5</span>
-                  </td>
-                </tr>
-
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="py-4 px-6 font-semibold text-slate-900">Commercial REITs</td>
-                  <td className="py-4 px-6 text-slate-500">Real Estate</td>
-                  <td className="py-4 px-6 text-emerald-600 font-bold">6-9% dividend yield + growth</td>
-                  <td className="py-4 px-6">₹10,000</td>
-                  <td className="py-4 px-6 text-slate-600 font-semibold">High (Listed)</td>
-                  <td className="py-4 px-6">
-                    <span className="px-2 py-0.5 rounded text-xs font-bold bg-blue-100 text-blue-800">3 / 5</span>
-                  </td>
-                </tr>
-
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="py-4 px-6 font-semibold text-slate-900">Invoice Discounting</td>
-                  <td className="py-4 px-6 text-slate-500">Alternative Debt</td>
-                  <td className="py-4 px-6 text-emerald-600 font-bold">10-13% annualized</td>
-                  <td className="py-4 px-6">₹1,00,000</td>
-                  <td className="py-4 px-6 text-slate-600">Medium (30-90 Days)</td>
-                  <td className="py-4 px-6">
-                    <span className="px-2 py-0.5 rounded text-xs font-bold bg-blue-100 text-blue-800">3 / 5</span>
-                  </td>
-                </tr>
-
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="py-4 px-6 font-semibold text-slate-900">P2P Lending NBFCs</td>
-                  <td className="py-4 px-6 text-slate-500">Alternative Debt</td>
-                  <td className="py-4 px-6 text-emerald-600 font-bold">10-14% interest</td>
-                  <td className="py-4 px-6">₹5,000</td>
-                  <td className="py-4 px-6 text-slate-500">Low (Monthly EMI)</td>
-                  <td className="py-4 px-6">
-                    <span className="px-2 py-0.5 rounded text-xs font-bold bg-amber-100 text-amber-800">4 / 5</span>
-                  </td>
-                </tr>
-
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="py-4 px-6 font-semibold text-slate-900">Fixed Deposits (Bank)</td>
-                  <td className="py-4 px-6 text-slate-500">Traditional</td>
-                  <td className="py-4 px-6 text-slate-600">6.5-7.5% fixed</td>
-                  <td className="py-4 px-6">₹1,000</td>
-                  <td className="py-4 px-6 text-slate-600">Medium</td>
-                  <td className="py-4 px-6">
-                    <span className="px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800">1 / 5</span>
-                  </td>
-                </tr>
-
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="py-4 px-6 font-semibold text-slate-900">Public Equity (Nifty 50)</td>
-                  <td className="py-4 px-6 text-slate-500">Traditional</td>
-                  <td className="py-4 px-6 text-slate-600">10-14% CAGR (Volatile)</td>
-                  <td className="py-4 px-6">₹100</td>
-                  <td className="py-4 px-6 text-slate-600 font-semibold">High</td>
-                  <td className="py-4 px-6">
-                    <span className="px-2 py-0.5 rounded text-xs font-bold bg-amber-100 text-amber-800">4 / 5</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. FEATURED PRODUCTS GRID (GROWW STYLE) */}
+      {/* 5. FEATURED ASSET CLASSES GRID */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">
-                Asset Intelligence
+                Complete 17-Asset Catalog
               </span>
               <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
-                Curated Alternative Asset Classes
+                Regulated Alternative &amp; Fixed-Income Vehicles
               </h2>
               <p className="mt-2 text-slate-600 text-base">
-                Deep-dive into regulations, expected returns, and platform access in India.
+                Deep-dive into SEBI/RBI regulations, 2026 capital gains tax splits, and platform access in India.
               </p>
             </div>
             <Link
               href="/products"
               className="mt-4 md:mt-0 text-sm font-semibold text-emerald-700 hover:text-emerald-800"
             >
-              Explore all 16 investment products →
+              Explore all {investmentProducts.length} investment products →
             </Link>
           </div>
 
@@ -452,35 +471,6 @@ export default function Home() {
                 </div>
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 5. CALL TO ACTION BANNER */}
-      <section className="py-16 bg-slate-950 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(5,150,105,0.2),transparent_50%)] pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="max-w-2xl">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Start Discovering Deals Right Now.
-            </h2>
-            <p className="mt-4 text-base text-slate-300 leading-relaxed">
-              No registration or phone number required to browse property auction records, inspect reserve prices, and analyze alternative assets.
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/properties"
-                className="px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 font-semibold text-white text-center transition-colors shadow-lg shadow-emerald-600/30"
-              >
-                Search Live Auction Properties
-              </Link>
-              <Link
-                href="/calculator"
-                className="px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 font-semibold text-slate-200 text-center transition-colors"
-              >
-                Open Yield Calculator
-              </Link>
-            </div>
           </div>
         </div>
       </section>

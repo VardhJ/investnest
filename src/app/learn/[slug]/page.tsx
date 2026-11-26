@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
+import QuickAlertBox from '@/components/QuickAlertBox';
 
 // Article metadata including dates (used for schema + sitemap accuracy)
 interface ArticleData {
@@ -2527,6 +2528,62 @@ export default async function LearnArticlePage({ params }: { params: Promise<{ s
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.investnest.in';
 
+  // Determine contextual live screener widget based on article slug
+  let screenerWidget = {
+    badge: 'Hub 01 • Live SARFAESI Auction Screener',
+    title: 'Screen 4,200+ Bank-Seized Properties at 15-30% Below Market',
+    description:
+      'Filter verified SBI, PNB, Union Bank, BoB, and HDFC foreclosure notices by city, reserve price, and State IGR circle-rate Deal Score.',
+    ctaLabel: 'Open Live Auction Screener →',
+    ctaHref: '/properties',
+    secondaryLabel: 'Bank & City Analytics',
+    secondaryHref: '/analytics',
+  };
+
+  if (slug.includes('reit')) {
+    screenerWidget = {
+      badge: 'Hub 02 • SEBI REIT, SM-REIT & InvIT Screener',
+      title: 'Compare Real Post-Tax NDCF Yields Across All Listed Trusts',
+      description:
+        'Screen Embassy, Mindspace, Brookfield, Nexus, PropShare SM-REIT, IndiGrid, and PowerGrid on Section 115UA tax splits, occupancy, and WALE.',
+      ctaLabel: 'Open REIT & InvIT Screener →',
+      ctaHref: '/reits',
+      secondaryLabel: 'Post-Tax Yield Calculator',
+      secondaryHref: '/calculator',
+    };
+  } else if (slug.includes('p2p') || slug.includes('invoice')) {
+    screenerWidget = {
+      badge: 'Hub 03 • Independent RBI NBFC-P2P Watchdog',
+      title: 'Audit All 28 RBI-Registered NBFC-P2P Platforms',
+      description:
+        'Verify Named Bank Escrow Trustees, T+1 settlement compliance, public 90-day NPA reporting, and net XIRR after defaults.',
+      ctaLabel: 'Open 28-Platform Watchdog Scorecard →',
+      ctaHref: '/p2p/platforms',
+      secondaryLabel: 'Explore Corporate Bonds (OBPP)',
+      secondaryHref: '/products/corporate-bonds-obpp',
+    };
+  } else if (
+    slug.includes('tax') ||
+    slug.includes('fd') ||
+    slug.includes('nps') ||
+    slug.includes('gold') ||
+    slug.includes('risk') ||
+    slug.includes('emergency') ||
+    slug.includes('mutual') ||
+    slug.includes('credit')
+  ) {
+    screenerWidget = {
+      badge: 'Cross-Asset Intelligence • 2026 Tax Rules',
+      title: 'Simulate Real Post-Tax Returns in Your Income Tax Slab',
+      description:
+        'Compare FDs, PPF, Listed REITs, SM-REITs, InvITs, Corporate Bonds, SGBs, and Nifty ETFs side-by-side after 0%, 10%, 20%, or 30% tax drag.',
+      ctaLabel: 'Open Post-Tax Yield Comparator →',
+      ctaHref: '/calculator',
+      secondaryLabel: 'Browse All 17 Asset Classes',
+      secondaryHref: '/products',
+    };
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 py-8 lg:py-12">
       <JsonLd
@@ -2582,9 +2639,38 @@ export default async function LearnArticlePage({ params }: { params: Promise<{ s
             <span className="text-slate-400 text-xs font-medium">{article.readTime} reading time</span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-8 pb-4 border-b border-slate-100">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-6 pb-4 border-b border-slate-100">
             {article.title}
           </h1>
+
+          {/* Top Contextual Live Screener Banner */}
+          <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-slate-900 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 mb-1">
+                {screenerWidget.badge}
+              </div>
+              <div className="text-sm sm:text-base font-extrabold text-white">
+                {screenerWidget.title}
+              </div>
+              <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">
+                {screenerWidget.description}
+              </p>
+            </div>
+            <div className="flex flex-col sm:items-end gap-1.5 shrink-0">
+              <Link
+                href={screenerWidget.ctaHref}
+                className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold text-center transition"
+              >
+                {screenerWidget.ctaLabel}
+              </Link>
+              <Link
+                href={screenerWidget.secondaryHref}
+                className="text-[11px] font-semibold text-slate-400 hover:text-white text-center"
+              >
+                {screenerWidget.secondaryLabel} →
+              </Link>
+            </div>
+          </div>
 
           <div className="prose max-w-none text-slate-700">
             {renderContent(article.content)}
@@ -2594,6 +2680,15 @@ export default async function LearnArticlePage({ params }: { params: Promise<{ s
             <strong className="text-slate-700">Regulatory Disclaimer:</strong> This dossier is curated for educational and informational purposes only and does not constitute financial, legal, or investment advice. Always consult a SEBI-registered advisor and independent legal counsel before participating in auctions or deploying capital.
           </div>
         </article>
+
+        {/* Bottom Lead Capture Box */}
+        <div className="mt-8">
+          <QuickAlertBox
+            variant="dark"
+            title="Get Weekly Below-Market Bank Auctions & Regulated Yield Digest"
+            subtitle="Receive top 20-30% discounted SARFAESI property notices, reserve price drops, and SEBI REIT/OBPP updates directly in your inbox."
+          />
+        </div>
 
         {/* Related Articles */}
         <div className="mt-8 p-6 bg-white rounded-2xl border border-slate-200">

@@ -12,15 +12,16 @@ const BANKS = ['SBI', 'PNB', 'HDFC', 'ICICI', 'Axis', 'Bank of Baroda', 'Canara 
 interface Props {
   initialProperties?: Property[];
   initialCity?: string;
+  initialBank?: string;
 }
 
-export default function PropertiesClient({ initialProperties = [], initialCity = '' }: Props) {
+export default function PropertiesClient({ initialProperties = [], initialCity = '', initialBank = '' }: Props) {
   const [properties, setProperties] = useState<Property[]>(initialProperties);
   const [loading, setLoading] = useState(initialProperties.length === 0);
   const [search, setSearch] = useState('');
   const [city, setCity] = useState(initialCity);
   const [propertyType, setPropertyType] = useState('');
-  const [bank, setBank] = useState('');
+  const [bank, setBank] = useState(initialBank);
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [sortBy, setSortBy] = useState('auction_date');
@@ -127,14 +128,68 @@ export default function PropertiesClient({ initialProperties = [], initialCity =
                 <span>Updated Daily</span>
               </div>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                Bank-Seized Property Auctions
+                {city
+                  ? `Bank-Seized Property Auctions in ${city}`
+                  : bank
+                  ? `${bank} SARFAESI Property Auctions`
+                  : 'Bank-Seized Property Auctions'}
               </h1>
               <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-2xl">
                 Distressed commercial, residential, and industrial assets auctioned by Indian scheduled banks at 15-30% below market valuations.
               </p>
             </div>
-            <div className="text-sm text-slate-500 font-medium">
-              Showing active e-auctions across India
+            <div className="flex flex-col sm:items-end gap-2">
+              <Link
+                href="/analytics"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition"
+              >
+                <span>Bank & City Auction Analytics</span>
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </Link>
+              <div className="text-xs text-slate-500 font-medium">
+                Showing active e-auctions across India
+              </div>
+            </div>
+          </div>
+
+          {/* Programmatic Hub Sub-Navigation Links for SEO & Hierarchy */}
+          <div className="mt-6 pt-5 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="font-bold text-slate-400 uppercase tracking-wider mr-1">Top Cities:</span>
+              {CITIES.map((c) => (
+                <Link
+                  key={c}
+                  href={`/properties/city/${c.toLowerCase()}`}
+                  className={`px-2.5 py-1 rounded-lg font-semibold border transition ${
+                    city.toLowerCase() === c.toLowerCase()
+                      ? 'bg-emerald-600 text-white border-emerald-600'
+                      : 'bg-slate-50 text-slate-600 border-slate-200 hover:border-emerald-300 hover:text-emerald-700'
+                  }`}
+                >
+                  {c}
+                </Link>
+              ))}
+            </div>
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="font-bold text-slate-400 uppercase tracking-wider mr-1">By Bank:</span>
+              {[
+                { slug: 'sbi', label: 'SBI' },
+                { slug: 'pnb', label: 'PNB' },
+                { slug: 'union-bank', label: 'Union Bank' },
+                { slug: 'bank-of-baroda', label: 'BoB' },
+                { slug: 'canara-bank', label: 'Canara' },
+                { slug: 'hdfc', label: 'HDFC' },
+              ].map((b) => (
+                <Link
+                  key={b.slug}
+                  href={`/properties/bank/${b.slug}`}
+                  className="px-2.5 py-1 rounded-lg font-semibold bg-blue-50/70 text-blue-800 border border-blue-200/70 hover:bg-blue-100 transition"
+                >
+                  {b.label}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
