@@ -880,13 +880,20 @@ def main():
         logger.error(f"IBAPI failed: {e}")
 
     # Step 1b: Fetch from BAANKNET (PSB Alliance official portal)
-    try:
-        baanknet = BaanknetParser()
-        props = baanknet.fetch_properties()
-        all_properties.extend(props)
-        logger.info(f"BAANKNET: {len(props)} properties")
-    except Exception as e:
-        logger.error(f"BAANKNET failed: {e}")
+    # NOTE: BAANKNET's Terms & Conditions prohibit storing/reusing information
+    # accessed on the service without written consent from PSB Alliance.
+    # This scraper is DISABLED by default. Set BAANKNET_ENABLED=true in the
+    # environment (and obtain written permission from PSB Alliance) before use.
+    if os.getenv('BAANKNET_ENABLED', 'false').lower() == 'true':
+        try:
+            baanknet = BaanknetParser()
+            props = baanknet.fetch_properties()
+            all_properties.extend(props)
+            logger.info(f"BAANKNET: {len(props)} properties")
+        except Exception as e:
+            logger.error(f"BAANKNET failed: {e}")
+    else:
+        logger.info("BAANKNET scraper disabled (BAANKNET_ENABLED != true). Skipping.")
 
     if not all_properties:
         logger.warning("No properties fetched. Exiting.")
