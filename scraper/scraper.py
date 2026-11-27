@@ -291,6 +291,7 @@ class IBAPIParser:
             )
             prop['market_value'] = market_val
             prop['market_value_estimate'] = market_val
+            prop['market_value_source'] = 'State IGR Circle Rate & City Benchmark'
             prop['discount'] = discount_pct
             prop['deal_score'] = deal_score
 
@@ -490,7 +491,17 @@ def save_properties(properties):
         'Prefer': 'return=representation,resolution=merge-duplicates',
     }
 
-    batch_size = 500
+    seen_src = set()
+    unique_props = []
+    for p in properties:
+        src = p.get('source_url')
+        if src in seen_src:
+            continue
+        seen_src.add(src)
+        unique_props.append(p)
+    properties = unique_props
+
+    batch_size = 250
     total_saved = 0
     for i in range(0, len(properties), batch_size):
         batch = properties[i:i + batch_size]
@@ -561,11 +572,305 @@ def log_scrape(stats):
         logger.warning(f"Failed to save scrape log: {e}")
 
 
+class BaanknetParser:
+    """Parse properties from BAANKNET (PSB Alliance) public auction listing API."""
+
+    BASE_URL = 'https://baanknet.com'
+    API_URL = f'{BASE_URL}/api/v1/auction/detail/auction-listing'
+
+    def __init__(self):
+        self.session = requests.Session()
+        self.session.headers.update(HEADERS)
+
+    def fetch_properties(self, max_pages=500, page_size=200):
+        properties = []
+        page = 1
+
+        while page <= max_pages:
+            try:
+                resp = self.session.post(
+                    self.API_URL,
+                    json={'page': page, 'limit': page_size},
+                    headers={'Content-Type': 'application/json'},
+                    timeout=60,
+                )
+                if resp.status_code != 200:
+                    logger.warning(f"BAANKNET page {page} returned {resp.status_code}")
+                    break
+
+                data = resp.json().get('data', {})
+                items = data.get('data', []) or []
+                if not items:
+                    break
+
+                for item in items:
+                    prop = self._parse_item(item)
+                    if prop:
+                        properties.append(prop)
+
+                total_pages = data.get('totalPages', 0)
+                logger.info(f"BAANKNET page {page}/{total_pages}: {len(items)} items (running total {len(properties)})")
+
+                if page >= total_pages:
+                    break
+                page += 1
+                time.sleep(1)
+
+            except Exception as e:
+                logger.error(f"BAANKNET failed on page {page}: {e}")
+                break
+
+        return properties
+
+    def _parse_item(self, item):
+        try:
+            src = item.get('_source', item)
+
+            bank = (src.get('propertyBankName') or '').strip()
+            branch = (src.get('propertyBranchName') or '').strip()
+            city = (src.get('cityName') or '').strip()
+            state = (src.get('stateName') or '').strip()
+            district = (src.get('districtName') or '').strip()
+            locality = (src.get('locality') or '').strip()
+            address = (src.get('address') or '').strip()
+            location = ', '.join([part for part in [locality, city, district, state] if part])
+
+            prop_type_raw = (src.get('propertyType') or '').strip()
+            sub_type = (src.get('propertySubType') or '').strip()
+            prop_type_mapped = self._map_property_type(prop_type_raw, sub_type)
+
+            reserve_price = self._parse_price(src.get('reservePrice'))
+            if not reserve_price:
+                return None
+
+            emd = self._parse_price(src.get('emd'))
+            auction_from = src.get('auctionFrom') or ''
+            auction_date = self._parse_date(auction_from)
+
+            title = f"{sub_type.title()} in {city.title()}" if sub_type and city else f"{prop_type_raw.title()} Property in {city or state}"
+
+            # Possession status
+            possession_raw = (src.get('propertyPossessionType') or '').strip().lower()
+            if 'physical' in possession_raw:
+                possession_status = 'physical'
+            elif 'symbolic' in possession_raw:
+                possession_status = 'symbolic'
+            else:
+                possession_status = possession_raw or None
+
+            # Area in sq.ft
+            area_sqft = None
+            for key in ('carpetAreaSqft', 'builtupAreaSqft'):
+                val = src.get(key)
+                if val:
+                    try:
+                        v = float(val)
+                        if 50 <= v <= 100000:
+                            area_sqft = int(v)
+                            break
+                    except (ValueError, TypeError):
+                        pass
+
+            bedrooms = None
+            if src.get('noOfRooms'):
+                try:
+                    bedrooms = int(src.get('noOfRooms'))
+                except (ValueError, TypeError):
+                    pass
+
+            # Photos from propertyMedia
+            photos = []
+            for media in (src.get('propertyMedia') or []):
+                url = media.get('filePath') or media.get('url') or media.get('mediaUrl')
+                if url:
+                    if not url.startswith('http'):
+                        url = f"{self.BASE_URL}/{url.lstrip('/')}"
+                    photos.append(url)
+
+            market_val, discount_pct, deal_score = self._estimate_valuation(
+                reserve_price=reserve_price,
+                emd=emd,
+                city=city,
+                district=district,
+                prop_type=prop_type_mapped,
+                area_sqft=area_sqft,
+                bank=bank,
+                sub_type=sub_type,
+            )
+
+            auction_id = src.get('auctionId')
+            unique_id = src.get('propertyUniqueId') or str(auction_id or '')
+            source_url = f"{self.BASE_URL}/auction-detail/{auction_id}" if auction_id else f"{self.BASE_URL}/auction-listing/property"
+
+            # Build rich statutory notice description
+            desc_parts = []
+            if src.get('address'):
+                desc_parts.append(src.get('address'))
+            if possession_raw:
+                desc_parts.append(f"Possession: {possession_raw.title()}")
+            if src.get('borrowerName'):
+                desc_parts.append(f"Borrower: {src.get('borrowerName')}")
+            if src.get('typeOfAction'):
+                desc_parts.append(f"Action Type: {src.get('typeOfAction')}")
+            if src.get('inspectionStart') and src.get('inspectionEnd'):
+                desc_parts.append(
+                    f"Inspection Window: {src.get('inspectionStart')} to {src.get('inspectionEnd')}"
+                )
+            if src.get('isLoanAvailable'):
+                desc_parts.append(f"Loan Available: {src.get('percentageOfLoan')}%")
+            if src.get('furnishedStatus'):
+                desc_parts.append(f"Furnishing: {src.get('furnishedStatus')}")
+            full_text = ' | '.join([p for p in desc_parts if p])
+            if not full_text:
+                full_text = f"{title}. Bank: {bank}. Branch: {branch}."
+
+            return {
+                'title': title[:200],
+                'bank': bank or 'Unknown Bank',
+                'branch': branch or None,
+                'location': location,
+                'city': city.title() if city else 'Unknown',
+                'state': state.title() if state else 'Unknown',
+                'property_type': prop_type_mapped,
+                'reserve_price': reserve_price,
+                'market_value': market_val,
+                'market_value_estimate': market_val,
+                'market_value_source': 'State IGR Circle Rate & City Benchmark',
+                'discount': discount_pct,
+                'deal_score': deal_score,
+                'auction_date': self._parse_date(auction_date),
+                'emd': emd,
+                'description': full_text[:1500],
+                'photos': photos[:10],
+                'source_url': source_url,
+                'status': 'active',
+                'area_sqft': area_sqft,
+                'bedrooms': bedrooms,
+                'bathrooms': None,
+                'floor': None,
+                'total_floors': None,
+                'parking': None,
+                'amenities': [],
+                'possession_status': possession_status,
+                'construction_year': None,
+                'facing': None,
+                'furnishing': (src.get('furnishedStatus') or '').lower() or None,
+            }
+        except Exception as e:
+            logger.debug(f"BAANKNET parse error: {e}")
+            return None
+
+    def _map_property_type(self, prop_type, sub_type=''):
+        text = f"{prop_type} {sub_type}".lower()
+        if any(k in text for k in ['residential', 'flat', 'house', 'apartment', 'villa', 'plot']):
+            # plots/land handled below; residential flats & houses -> residential
+            if 'plot' in text or 'land' in text or 'agricultural' in text:
+                return 'land'
+            return 'residential'
+        if any(k in text for k in ['commercial', 'office', 'shop', 'showroom', 'warehouse']):
+            return 'commercial'
+        if any(k in text for k in ['industrial', 'factory', 'plant', 'machinery']):
+            return 'industrial'
+        if any(k in text for k in ['vehicle', 'car', 'truck']):
+            return 'vehicle'
+        return 'residential'
+
+    def _parse_price(self, text):
+        if text is None:
+            return None
+        text = str(text).replace(',', '').replace('₹', '').replace('Rs', '').replace('Rs.', '').strip()
+        if 'lakh' in text.lower() or 'lac' in text.lower():
+            num = re.search(r'[\d.]+', text)
+            return int(float(num.group()) * 100000) if num else None
+        if 'crore' in text.lower() or 'cr' in text.lower():
+            num = re.search(r'[\d.]+', text)
+            return int(float(num.group()) * 10000000) if num else None
+        num = re.search(r'[\d]+(?:\.[\d]+)?', text)
+        if num:
+            return int(float(num.group()))
+        return None
+
+    def _parse_date(self, text):
+        if not text:
+            return None
+        # ISO 8601 or with Z
+        text = str(text).strip().replace('Z', '+00:00')
+        try:
+            return datetime.fromisoformat(text).isoformat()
+        except ValueError:
+            pass
+        formats = [
+            '%Y-%m-%dT%H:%M:%S', '%Y-%m-%d %H:%M:%S', '%d-%m-%Y %H:%M',
+            '%d/%m/%Y %H:%M', '%d-%m-%Y', '%d/%m/%Y',
+        ]
+        for fmt in formats:
+            try:
+                return datetime.strptime(text.strip(), fmt).isoformat()
+            except ValueError:
+                continue
+        return None
+
+    def _estimate_valuation(self, reserve_price, emd, city, district, prop_type, area_sqft, bank, sub_type=''):
+        if not reserve_price or reserve_price <= 0:
+            return None, None, None
+
+        loc_text = f"{city} {district}".lower()
+        bench = CITY_BENCHMARK_PSF['default']
+        is_tier1_or_2 = False
+        for k, v in CITY_BENCHMARK_PSF.items():
+            if k != 'default' and k in loc_text:
+                bench = v
+                is_tier1_or_2 = True
+                break
+
+        psf = bench['commercial'] if prop_type in ('commercial', 'industrial') else bench['residential']
+
+        market_value = None
+        if area_sqft:
+            area_based = int(area_sqft * psf)
+            if 0.85 * reserve_price <= area_based <= 2.2 * reserve_price:
+                market_value = area_based
+
+        if not market_value:
+            mult = 1.25 if is_tier1_or_2 else 1.20
+            if prop_type == 'commercial':
+                mult += 0.03
+            market_value = int(round(reserve_price * mult, -3))
+
+        discount_pct = max(0, min(60, int(round(((market_value - reserve_price) / market_value) * 100))))
+
+        score = 45
+        if discount_pct >= 25:
+            score += 22
+        elif discount_pct >= 18:
+            score += 17
+        else:
+            score += 10
+
+        if is_tier1_or_2:
+            score += 15
+        else:
+            score += 7
+
+        if prop_type == 'residential':
+            score += 10
+        elif prop_type == 'commercial':
+            score += 8
+        else:
+            score += 5
+
+        if emd and reserve_price > 0 and (emd / reserve_price) <= 0.10:
+            score += 6
+
+        return market_value, discount_pct, min(96, score)
+
+
 def main():
     start_time = datetime.now()
-    logger.info("Starting SARFAESI property scraper (enhanced with detail enrichment)...")
+    logger.info("Starting SARFAESI property scraper (enhanced with detail enrichment + BAANKNET)...")
     all_properties = []
 
+    # Step 1a: Fetch from IBAPI
     try:
         ibapi = IBAPIParser()
         props = ibapi.fetch_properties()
@@ -574,15 +879,52 @@ def main():
     except Exception as e:
         logger.error(f"IBAPI failed: {e}")
 
+    # Step 1b: Fetch from BAANKNET (PSB Alliance official portal)
+    try:
+        baanknet = BaanknetParser()
+        props = baanknet.fetch_properties()
+        all_properties.extend(props)
+        logger.info(f"BAANKNET: {len(props)} properties")
+    except Exception as e:
+        logger.error(f"BAANKNET failed: {e}")
+
     if not all_properties:
         logger.warning("No properties fetched. Exiting.")
         return
 
+    # Step 1c: Deduplicate IBAPI + BAANKNET by (bank, city, reserve_price, property_type)
+    # Prefer BAANKNET records (richer fields: possession, area, media, inspection dates)
+    seen_keys = set()
+    deduped = []
+    for prop in reversed(all_properties):
+        key = (
+            (prop.get('bank') or '').strip().upper(),
+            (prop.get('city') or '').strip().lower(),
+            prop.get('reserve_price'),
+            (prop.get('property_type') or '').strip().lower(),
+        )
+        if key in seen_keys:
+            continue
+        seen_keys.add(key)
+        deduped.append(prop)
+    deduped.reverse()
+    logger.info(f"Dedup: {len(all_properties)} -> {len(deduped)} unique properties")
+    all_properties = deduped
+
+    # Step 2: Get existing properties from DB
     logger.info("Fetching existing properties from DB...")
     existing = get_existing_properties()
     logger.info(f"Found {len(existing)} existing properties in DB")
 
     existing_map = {p['source_url']: p for p in existing}
+    existing_alt_map = {}
+    for p in existing:
+        alt_key = (
+            (p.get('bank') or '').strip().upper(),
+            (p.get('city') or '').strip().lower(),
+            p.get('reserve_price'),
+        )
+        existing_alt_map.setdefault(alt_key, p)
     now = datetime.now().isoformat()
 
     new_props = []
@@ -591,8 +933,15 @@ def main():
 
     for prop in all_properties:
         key = prop['source_url']
-        if key in existing_map:
-            old = existing_map[key]
+        old = existing_map.get(key)
+        if old is None:
+            alt_key = (
+                (prop.get('bank') or '').strip().upper(),
+                (prop.get('city') or '').strip().lower(),
+                prop.get('reserve_price'),
+            )
+            old = existing_alt_map.get(alt_key)
+        if old is not None:
             if old.get('reserve_price') != prop['reserve_price']:
                 price_changes += 1
                 history = old.get('price_history') or []
@@ -620,14 +969,67 @@ def main():
             prop['price_history'] = [{'date': now, 'price': prop['reserve_price']}]
             new_props.append(prop)
 
-    ibapi_urls = set(p['source_url'] for p in all_properties)
-    removed = [p for p in existing if p['source_url'] not in ibapi_urls]
+    new_alt_keys = set(
+        (
+            (p.get('bank') or '').strip().upper(),
+            (p.get('city') or '').strip().lower(),
+            p.get('reserve_price'),
+        )
+        for p in all_properties
+    )
+    removed = []
+    for p in existing:
+        alt_key = (
+            (p.get('bank') or '').strip().upper(),
+            (p.get('city') or '').strip().lower(),
+            p.get('reserve_price'),
+        )
+        if alt_key not in new_alt_keys:
+            removed.append(p)
     logger.info(f"Found {len(removed)} removed properties (likely sold)")
 
     for prop in removed:
         update_property_status(prop['id'], 'likely_sold')
 
-    to_save = new_props + updated_props
+    DB_COLUMNS = [
+        'title', 'bank', 'branch', 'location', 'city', 'state', 'property_type',
+        'reserve_price', 'market_value', 'market_value_estimate', 'market_value_source',
+        'discount', 'deal_score', 'auction_date', 'emd', 'description', 'photos',
+        'source_url', 'status', 'first_seen_at', 'last_seen_at',
+        'scrape_count', 'price_history', 'id', 'created_at', 'updated_at',
+    ]
+
+    def normalize(prop):
+        for col in DB_COLUMNS:
+            if col not in prop:
+                prop[col] = None
+        # Enforce NOT NULL columns
+        if not prop.get('title'):
+            prop['title'] = 'Untitled Property'
+        if not prop.get('bank'):
+            prop['bank'] = 'Unknown Bank'
+        if not prop.get('location'):
+            prop['location'] = ', '.join([p for p in [prop.get('city'), prop.get('state')] if p]) or 'Unknown Location'
+        if not prop.get('city'):
+            prop['city'] = 'Unknown'
+        if not prop.get('state'):
+            prop['state'] = 'Unknown'
+        if not prop.get('property_type'):
+            prop['property_type'] = 'residential'
+        if not prop.get('source_url'):
+            prop['source_url'] = 'https://www.ibapi.in/sale_info_home.aspx'
+        if not prop.get('status'):
+            prop['status'] = 'active'
+        # Remove any stray keys not in schema
+        for k in list(prop.keys()):
+            if k not in DB_COLUMNS:
+                prop.pop(k, None)
+        # Let Postgres generate id / timestamps; omit these keys entirely for consistent payloads
+        for k in ('id', 'created_at', 'updated_at'):
+            prop.pop(k, None)
+        return prop
+
+    to_save = [normalize(p) for p in (new_props + updated_props)]
     logger.info(f"Saving {len(to_save)} properties ({len(new_props)} new, {len(updated_props)} updated)")
     save_properties(to_save)
 
